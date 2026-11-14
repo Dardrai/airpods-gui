@@ -1,0 +1,5 @@
+dist/
+fyne-cross/
+*.syso
+*.elf
+build/windows/app.ico

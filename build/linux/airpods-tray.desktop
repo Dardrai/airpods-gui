@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=AirPods
+Comment=Tray app and settings for the AirPods USB dongle
+Exec=airpods-tray
+Icon=airpods-tray
+Categories=AudioVideo;Audio;Settings;
+StartupWMClass=io.github.dardrai.airpods-gui
