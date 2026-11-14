@@ -110,9 +110,11 @@ Windows:
 
 Open questions only hardware can settle:
 
-- [ ] `airpods set hold-actions noise-control,siri`, then test each stem. A protocol doc says the
-      low byte is the right ear, whereas this CLI says left. Noise control
-      should be on the left stem and Siri on the right; if they are swapped, the encoding is wrong.
+- [ ] `airpods set hold-actions siri,siri`, then hold a stem: the listening mode must not change.
+      Then `airpods set hold-actions noise-control,siri`: noise control should be on the left stem
+      and Siri on the right. The encoding follows the LibrePods protocol notes (1 is Siri, 5 is
+      noise control, the right ear is the low byte) and has not been confirmed on hardware; if
+      either result is the opposite, the encoding is wrong.
 - [ ] Confirm control command receipts on a real dongle: `reconnect` and `pair-phone` should print
       `accepted by dongle`, not exit 3. Test `pair` last: it erases the stored pairing, so you will
       have to pair the AirPods again. Note whether `pair` ever answers busy after sending (exit 3), and whether the

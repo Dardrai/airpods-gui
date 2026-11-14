@@ -143,7 +143,8 @@ func (v View) CanChoose(control byte) bool {
 func (v View) ValueAllowed(control byte, value uint32) bool {
 	switch control {
 	case ControlHold:
-		if p, known := v.profile(); known && !p.Listening && (value&0xff == 1 || value>>8&0xff == 1) {
+		// 5 is noise control, which a model without listening modes cannot perform.
+		if p, known := v.profile(); known && !p.Listening && (value&0xff == 5 || value>>8&0xff == 5) {
 			return false
 		}
 	case ControlMode:

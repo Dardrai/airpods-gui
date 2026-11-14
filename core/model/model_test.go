@@ -50,7 +50,8 @@ func TestNonListeningModels(t *testing.T) {
 	if v.Listening() || v.OffAvailable() {
 		t.Error("no modes on AirPods 3")
 	}
-	if v.ValueAllowed(ControlHold, 0x0105) || v.ValueAllowed(ControlHold, 0x0501) || !v.ValueAllowed(ControlHold, 0x0505) {
+	// 1 is Siri and 5 is noise control, so only Siri on both ears is possible.
+	if v.ValueAllowed(ControlHold, 0x0105) || v.ValueAllowed(ControlHold, 0x0501) || v.ValueAllowed(ControlHold, 0x0505) || !v.ValueAllowed(ControlHold, 0x0101) {
 		t.Error("no noise-control hold on non-listening models")
 	}
 	if v.SupportsControl(ControlMode) || !v.SupportsControl(0x0a) {

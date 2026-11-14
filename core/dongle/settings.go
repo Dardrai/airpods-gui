@@ -40,15 +40,18 @@ const toneVolumeControl = 0x1f
 
 // holdActionLeftShift and holdActionRightShift place each ear's hold action in the
 // setting's value. They are the only statement of that order: swap them to flip it.
+// Apple's layout, as LibrePods documents it from bluetoothd: the right ear is the low
+// byte and the left ear the next one.
 const (
-	holdActionLeftShift  = 0
-	holdActionRightShift = 8
+	holdActionLeftShift  = 8
+	holdActionRightShift = 0
 )
 
 var (
 	modeValues = []NamedValue{{"off", 1}, {"anc", 2}, {"transparency", 3}, {"adaptive", 4}}
 	toggle     = []NamedValue{{"on", 1}, {"off", 2}}
-	holdValues = []NamedValue{{"noise-control", 1}, {"siri", 5}}
+	// Apple's values: 1 is Siri, 5 is noise control.
+	holdValues = []NamedValue{{"noise-control", 5}, {"siri", 1}}
 )
 
 // Settings is the CLI's table, in display order.

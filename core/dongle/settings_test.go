@@ -112,11 +112,23 @@ func TestPercentRejectsHugeDigitStrings(t *testing.T) {
 	}
 }
 
-func TestHoldActionsLeftIsLowByte(t *testing.T) {
+// The command line order is left,right; on the wire the right ear is the low byte and
+// the left ear the next, with 1 for Siri and 5 for noise control.
+func TestHoldActionsRightIsLowByte(t *testing.T) {
 	s, _ := LookupSetting("hold-actions")
-	raw, err := s.Encode("noise-control,siri")
-	if err != nil || raw != 0x0501 {
-		t.Fatalf("raw = %#x, %v", raw, err)
+	for word, want := range map[string]uint32{
+		"noise-control,siri":          0x0501,
+		"siri,noise-control":          0x0105,
+		"siri,siri":                   0x0101,
+		"noise-control,noise-control": 0x0505,
+	} {
+		raw, err := s.Encode(word)
+		if err != nil || raw != want {
+			t.Errorf("%s: raw = %#x, %v, want %#x", word, raw, err, want)
+		}
+		if got := s.Decode(want); got != word {
+			t.Errorf("%#x decodes to %q, want %q", want, got, word)
+		}
 	}
 }
 

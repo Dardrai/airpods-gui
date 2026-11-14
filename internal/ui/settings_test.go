@@ -880,15 +880,15 @@ func TestWritesUseLibraryEncoding(t *testing.T) {
 		actions[1].SetSelected("Noise control")
 	})
 	settle()
-	if got := lastCommitValue(t, r.dev, 0x16); got != 0x0101 {
+	if got := lastCommitValue(t, r.dev, 0x16); got != 0x0505 { // 5 is noise control
 		t.Errorf("hold-actions wrote 0x%x", got)
 	}
 	r.main(func() {
 		r.w.settings.byName["hold-actions"].actions[0].SetSelected("Siri")
 	})
 	settle()
-	if got := lastCommitValue(t, r.dev, 0x16); got != 0x0105 {
-		t.Errorf("left action must be the low byte, wrote 0x%x", got)
+	if got := lastCommitValue(t, r.dev, 0x16); got != 0x0105 { // left Siri (1) high, right noise control (5) low
+		t.Errorf("left action must be the high byte, wrote 0x%x", got)
 	}
 }
 
