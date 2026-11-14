@@ -1,0 +1,74 @@
+# The airpods command without the tray app, for a computer with no desktop and for arm64.
+# build/fyne-cross.sh package sets PKG_VERSION per format and PKG_ARCH. Paths are relative to
+# the repository root. The binary is static, so there are no dependencies. Every file here is
+# also in the airpods-gui package of build/nfpm.yaml, at the same path, so the two cannot be
+# installed together: airpods-gui replaces this one.
+name: airpods-cli
+arch: ${PKG_ARCH}
+platform: linux
+version: ${PKG_VERSION}
+version_schema: none
+section: sound
+priority: optional
+maintainer: Dardrai <26252703+Dardrai@users.noreply.github.com>
+description: |
+  Command line tool for the AirPods USB dongle
+  airpods reads and changes AirPods settings, and airpods diag captures diagnostics.
+  The airpods-gui package has this command and the tray app.
+homepage: https://github.com/Dardrai/airpods-gui
+license: GPL-3.0-only
+
+conflicts:
+  - airpods-gui
+
+contents:
+  - src: dist/.stage/airpods
+    dst: /usr/bin/airpods
+    file_info: {mode: 0o755}
+  - src: core/hid/70-airpods-hid.rules
+    dst: /usr/lib/udev/rules.d/70-airpods-hid.rules
+    file_info: {mode: 0o644}
+  - src: dist/completions/airpods.bash
+    dst: /usr/share/bash-completion/completions/airpods
+    file_info: {mode: 0o644}
+  - src: dist/completions/airpods.fish
+    dst: /usr/share/fish/vendor_completions.d/airpods.fish
+    file_info: {mode: 0o644}
+  - src: dist/completions/_airpods
+    dst: /usr/share/zsh/vendor-completions/_airpods
+    packager: deb
+    file_info: {mode: 0o644}
+  - src: dist/completions/_airpods
+    dst: /usr/share/zsh/site-functions/_airpods
+    packager: rpm
+    file_info: {mode: 0o644}
+  - src: dist/completions/_airpods
+    dst: /usr/share/zsh/site-functions/_airpods
+    packager: archlinux
+    file_info: {mode: 0o644}
+  - src: build/linux/copyright
+    dst: /usr/share/doc/airpods-cli/copyright
+    packager: deb
+    file_info: {mode: 0o644}
+  - dst: /usr/share/licenses/airpods-cli
+    packager: rpm
+    type: dir
+    file_info: {mode: 0o755}
+  - src: LICENSE
+    dst: /usr/share/licenses/airpods-cli/LICENSE
+    packager: rpm
+    type: license
+    file_info: {mode: 0o644}
+  - src: LICENSE
+    dst: /usr/share/licenses/airpods-cli/LICENSE
+    packager: archlinux
+    file_info: {mode: 0o644}
+
+scripts:
+  postinstall: build/linux/reload-udev.sh
+  postremove: build/linux/reload-udev.sh
+
+archlinux:
+  packager: Dardrai <26252703+Dardrai@users.noreply.github.com>
+  scripts:
+    postupgrade: build/linux/reload-udev.sh

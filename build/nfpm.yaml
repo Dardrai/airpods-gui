@@ -1,0 +1,153 @@
+# The package most people install: the tray app and the airpods command. build/fyne-cross.sh
+# package sets PKG_VERSION per format and PKG_ARCH. Paths are relative to the repository root.
+# The libraries below are what the tray binary links plus what GLFW loads at run time for X11
+# and Wayland; docs/BUILD.md has the mapping. build/nfpm-cli.yaml is the command alone, and
+# installs the same files for it, so this package takes its place.
+name: airpods-gui
+arch: ${PKG_ARCH}
+platform: linux
+version: ${PKG_VERSION}
+version_schema: none
+section: sound
+priority: optional
+maintainer: Dardrai <26252703+Dardrai@users.noreply.github.com>
+description: |
+  Tray app, settings window and command line tool for the AirPods USB dongle
+  with batteries, Noise Control and AirPods settings. Audio is plain USB audio.
+  The airpods command reads and changes the same settings from a terminal.
+homepage: https://github.com/Dardrai/airpods-gui
+license: GPL-3.0-only
+
+# airpods-cli before 0.4 also had /usr/bin/airpods-diag, which is now airpods diag.
+provides:
+  - airpods-cli
+replaces:
+  - airpods-cli
+conflicts:
+  - airpods-cli
+
+contents:
+  - src: dist/airpods-tray
+    dst: /usr/bin/airpods-tray
+    file_info: {mode: 0o755}
+  - src: dist/.stage/airpods
+    dst: /usr/bin/airpods
+    file_info: {mode: 0o755}
+  - src: dist/completions/airpods.bash
+    dst: /usr/share/bash-completion/completions/airpods
+    file_info: {mode: 0o644}
+  - src: dist/completions/airpods.fish
+    dst: /usr/share/fish/vendor_completions.d/airpods.fish
+    file_info: {mode: 0o644}
+  - src: dist/completions/_airpods
+    dst: /usr/share/zsh/vendor-completions/_airpods
+    packager: deb
+    file_info: {mode: 0o644}
+  - src: dist/completions/_airpods
+    dst: /usr/share/zsh/site-functions/_airpods
+    packager: rpm
+    file_info: {mode: 0o644}
+  - src: dist/completions/_airpods
+    dst: /usr/share/zsh/site-functions/_airpods
+    packager: archlinux
+    file_info: {mode: 0o644}
+  - src: build/linux/airpods-tray.desktop
+    dst: /usr/share/applications/airpods-tray.desktop
+    file_info: {mode: 0o644}
+  - src: dist/icons/hicolor/*/apps/airpods-tray.*
+    dst: /usr/share/icons/hicolor
+    file_info: {mode: 0o644}
+  - src: core/hid/70-airpods-hid.rules
+    dst: /usr/lib/udev/rules.d/70-airpods-hid.rules
+    file_info: {mode: 0o644}
+  - src: build/linux/copyright
+    dst: /usr/share/doc/airpods-gui/copyright
+    packager: deb
+    file_info: {mode: 0o644}
+  - dst: /usr/share/licenses/airpods-gui
+    packager: rpm
+    type: dir
+    file_info: {mode: 0o755}
+  - src: LICENSE
+    dst: /usr/share/licenses/airpods-gui/LICENSE
+    packager: rpm
+    type: license
+    file_info: {mode: 0o644}
+  - src: LICENSE
+    dst: /usr/share/licenses/airpods-gui/LICENSE
+    packager: archlinux
+    file_info: {mode: 0o644}
+
+scripts:
+  postinstall: build/linux/postinstall.sh
+  postremove: build/linux/postremove.sh
+
+archlinux:
+  packager: Dardrai <26252703+Dardrai@users.noreply.github.com>
+  scripts:
+    postupgrade: build/linux/postinstall.sh
+
+overrides:
+  deb:
+    depends:
+      - libc6 (>= 2.31)
+      - libgl1
+      - libegl1
+      - libx11-6
+      - libx11-xcb1
+      - libxcursor1
+      - libxext6
+      - libxi6
+      - libxinerama1
+      - libxrandr2
+      - libxrender1
+      - libxxf86vm1
+      - libxkbcommon0
+      - libwayland-client0
+      - libwayland-cursor0
+      - libwayland-egl1
+      - hicolor-icon-theme
+    recommends:
+      - libdecor-0-0
+    suggests:
+      - gnome-shell-extension-appindicator
+  rpm:
+    depends:
+      - glibc >= 2.31
+      - libGL.so.1()(64bit)
+      - libEGL.so.1()(64bit)
+      - libX11.so.6()(64bit)
+      - libX11-xcb.so.1()(64bit)
+      - libXcursor.so.1()(64bit)
+      - libXext.so.6()(64bit)
+      - libXi.so.6()(64bit)
+      - libXinerama.so.1()(64bit)
+      - libXrandr.so.2()(64bit)
+      - libXrender.so.1()(64bit)
+      - libXxf86vm.so.1()(64bit)
+      - libxkbcommon.so.0()(64bit)
+      - libwayland-client.so.0()(64bit)
+      - libwayland-cursor.so.0()(64bit)
+      - libwayland-egl.so.1()(64bit)
+      - hicolor-icon-theme
+    recommends:
+      - libdecor
+      - (gnome-shell-extension-appindicator if gnome-shell)
+  archlinux:
+    depends:
+      - glibc>=2.31
+      - libglvnd
+      - libx11
+      - libxcursor
+      - libxext
+      - libxi
+      - libxinerama
+      - libxrandr
+      - libxrender
+      - libxxf86vm
+      - libxkbcommon
+      - wayland
+      - hicolor-icon-theme
+    suggests:
+      - "libdecor: window decorations on GNOME Wayland"
+      - "gnome-shell-extension-appindicator: tray icon on GNOME"

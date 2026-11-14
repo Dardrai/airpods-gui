@@ -1,0 +1,2545 @@
+[
+ {
+  "name": "info text",
+  "scenario": "pro3",
+  "argv": [
+   "info"
+  ],
+  "stdout": "Model: AirPods Pro 3\nModel number: A3063\nFirmware: 9A348\nSerial: hidden; use --show-serial\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 16,
+  "trace": "8d7c383854763b1698ef35169561971575cc97d83a56eb52137e01889daee43e",
+  "written": 0
+ },
+ {
+  "name": "info serial",
+  "scenario": "pro3",
+  "argv": [
+   "info",
+   "--show-serial"
+  ],
+  "stdout": "Model: AirPods Pro 3\nModel number: A3063\nFirmware: 9A348\nSerial: SIMSERIAL123\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 16,
+  "trace": "8d7c383854763b1698ef35169561971575cc97d83a56eb52137e01889daee43e",
+  "written": 0
+ },
+ {
+  "name": "info caps",
+  "scenario": "pro3",
+  "argv": [
+   "info",
+   "--capabilities"
+  ],
+  "stdout": "Model: AirPods Pro 3\nModel number: A3063\nFirmware: 9A348\nSerial: hidden; use --show-serial\nCapabilities (from the model catalog, not a report from these AirPods):\n  over-ear: no\n  listening modes: yes\n  adaptive: yes\n  allow-off option: yes\n  high quality microphone: yes\n  custom EQ: yes\n  hearing assistance: yes\n  custom transparency: yes\n  loud sound reduction: yes\nControls:\n  0x01: microphone\n  0x0a: ear-detection\n  0x0d: mode\n  0x16: hold-actions\n  0x17: press-speed\n  0x18: hold-duration\n  0x1a: hold-modes\n  0x1b: one-bud-anc\n  0x1f: tone-volume\n  0x20: connect-automatically\n  0x23: swipe-duration\n  0x24: call-controls\n  0x25: volume-swipe\n  0x26: personalized-volume\n  0x28: conversation-awareness\n  0x2e: adaptive-strength\n  0x2f: gain-swipe\n  0x31: case-sounds\n  0x34: allow-off\n  0x35: pause-when-asleep\n  0x36: allow-auto-connect\n  0x37: en352-protection\n  0x3b: optimized-charging\n  0x40: case-volume\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 16,
+  "trace": "8d7c383854763b1698ef35169561971575cc97d83a56eb52137e01889daee43e",
+  "written": 0
+ },
+ {
+  "name": "info caps max 2",
+  "scenario": "max2",
+  "argv": [
+   "info",
+   "--capabilities"
+  ],
+  "stdout": "Model: AirPods Max 2\nModel number: A3454\nFirmware: 9A348\nSerial: hidden; use --show-serial\nCapabilities (from the model catalog, not a report from these AirPods):\n  over-ear: yes\n  listening modes: yes\n  adaptive: yes\n  allow-off option: no\n  high quality microphone: yes\n  custom EQ: yes\n  hearing assistance: no\n  custom transparency: no\n  loud sound reduction: no\nControls:\n  0x0a: ear-detection\n  0x0d: mode\n  0x1a: hold-modes\n  0x1c: crown-direction\n  0x1f: tone-volume\n  0x20: connect-automatically\n  0x24: call-controls\n  0x26: personalized-volume\n  0x28: conversation-awareness\n  0x2e: adaptive-strength\n  0x35: pause-when-asleep\n  0x3b: optimized-charging\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 16,
+  "trace": "8d7c383854763b1698ef35169561971575cc97d83a56eb52137e01889daee43e",
+  "written": 0
+ },
+ {
+  "name": "info json",
+  "scenario": "pro3",
+  "argv": [
+   "--json",
+   "info",
+   "--capabilities"
+  ],
+  "stdout": "{\n  \"schema\": 1,\n  \"model_name\": \"AirPods Pro 3\",\n  \"model_number\": \"A3063\",\n  \"firmware\": \"9A348\",\n  \"serial\": null,\n  \"serial_hidden\": true,\n  \"capabilities\": {\n    \"listed\": true,\n    \"family\": \"airpods_pro_3\",\n    \"over_ear\": false,\n    \"listening\": true,\n    \"adaptive\": true,\n    \"allow_off_option\": true,\n    \"high_quality_mic\": true,\n    \"custom_eq\": true,\n    \"hearing_aid\": true,\n    \"custom_transparency\": true,\n    \"loud_sound_reduction\": true,\n    \"controls\": [\n      {\n        \"id\": \"0x01\",\n        \"name\": \"microphone\"\n      },\n      {\n        \"id\": \"0x0a\",\n        \"name\": \"ear-detection\"\n      },\n      {\n        \"id\": \"0x0d\",\n        \"name\": \"mode\"\n      },\n      {\n        \"id\": \"0x16\",\n        \"name\": \"hold-actions\"\n      },\n      {\n        \"id\": \"0x17\",\n        \"name\": \"press-speed\"\n      },\n      {\n        \"id\": \"0x18\",\n        \"name\": \"hold-duration\"\n      },\n      {\n        \"id\": \"0x1a\",\n        \"name\": \"hold-modes\"\n      },\n      {\n        \"id\": \"0x1b\",\n        \"name\": \"one-bud-anc\"\n      },\n      {\n        \"id\": \"0x1f\",\n        \"name\": \"tone-volume\"\n      },\n      {\n        \"id\": \"0x20\",\n        \"name\": \"connect-automatically\"\n      },\n      {\n        \"id\": \"0x23\",\n        \"name\": \"swipe-duration\"\n      },\n      {\n        \"id\": \"0x24\",\n        \"name\": \"call-controls\"\n      },\n      {\n        \"id\": \"0x25\",\n        \"name\": \"volume-swipe\"\n      },\n      {\n        \"id\": \"0x26\",\n        \"name\": \"personalized-volume\"\n      },\n      {\n        \"id\": \"0x28\",\n        \"name\": \"conversation-awareness\"\n      },\n      {\n        \"id\": \"0x2e\",\n        \"name\": \"adaptive-strength\"\n      },\n      {\n        \"id\": \"0x2f\",\n        \"name\": \"gain-swipe\"\n      },\n      {\n        \"id\": \"0x31\",\n        \"name\": \"case-sounds\"\n      },\n      {\n        \"id\": \"0x34\",\n        \"name\": \"allow-off\"\n      },\n      {\n        \"id\": \"0x35\",\n        \"name\": \"pause-when-asleep\"\n      },\n      {\n        \"id\": \"0x36\",\n        \"name\": \"allow-auto-connect\"\n      },\n      {\n        \"id\": \"0x37\",\n        \"name\": \"en352-protection\"\n      },\n      {\n        \"id\": \"0x3b\",\n        \"name\": \"optimized-charging\"\n      },\n      {\n        \"id\": \"0x40\",\n        \"name\": \"case-volume\"\n      }\n    ]\n  }\n}\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 16,
+  "trace": "8d7c383854763b1698ef35169561971575cc97d83a56eb52137e01889daee43e",
+  "written": 0
+ },
+ {
+  "name": "info unlisted",
+  "scenario": "unlisted",
+  "argv": [
+   "info",
+   "--capabilities"
+  ],
+  "stdout": "Model: unknown (not in the model catalog)\nModel number: A9999\nFirmware: 9A348\nSerial: hidden; use --show-serial\nCapabilities: this model is not in the catalog\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 16,
+  "trace": "8d7c383854763b1698ef35169561971575cc97d83a56eb52137e01889daee43e",
+  "written": 0
+ },
+ {
+  "name": "info unlisted json",
+  "scenario": "unlisted",
+  "argv": [
+   "--json",
+   "info",
+   "--capabilities"
+  ],
+  "stdout": "{\n  \"schema\": 1,\n  \"model_name\": null,\n  \"model_number\": \"A9999\",\n  \"firmware\": \"9A348\",\n  \"serial\": null,\n  \"serial_hidden\": true,\n  \"capabilities\": {\n    \"listed\": false,\n    \"family\": null,\n    \"over_ear\": false,\n    \"listening\": false,\n    \"adaptive\": false,\n    \"allow_off_option\": false,\n    \"high_quality_mic\": false,\n    \"custom_eq\": false,\n    \"hearing_aid\": false,\n    \"custom_transparency\": false,\n    \"loud_sound_reduction\": false,\n    \"controls\": []\n  }\n}\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 16,
+  "trace": "8d7c383854763b1698ef35169561971575cc97d83a56eb52137e01889daee43e",
+  "written": 0
+ },
+ {
+  "name": "info no metadata",
+  "scenario": "no-metadata",
+  "argv": [
+   "info"
+  ],
+  "stdout": "Model: not reported\nModel number: not reported\nFirmware: not reported\nSerial: not reported\n",
+  "stderr": "",
+  "exit": 1,
+  "ops": 12,
+  "trace": "8bf4d8707734b6b9e4a811fcc25fec854d6a982143602f86805a9011fdb89602",
+  "written": 0
+ },
+ {
+  "name": "info no metadata json",
+  "scenario": "no-metadata",
+  "argv": [
+   "--json",
+   "info"
+  ],
+  "stdout": "{\n  \"schema\": 1,\n  \"model_name\": null,\n  \"model_number\": null,\n  \"firmware\": null,\n  \"serial\": null,\n  \"serial_hidden\": false\n}\n",
+  "stderr": "",
+  "exit": 1,
+  "ops": 12,
+  "trace": "8bf4d8707734b6b9e4a811fcc25fec854d6a982143602f86805a9011fdb89602",
+  "written": 0
+ },
+ {
+  "name": "info disconnected",
+  "scenario": "disconnected",
+  "argv": [
+   "info"
+  ],
+  "stdout": "",
+  "stderr": "Error: Connect the dongle's AirPods first.\n",
+  "exit": 1,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da65c77864909833335273dee37312d5030838710904a976f31",
+  "written": 0
+ },
+ {
+  "name": "info no rpc",
+  "scenario": "no-rpc",
+  "argv": [
+   "info"
+  ],
+  "stdout": "",
+  "stderr": "Error: Update the dongle firmware before reading AirPods information.\n",
+  "exit": 1,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da65c77864909833335273dee37312d5030838710904a976f31",
+  "written": 0
+ },
+ {
+  "name": "info old firmware",
+  "scenario": "pro3-old-firmware",
+  "argv": [
+   "info"
+  ],
+  "stdout": "Model: AirPods Pro 3\nModel number: A3063\nFirmware: 6F21\nSerial: hidden; use --show-serial\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 16,
+  "trace": "8d7c383854763b1698ef35169561971575cc97d83a56eb52137e01889daee43e",
+  "written": 0
+ },
+ {
+  "name": "info bad flag",
+  "scenario": "pro3",
+  "argv": [
+   "info",
+   "--bogus"
+  ],
+  "stdout": "",
+  "stderr": "usage: airpods [-h] [--version] [--serial SERIAL] [--json] [--debug]\n               {help,completion,list,status,settings,get,set,audio,game,nearby,perf,info,hearing,hardware,experimental,reconnect,connect,pair,pair-phone,disconnect,reconnect-policy,firmware,diag} ...\nairpods: error: unrecognized arguments: --bogus\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "hearing status",
+  "scenario": "pro3",
+  "argv": [
+   "hearing",
+   "status"
+  ],
+  "stdout": "Hearing Aid: off\nMedia Assist: off\nHearing Aid set up: yes\nMedia Assist set up: yes\nReport ages: hearing aid 1000 ms, assist 1000 ms, media 1000 ms\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 189,
+  "trace": "ab30bd380092bd58bce908f4d900e08e7db9cc4ff9af0aa00afbd9b3d4958c26",
+  "written": 0
+ },
+ {
+  "name": "hearing status json",
+  "scenario": "pro3",
+  "argv": [
+   "--json",
+   "hearing",
+   "status"
+  ],
+  "stdout": "{\n  \"schema\": 1,\n  \"hearing_aid\": \"off\",\n  \"media_assist\": \"off\",\n  \"hearing_enrolled\": \"on\",\n  \"voice_enrolled\": \"on\",\n  \"assist_enabled\": \"off\",\n  \"voice_enabled\": \"off\",\n  \"media_enabled\": \"off\",\n  \"report_age_ms\": {\n    \"hearing_aid\": 1000,\n    \"assist\": 1000,\n    \"media\": 1000\n  }\n}\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 189,
+  "trace": "ab30bd380092bd58bce908f4d900e08e7db9cc4ff9af0aa00afbd9b3d4958c26",
+  "written": 0
+ },
+ {
+  "name": "hearing status unreported",
+  "scenario": "unreported",
+  "argv": [
+   "hearing",
+   "status"
+  ],
+  "stdout": "Hearing Aid: unknown (not reported; this does not mean off)\nMedia Assist: unknown (not reported; this does not mean off)\nHearing Aid set up: unknown (not reported)\nMedia Assist set up: unknown (not reported)\nReport ages: hearing aid no report, assist no report, media no report\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 165,
+  "trace": "ec319af13e1054872bfd7e3438bb49271b764423c450abe7e22cfe14e5e2c927",
+  "written": 0
+ },
+ {
+  "name": "hearing status on",
+  "scenario": "hearing-on",
+  "argv": [
+   "hearing",
+   "status"
+  ],
+  "stdout": "Hearing Aid: on\nMedia Assist: off\nHearing Aid set up: yes\nMedia Assist set up: yes\nReport ages: hearing aid 1000 ms, assist 1000 ms, media 1000 ms\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 189,
+  "trace": "ab30bd380092bd58bce908f4d900e08e7db9cc4ff9af0aa00afbd9b3d4958c26",
+  "written": 0
+ },
+ {
+  "name": "hearing status other model",
+  "scenario": "pro1",
+  "argv": [
+   "hearing",
+   "status"
+  ],
+  "stdout": "",
+  "stderr": "Error: Hearing assistance is not supported by the model these AirPods report.\n",
+  "exit": 1,
+  "ops": 144,
+  "trace": "0e12b99ccb967929c59a7e1bd41a9f543b11c8dfdc0b5bdc094b697426d3f650",
+  "written": 0
+ },
+ {
+  "name": "hearing status unlisted",
+  "scenario": "unlisted",
+  "argv": [
+   "hearing",
+   "status"
+  ],
+  "stdout": "",
+  "stderr": "Error: Hearing assistance is not supported by the model these AirPods report.\n",
+  "exit": 1,
+  "ops": 144,
+  "trace": "0e12b99ccb967929c59a7e1bd41a9f543b11c8dfdc0b5bdc094b697426d3f650",
+  "written": 0
+ },
+ {
+  "name": "hearing status disconnected",
+  "scenario": "disconnected",
+  "argv": [
+   "hearing",
+   "status"
+  ],
+  "stdout": "",
+  "stderr": "Error: Connect the dongle's AirPods before reading or changing hearing data.\n",
+  "exit": 1,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da65c77864909833335273dee37312d5030838710904a976f31",
+  "written": 0
+ },
+ {
+  "name": "hearing status microphone",
+  "scenario": "microphone",
+  "argv": [
+   "hearing",
+   "status"
+  ],
+  "stdout": "",
+  "stderr": "Error: Stop recording and wait for the microphone to recover before reading or changing hearing data.\n",
+  "exit": 1,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da65c77864909833335273dee37312d5030838710904a976f31",
+  "written": 0
+ },
+ {
+  "name": "hearing status no rpc",
+  "scenario": "no-rpc",
+  "argv": [
+   "hearing",
+   "status"
+  ],
+  "stdout": "",
+  "stderr": "Error: Update the dongle firmware before reading or changing hearing data.\n",
+  "exit": 1,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da65c77864909833335273dee37312d5030838710904a976f31",
+  "written": 0
+ },
+ {
+  "name": "hearing no subcommand",
+  "scenario": "pro3",
+  "argv": [
+   "hearing"
+  ],
+  "stdout": "",
+  "stderr": "usage: airpods hearing [-h] {status,aid,media-assist,recover,profile} ...\nairpods hearing: error: the following arguments are required: subcommand\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "hearing json refused for change",
+  "scenario": "pro3",
+  "argv": [
+   "--json",
+   "hearing",
+   "aid",
+   "off"
+  ],
+  "stdout": "",
+  "stderr": "usage: airpods [-h] [--version] [--serial SERIAL] [--json] [--debug]\n               {help,completion,list,status,settings,get,set,audio,game,nearby,perf,info,hearing,hardware,experimental,reconnect,connect,pair,pair-phone,disconnect,reconnect-policy,firmware,diag} ...\nairpods: error: --json works only with status, settings, get, list, info and the read commands of hearing, hardware and experimental\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "aid on with yes",
+  "scenario": "pro3",
+  "argv": [
+   "hearing",
+   "aid",
+   "on",
+   "--yes"
+  ],
+  "stdout": "hearing-aid: on (confirmed by the AirPods)\n",
+  "stderr": "Warning: this changes how sound is presented, including how loud it is, and has not been verified on real AirPods. If it sounds wrong or too loud, take the AirPods out, then turn it off.\n",
+  "exit": 0,
+  "ops": 1066,
+  "trace": "ad8ebc93435911ca201040d3c5285687b24166522bfeed275e26c174764162cd",
+  "written": 3
+ },
+ {
+  "name": "aid on confirmed",
+  "scenario": "pro3",
+  "argv": [
+   "hearing",
+   "aid",
+   "on"
+  ],
+  "answer": "y",
+  "stdout": "hearing-aid: on (confirmed by the AirPods)\n",
+  "stderr": "Warning: this changes how sound is presented, including how loud it is, and has not been verified on real AirPods. If it sounds wrong or too loud, take the AirPods out, then turn it off.\n",
+  "exit": 0,
+  "ops": 1066,
+  "trace": "ad8ebc93435911ca201040d3c5285687b24166522bfeed275e26c174764162cd",
+  "asked": 1,
+  "written": 3
+ },
+ {
+  "name": "aid on declined",
+  "scenario": "pro3",
+  "argv": [
+   "hearing",
+   "aid",
+   "on"
+  ],
+  "answer": "n",
+  "stdout": "",
+  "stderr": "Warning: this changes how sound is presented, including how loud it is, and has not been verified on real AirPods. If it sounds wrong or too loud, take the AirPods out, then turn it off.\nError: Nothing was sent: not confirmed.\n",
+  "exit": 1,
+  "ops": 144,
+  "trace": "0e12b99ccb967929c59a7e1bd41a9f543b11c8dfdc0b5bdc094b697426d3f650",
+  "asked": 1,
+  "written": 0
+ },
+ {
+  "name": "aid on nobody there",
+  "scenario": "pro3",
+  "argv": [
+   "hearing",
+   "aid",
+   "on"
+  ],
+  "stdout": "",
+  "stderr": "Warning: this changes how sound is presented, including how loud it is, and has not been verified on real AirPods. If it sounds wrong or too loud, take the AirPods out, then turn it off.\nError: Nothing was sent: turning Hearing Aid on needs --yes, or a terminal to confirm in.\n",
+  "exit": 1,
+  "ops": 144,
+  "trace": "0e12b99ccb967929c59a7e1bd41a9f543b11c8dfdc0b5bdc094b697426d3f650",
+  "written": 0
+ },
+ {
+  "name": "aid on already on",
+  "scenario": "hearing-on",
+  "argv": [
+   "hearing",
+   "aid",
+   "on"
+  ],
+  "stdout": "hearing-aid: on (already reported; no write sent)\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 850,
+  "trace": "54051b6ff36e68852b278a10a0ac214068e2082b5c9996565b2e39dc2d5933f7",
+  "written": 0
+ },
+ {
+  "name": "aid off",
+  "scenario": "hearing-on",
+  "argv": [
+   "hearing",
+   "aid",
+   "off"
+  ],
+  "stdout": "hearing-aid: off (confirmed by the AirPods)\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 604,
+  "trace": "2db48ad5a59625fa8977c38d294e27c4e3d3e16f58426fc9657638c4602d03d8",
+  "written": 2
+ },
+ {
+  "name": "aid off already off",
+  "scenario": "pro3",
+  "argv": [
+   "hearing",
+   "aid",
+   "off"
+  ],
+  "stdout": "hearing-aid: off (already reported; no write sent)\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 532,
+  "trace": "121c477f51c2c6f88dbd1217b67e1fdd4ce348354c0aeb77ad4159ba44d12fde",
+  "written": 0
+ },
+ {
+  "name": "aid on not enrolled",
+  "scenario": "not-enrolled",
+  "argv": [
+   "hearing",
+   "aid",
+   "on",
+   "--yes"
+  ],
+  "stdout": "",
+  "stderr": "Error: Hearing assistance has not been set up on these AirPods. Set it up from an iPhone or iPad.\n",
+  "exit": 1,
+  "ops": 144,
+  "trace": "0e12b99ccb967929c59a7e1bd41a9f543b11c8dfdc0b5bdc094b697426d3f650",
+  "written": 0
+ },
+ {
+  "name": "aid on unreported",
+  "scenario": "unreported",
+  "argv": [
+   "hearing",
+   "aid",
+   "on",
+   "--yes"
+  ],
+  "stdout": "",
+  "stderr": "Error: Hearing assistance has not been set up on these AirPods. Set it up from an iPhone or iPad.\n",
+  "exit": 1,
+  "ops": 132,
+  "trace": "14c5f65d4dbf251f8ae5b273cf9aa83cc85fdea0b0d9664a26274ad0ca8b4356",
+  "written": 0
+ },
+ {
+  "name": "aid off unreported",
+  "scenario": "unreported",
+  "argv": [
+   "hearing",
+   "aid",
+   "off"
+  ],
+  "stdout": "",
+  "stderr": "Error: Wait for the AirPods to report the other hearing mode before changing this one.\n",
+  "exit": 1,
+  "ops": 315,
+  "trace": "53931bd0a87eacf13fc05e9af65cb54dbd97cbee5f5cf93f570527367ef6761b",
+  "written": 0
+ },
+ {
+  "name": "aid on other model",
+  "scenario": "pro1",
+  "argv": [
+   "hearing",
+   "aid",
+   "on",
+   "--yes"
+  ],
+  "stdout": "",
+  "stderr": "Error: Hearing assistance is not supported by the model these AirPods report.\n",
+  "exit": 1,
+  "ops": 144,
+  "trace": "0e12b99ccb967929c59a7e1bd41a9f543b11c8dfdc0b5bdc094b697426d3f650",
+  "written": 0
+ },
+ {
+  "name": "aid off other model",
+  "scenario": "pro1",
+  "argv": [
+   "hearing",
+   "aid",
+   "off"
+  ],
+  "stdout": "",
+  "stderr": "Error: Hearing assistance is not supported by the model these AirPods report.\n",
+  "exit": 1,
+  "ops": 144,
+  "trace": "0e12b99ccb967929c59a7e1bd41a9f543b11c8dfdc0b5bdc094b697426d3f650",
+  "written": 0
+ },
+ {
+  "name": "aid bad word",
+  "scenario": "pro3",
+  "argv": [
+   "hearing",
+   "aid",
+   "maybe"
+  ],
+  "stdout": "",
+  "stderr": "usage: airpods hearing aid [-h] [--yes] {on,off}\nairpods hearing aid: error: argument state: invalid choice: 'maybe' (choose from on, off)\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "aid on unconfirmed nobody",
+  "scenario": "silent",
+  "argv": [
+   "hearing",
+   "aid",
+   "on",
+   "--yes"
+  ],
+  "stdout": "",
+  "stderr": "Warning: this changes how sound is presented, including how loud it is, and has not been verified on real AirPods. If it sounds wrong or too loud, take the AirPods out, then turn it off.\nThe hearing mode change was sent, but the AirPods did not confirm it. Reconnect the AirPods and read the state again.\nIt may have applied. Read it again with airpods hearing status.\nHearing Aid may still be active. Turn it off to be sure. Run: airpods hearing recover --off hearing-aid\n",
+  "exit": 3,
+  "ops": 9108,
+  "trace": "e154f60fd1d468df8586bd73da278ee45af12dfe83e7889852b855ad16117685",
+  "written": 3
+ },
+ {
+  "name": "aid on unconfirmed declined",
+  "scenario": "silent",
+  "argv": [
+   "hearing",
+   "aid",
+   "on",
+   "--yes"
+  ],
+  "answer": "n",
+  "stdout": "",
+  "stderr": "Warning: this changes how sound is presented, including how loud it is, and has not been verified on real AirPods. If it sounds wrong or too loud, take the AirPods out, then turn it off.\nThe hearing mode change was sent, but the AirPods did not confirm it. Reconnect the AirPods and read the state again.\nIt may have applied. Read it again with airpods hearing status.\nHearing Aid may still be active. Turn it off to be sure. Run: airpods hearing recover --off hearing-aid\n",
+  "exit": 3,
+  "ops": 9108,
+  "trace": "e154f60fd1d468df8586bd73da278ee45af12dfe83e7889852b855ad16117685",
+  "asked": 1,
+  "written": 3
+ },
+ {
+  "name": "aid on unconfirmed recovered",
+  "scenario": "silent-until-off",
+  "argv": [
+   "hearing",
+   "aid",
+   "on",
+   "--yes"
+  ],
+  "answer": "y",
+  "stdout": "hearing-aid: off (confirmed by the AirPods)\n",
+  "stderr": "Warning: this changes how sound is presented, including how loud it is, and has not been verified on real AirPods. If it sounds wrong or too loud, take the AirPods out, then turn it off.\nThe hearing mode change was sent, but the AirPods did not confirm it. Reconnect the AirPods and read the state again.\nIt may have applied. Read it again with airpods hearing status.\nHearing Aid may still be active. Turn it off to be sure. Run: airpods hearing recover --off hearing-aid\n",
+  "exit": 1,
+  "ops": 9568,
+  "trace": "eb425e0619d1d02820924166827f93ada84fbc5a28212713e69eea0852c241d8",
+  "asked": 1,
+  "written": 5
+ },
+ {
+  "name": "aid off unconfirmed",
+  "scenario": "hearing-on-silent",
+  "argv": [
+   "hearing",
+   "aid",
+   "off"
+  ],
+  "stdout": "",
+  "stderr": "The hearing mode change was sent, but the AirPods did not confirm it. Reconnect the AirPods and read the state again.\nIt may have applied. Read it again with airpods hearing status.\n",
+  "exit": 3,
+  "ops": 8844,
+  "trace": "83e98a89a843efaa035c656cbe621e9f2b59290f93d13cf52d5d0fb0823e9b75",
+  "written": 2
+ },
+ {
+  "name": "media on with yes",
+  "scenario": "pro3",
+  "argv": [
+   "hearing",
+   "media-assist",
+   "on",
+   "--yes"
+  ],
+  "stdout": "media-assist: on (confirmed by the AirPods)\n",
+  "stderr": "Warning: this changes how sound is presented, including how loud it is, and has not been verified on real AirPods. If it sounds wrong or too loud, take the AirPods out, then turn it off.\n",
+  "exit": 0,
+  "ops": 1054,
+  "trace": "a4e13cc86b56707ae5a63dc6a82eee746c6836e6cb626f8881c6b797eca08c17",
+  "written": 2
+ },
+ {
+  "name": "media on nobody there",
+  "scenario": "pro3",
+  "argv": [
+   "hearing",
+   "media-assist",
+   "on"
+  ],
+  "stdout": "",
+  "stderr": "Warning: this changes how sound is presented, including how loud it is, and has not been verified on real AirPods. If it sounds wrong or too loud, take the AirPods out, then turn it off.\nError: Nothing was sent: turning Media Assist on needs --yes, or a terminal to confirm in.\n",
+  "exit": 1,
+  "ops": 144,
+  "trace": "0e12b99ccb967929c59a7e1bd41a9f543b11c8dfdc0b5bdc094b697426d3f650",
+  "written": 0
+ },
+ {
+  "name": "media off",
+  "scenario": "pro3",
+  "argv": [
+   "hearing",
+   "media-assist",
+   "off"
+  ],
+  "stdout": "media-assist: off (already reported; no write sent)\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 532,
+  "trace": "121c477f51c2c6f88dbd1217b67e1fdd4ce348354c0aeb77ad4159ba44d12fde",
+  "written": 0
+ },
+ {
+  "name": "media on unconfirmed",
+  "scenario": "silent",
+  "argv": [
+   "hearing",
+   "media-assist",
+   "on",
+   "--yes"
+  ],
+  "stdout": "",
+  "stderr": "Warning: this changes how sound is presented, including how loud it is, and has not been verified on real AirPods. If it sounds wrong or too loud, take the AirPods out, then turn it off.\nThe hearing mode change was sent, but the AirPods did not confirm it. Reconnect the AirPods and read the state again.\nIt may have applied. Read it again with airpods hearing status.\nMedia Assist may still be active. Turn it off to be sure. Run: airpods hearing recover --off media-assist\n",
+  "exit": 3,
+  "ops": 9096,
+  "trace": "2b5a9deb6e1c1a196e047a2170f8074dd7d61dec6317f35edf3dd0b1e64a1385",
+  "written": 2
+ },
+ {
+  "name": "recover read",
+  "scenario": "pro3",
+  "argv": [
+   "hearing",
+   "recover"
+  ],
+  "stdout": "Hearing Aid: off\nMedia Assist: off\nHearing Aid set up: yes\nMedia Assist set up: yes\nReport ages: hearing aid 1000 ms, assist 1000 ms, media 1000 ms\nBoth report off. A report can be older than a change that went unconfirmed: if a report is older than that change, run airpods reconnect, then read again.\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 189,
+  "trace": "ab30bd380092bd58bce908f4d900e08e7db9cc4ff9af0aa00afbd9b3d4958c26",
+  "written": 0
+ },
+ {
+  "name": "recover read on",
+  "scenario": "hearing-on",
+  "argv": [
+   "hearing",
+   "recover"
+  ],
+  "stdout": "Hearing Aid: on\nMedia Assist: off\nHearing Aid set up: yes\nMedia Assist set up: yes\nReport ages: hearing aid 1000 ms, assist 1000 ms, media 1000 ms\nHearing Aid may be active. To turn it off: airpods hearing recover --off hearing-aid\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 189,
+  "trace": "ab30bd380092bd58bce908f4d900e08e7db9cc4ff9af0aa00afbd9b3d4958c26",
+  "written": 0
+ },
+ {
+  "name": "recover read unreported",
+  "scenario": "unreported",
+  "argv": [
+   "hearing",
+   "recover"
+  ],
+  "stdout": "Hearing Aid: unknown (not reported; this does not mean off)\nMedia Assist: unknown (not reported; this does not mean off)\nHearing Aid set up: unknown (not reported)\nMedia Assist set up: unknown (not reported)\nReport ages: hearing aid no report, assist no report, media no report\nHearing Aid may be active. To turn it off: airpods hearing recover --off hearing-aid\nMedia Assist may be active. To turn it off: airpods hearing recover --off media-assist\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 165,
+  "trace": "ec319af13e1054872bfd7e3438bb49271b764423c450abe7e22cfe14e5e2c927",
+  "written": 0
+ },
+ {
+  "name": "recover off",
+  "scenario": "hearing-on",
+  "argv": [
+   "hearing",
+   "recover",
+   "--off",
+   "hearing-aid"
+  ],
+  "stdout": "hearing-aid: off (confirmed by the AirPods)\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 649,
+  "trace": "34420c04cce84b438bf68b77d0e2917010ee0544bcddadd655edc653f6efb158",
+  "written": 2
+ },
+ {
+  "name": "recover off already off",
+  "scenario": "pro3",
+  "argv": [
+   "hearing",
+   "recover",
+   "--off",
+   "hearing-aid"
+  ],
+  "stdout": "hearing-aid: already reported off; no write sent\nThat report may be older than the change it should show. If it still sounds on, take the AirPods out, run airpods reconnect, then airpods hearing status.\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 577,
+  "trace": "6c059268894b198fe620a8f120323e571bd3f3008654135ffb0e150780e9556f",
+  "written": 0
+ },
+ {
+  "name": "recover off media",
+  "scenario": "pro3",
+  "argv": [
+   "hearing",
+   "recover",
+   "--off",
+   "media-assist"
+  ],
+  "stdout": "media-assist: already reported off; no write sent\nThat report may be older than the change it should show. If it still sounds on, take the AirPods out, run airpods reconnect, then airpods hearing status.\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 577,
+  "trace": "6c059268894b198fe620a8f120323e571bd3f3008654135ffb0e150780e9556f",
+  "written": 0
+ },
+ {
+  "name": "recover off unreported",
+  "scenario": "unreported",
+  "argv": [
+   "hearing",
+   "recover",
+   "--off",
+   "hearing-aid"
+  ],
+  "stdout": "",
+  "stderr": "Error: Wait for the AirPods to report the other hearing mode before changing this one.\n",
+  "exit": 1,
+  "ops": 348,
+  "trace": "fa98d43d7f3f1bd99ebff3631b2630f987903a560d7bbcdb533b8274b1a5ee7a",
+  "written": 0
+ },
+ {
+  "name": "recover other model",
+  "scenario": "pro1",
+  "argv": [
+   "hearing",
+   "recover",
+   "--off",
+   "hearing-aid"
+  ],
+  "stdout": "",
+  "stderr": "Error: Hearing assistance is not supported by the model these AirPods report.\n",
+  "exit": 1,
+  "ops": 144,
+  "trace": "0e12b99ccb967929c59a7e1bd41a9f543b11c8dfdc0b5bdc094b697426d3f650",
+  "written": 0
+ },
+ {
+  "name": "recover silent",
+  "scenario": "hearing-on-silent",
+  "argv": [
+   "hearing",
+   "recover",
+   "--off",
+   "hearing-aid"
+  ],
+  "stdout": "",
+  "stderr": "The hearing mode change was sent, but the AirPods did not confirm it. Reconnect the AirPods and read the state again.\nIt may have applied. Read it again with airpods hearing status.\n",
+  "exit": 3,
+  "ops": 8889,
+  "trace": "466f05824afbeb9b6eb3038ab6121d7bb741c1dbf576a5536e4c8cb5435e65f3",
+  "written": 2
+ },
+ {
+  "name": "recover bad mode",
+  "scenario": "pro3",
+  "argv": [
+   "hearing",
+   "recover",
+   "--off",
+   "everything"
+  ],
+  "stdout": "",
+  "stderr": "usage: airpods hearing recover [-h] [--off {hearing-aid,media-assist}]\nairpods hearing recover: error: argument --off: invalid choice: 'everything' (choose from hearing-aid, media-assist)\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "help hearing",
+  "scenario": "pro3",
+  "argv": [
+   "help",
+   "hearing"
+  ],
+  "stdout": "usage: airpods hearing [-h] {status,aid,media-assist,recover,profile} ...\n\nHearing Aid and Media Assist change how sound is presented, including how loud\nit is. They have not been verified on real AirPods. See docs/CLI.md.\n\npositional arguments:\n  {status,aid,media-assist,recover,profile}\n    status              read the modes; writes nothing\n    aid                 turn Hearing Aid on or off\n    media-assist        turn Media Assist on or off\n    recover             after an unconfirmed change: read the modes, and with\n                        --off turn one off\n    profile             show the stored hearing profile, or apply a new one\n\noptions:\n  -h, --help            show this help message and exit\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "hearing aid help",
+  "scenario": "pro3",
+  "argv": [
+   "hearing",
+   "aid",
+   "-h"
+  ],
+  "stdout": "usage: airpods hearing aid [-h] [--yes] {on,off}\n\npositional arguments:\n  {on,off}\n\noptions:\n  -h, --help  show this help message and exit\n  --yes       do not ask before turning it on\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "profile show",
+  "scenario": "pro3",
+  "argv": [
+   "hearing",
+   "profile",
+   "show"
+  ],
+  "stdout": "Editable: yes\nBands: 250 500 1000 2000 3000 4000 6000 8000 Hz\nLeft: 10 11 12 13 14 15 16 17 dB HL\nRight: 20 21 22 23 24 25 26 27 dB HL\nAmplification: 0\nBalance: -0.5\nTone: left 0.125, right -0.125\nConversation Boost: left off, right on\nStored gain: left 0.25, right -0.25\nAmbient noise reduction: left 0.5, right 0.75\nOwn voice: 0.625\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 248,
+  "trace": "cf72bea32c40728732796128536c962a820570e5af8d347504dacbb0072ab155",
+  "written": 0
+ },
+ {
+  "name": "profile show json",
+  "scenario": "pro3",
+  "argv": [
+   "--json",
+   "hearing",
+   "profile",
+   "show"
+  ],
+  "stdout": "{\n  \"schema\": 1,\n  \"editable\": true,\n  \"bands_hz\": [\n    250,\n    500,\n    1000,\n    2000,\n    3000,\n    4000,\n    6000,\n    8000\n  ],\n  \"profile\": {\n    \"left_db_hl\": [\n      10,\n      11,\n      12,\n      13,\n      14,\n      15,\n      16,\n      17\n    ],\n    \"right_db_hl\": [\n      20,\n      21,\n      22,\n      23,\n      24,\n      25,\n      26,\n      27\n    ],\n    \"amplification\": 0,\n    \"balance\": -0.5,\n    \"tone\": 0,\n    \"conversation_boost\": false\n  },\n  \"stored\": {\n    \"left_amplification\": 0.25,\n    \"right_amplification\": -0.25,\n    \"left_tone\": 0.125,\n    \"right_tone\": -0.125,\n    \"left_conversation_boost\": false,\n    \"right_conversation_boost\": true,\n    \"left_ambient_noise_reduction\": 0.5,\n    \"right_ambient_noise_reduction\": 0.75,\n    \"own_voice\": 0.625\n  }\n}\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 248,
+  "trace": "cf72bea32c40728732796128536c962a820570e5af8d347504dacbb0072ab155",
+  "written": 0
+ },
+ {
+  "name": "profile show read only",
+  "scenario": "profile-read-only",
+  "argv": [
+   "hearing",
+   "profile",
+   "show"
+  ],
+  "stdout": "Editable: no; it can be read but not written back\nBands: 250 500 1000 2000 3000 4000 6000 8000 Hz\nLeft: 10 11 12 13 14 15 16 17 dB HL\nRight: 20 21 22 23 24 25 26 27 dB HL\nAmplification: 0\nBalance: -0.5\nTone: left 0.125, right -0.125\nConversation Boost: left off, right on\nStored gain: left 0.25, right -0.25\nAmbient noise reduction: left 0.5, right 0.75\nOwn voice: 0.625\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 248,
+  "trace": "cf72bea32c40728732796128536c962a820570e5af8d347504dacbb0072ab155",
+  "written": 0
+ },
+ {
+  "name": "profile show other model",
+  "scenario": "pro1",
+  "argv": [
+   "hearing",
+   "profile",
+   "show"
+  ],
+  "stdout": "",
+  "stderr": "Error: Hearing assistance is not supported by the model these AirPods report.\n",
+  "exit": 1,
+  "ops": 128,
+  "trace": "19b41102d7f497f15f24f9d20890375f872eb2bdf9b80dd91b5312bb110323d5",
+  "written": 0
+ },
+ {
+  "name": "profile show disconnected",
+  "scenario": "disconnected",
+  "argv": [
+   "hearing",
+   "profile",
+   "show"
+  ],
+  "stdout": "",
+  "stderr": "Error: Connect the dongle's AirPods before reading or changing hearing data.\n",
+  "exit": 1,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da65c77864909833335273dee37312d5030838710904a976f31",
+  "written": 0
+ },
+ {
+  "name": "profile show microphone",
+  "scenario": "microphone",
+  "argv": [
+   "hearing",
+   "profile",
+   "show"
+  ],
+  "stdout": "",
+  "stderr": "Error: Stop recording and wait for the microphone to recover before reading or changing hearing data.\n",
+  "exit": 1,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da65c77864909833335273dee37312d5030838710904a976f31",
+  "written": 0
+ },
+ {
+  "name": "profile apply flags",
+  "scenario": "hearing-on",
+  "argv": [
+   "hearing",
+   "profile",
+   "apply",
+   "--left",
+   "10,11,12,30,14,15,16,17",
+   "--right",
+   "20,21,22,23,24,25,26,40",
+   "--amplification",
+   "0.75",
+   "--balance",
+   "0.25",
+   "--tone",
+   "0.25",
+   "--conversation-boost",
+   "on",
+   "--yes"
+  ],
+  "stdout": "This will change:\n  Left 2000 Hz: 13 -> 30 dB HL\n  Right 8000 Hz: 27 -> 40 dB HL\n  Left gain: 0.25 -> 0.625\n  Right gain: -0.25 -> 0.875\n  Left tone: 0.125 -> 0.25\n  Right tone: -0.125 -> 0.25\n  Left Conversation Boost: off -> on\nhearing profile: applied and read back\n",
+  "stderr": "Warning: this changes how sound is presented, including how loud it is, and has not been verified on real AirPods. If it sounds wrong or too loud, take the AirPods out, then turn it off.\n",
+  "exit": 0,
+  "ops": 1265,
+  "trace": "f85076cffe41a0410cd374368e1400e84cc3e4ccb4e4a9a31fe79dac78c61eb6",
+  "written": 1
+ },
+ {
+  "name": "profile apply file",
+  "scenario": "hearing-on",
+  "argv": [
+   "hearing",
+   "profile",
+   "apply",
+   "--file",
+   "testdata/profile_apply.json",
+   "--yes"
+  ],
+  "stdout": "This will change:\n  Left 2000 Hz: 13 -> 30 dB HL\n  Left gain: 0.25 -> 1\n  Right gain: -0.25 -> 0.5\n  Left tone: 0.125 -> 0.25\n  Right tone: -0.125 -> 0.25\n  Left Conversation Boost: off -> on\nhearing profile: applied and read back\n",
+  "stderr": "Warning: this changes how sound is presented, including how loud it is, and has not been verified on real AirPods. If it sounds wrong or too loud, take the AirPods out, then turn it off.\n",
+  "exit": 0,
+  "ops": 1265,
+  "trace": "fbff0c7bd859c73ce2060fb19d73f516853ff6a60f20959674841196352cc513",
+  "written": 1
+ },
+ {
+  "name": "profile apply file and flag",
+  "scenario": "hearing-on",
+  "argv": [
+   "hearing",
+   "profile",
+   "apply",
+   "--file",
+   "testdata/profile_apply.json",
+   "--tone",
+   "0.5",
+   "--yes"
+  ],
+  "stdout": "This will change:\n  Left 2000 Hz: 13 -> 30 dB HL\n  Left gain: 0.25 -> 1\n  Right gain: -0.25 -> 0.5\n  Left tone: 0.125 -> 0.5\n  Right tone: -0.125 -> 0.5\n  Left Conversation Boost: off -> on\nhearing profile: applied and read back\n",
+  "stderr": "Warning: this changes how sound is presented, including how loud it is, and has not been verified on real AirPods. If it sounds wrong or too loud, take the AirPods out, then turn it off.\n",
+  "exit": 0,
+  "ops": 1265,
+  "trace": "790ae0de21e999af2008e82b911a6f515a59c53e2672d6fff95f0e64fdac374c",
+  "written": 1
+ },
+ {
+  "name": "profile apply hearing aid stays off",
+  "scenario": "pro3",
+  "argv": [
+   "hearing",
+   "profile",
+   "apply",
+   "--tone",
+   "0.5",
+   "--yes"
+  ],
+  "stdout": "This will change:\n  Left tone: 0.125 -> 0.5\n  Right tone: -0.125 -> 0.5\nhearing profile: applied and read back\n",
+  "stderr": "Warning: this changes how sound is presented, including how loud it is, and has not been verified on real AirPods. If it sounds wrong or too loud, take the AirPods out, then turn it off.\n",
+  "exit": 0,
+  "ops": 1265,
+  "trace": "1cff232674cbfc739f598d0d56594af96960c917a30fbc1032678ac4813e6704",
+  "written": 1
+ },
+ {
+  "name": "profile apply confirmed",
+  "scenario": "hearing-on",
+  "argv": [
+   "hearing",
+   "profile",
+   "apply",
+   "--tone",
+   "0.5"
+  ],
+  "answer": "y",
+  "stdout": "This will change:\n  Left tone: 0.125 -> 0.5\n  Right tone: -0.125 -> 0.5\nhearing profile: applied and read back\n",
+  "stderr": "Warning: this changes how sound is presented, including how loud it is, and has not been verified on real AirPods. If it sounds wrong or too loud, take the AirPods out, then turn it off.\n",
+  "exit": 0,
+  "ops": 1265,
+  "trace": "1cff232674cbfc739f598d0d56594af96960c917a30fbc1032678ac4813e6704",
+  "asked": 1,
+  "written": 1
+ },
+ {
+  "name": "profile apply declined",
+  "scenario": "hearing-on",
+  "argv": [
+   "hearing",
+   "profile",
+   "apply",
+   "--tone",
+   "0.5"
+  ],
+  "answer": "n",
+  "stdout": "This will change:\n  Left tone: 0.125 -> 0.5\n  Right tone: -0.125 -> 0.5\n",
+  "stderr": "Warning: this changes how sound is presented, including how loud it is, and has not been verified on real AirPods. If it sounds wrong or too loud, take the AirPods out, then turn it off.\nError: Nothing was sent: not confirmed.\n",
+  "exit": 1,
+  "ops": 496,
+  "trace": "551a050b40a2387777741f609b7d5f0f9a9b92fff03950ab85fbf0fa30855198",
+  "asked": 1,
+  "written": 0
+ },
+ {
+  "name": "profile apply nobody",
+  "scenario": "hearing-on",
+  "argv": [
+   "hearing",
+   "profile",
+   "apply",
+   "--tone",
+   "0.5"
+  ],
+  "stdout": "This will change:\n  Left tone: 0.125 -> 0.5\n  Right tone: -0.125 -> 0.5\n",
+  "stderr": "Warning: this changes how sound is presented, including how loud it is, and has not been verified on real AirPods. If it sounds wrong or too loud, take the AirPods out, then turn it off.\nError: Nothing was sent: applying a hearing profile needs --yes, or a terminal to confirm in.\n",
+  "exit": 1,
+  "ops": 496,
+  "trace": "551a050b40a2387777741f609b7d5f0f9a9b92fff03950ab85fbf0fa30855198",
+  "written": 0
+ },
+ {
+  "name": "profile apply nothing to do",
+  "scenario": "hearing-on",
+  "argv": [
+   "hearing",
+   "profile",
+   "apply",
+   "--left",
+   "10,11,12,13,14,15,16,17",
+   "--yes"
+  ],
+  "stdout": "hearing profile: already stored; no write sent\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 248,
+  "trace": "cf72bea32c40728732796128536c962a820570e5af8d347504dacbb0072ab155",
+  "written": 0
+ },
+ {
+  "name": "profile apply read only",
+  "scenario": "profile-read-only",
+  "argv": [
+   "hearing",
+   "profile",
+   "apply",
+   "--tone",
+   "0.5",
+   "--yes"
+  ],
+  "stdout": "",
+  "stderr": "Error: This hearing profile can be read but not edited.\n",
+  "exit": 1,
+  "ops": 248,
+  "trace": "cf72bea32c40728732796128536c962a820570e5af8d347504dacbb0072ab155",
+  "written": 0
+ },
+ {
+  "name": "profile apply not enrolled",
+  "scenario": "not-enrolled",
+  "argv": [
+   "hearing",
+   "profile",
+   "apply",
+   "--tone",
+   "0.5",
+   "--yes"
+  ],
+  "stdout": "",
+  "stderr": "Error: Hearing assistance has not been set up on these AirPods. Set it up from an iPhone or iPad.\n",
+  "exit": 1,
+  "ops": 496,
+  "trace": "551a050b40a2387777741f609b7d5f0f9a9b92fff03950ab85fbf0fa30855198",
+  "written": 0
+ },
+ {
+  "name": "profile apply transparency on",
+  "scenario": "transparency-on",
+  "argv": [
+   "hearing",
+   "profile",
+   "apply",
+   "--tone",
+   "0.5",
+   "--yes"
+  ],
+  "stdout": "This will change:\n  Left tone: 0.125 -> 0.5\n  Right tone: -0.125 -> 0.5\nhearing profile: applied and read back\n",
+  "stderr": "Warning: this changes how sound is presented, including how loud it is, and has not been verified on real AirPods. If it sounds wrong or too loud, take the AirPods out, then turn it off.\n",
+  "exit": 0,
+  "ops": 1265,
+  "trace": "1cff232674cbfc739f598d0d56594af96960c917a30fbc1032678ac4813e6704",
+  "written": 1
+ },
+ {
+  "name": "profile apply other model",
+  "scenario": "pro1",
+  "argv": [
+   "hearing",
+   "profile",
+   "apply",
+   "--tone",
+   "0.5",
+   "--yes"
+  ],
+  "stdout": "",
+  "stderr": "Error: Hearing assistance is not supported by the model these AirPods report.\n",
+  "exit": 1,
+  "ops": 128,
+  "trace": "19b41102d7f497f15f24f9d20890375f872eb2bdf9b80dd91b5312bb110323d5",
+  "written": 0
+ },
+ {
+  "name": "profile apply unreported",
+  "scenario": "unreported",
+  "argv": [
+   "hearing",
+   "profile",
+   "apply",
+   "--tone",
+   "0.5",
+   "--yes"
+  ],
+  "stdout": "",
+  "stderr": "Error: Hearing assistance has not been set up on these AirPods. Set it up from an iPhone or iPad.\n",
+  "exit": 1,
+  "ops": 472,
+  "trace": "bdf3f2d21ce5a16def5d3b8000ee91d9eb4315f2c0281f6d5ed06a771176a933",
+  "written": 0
+ },
+ {
+  "name": "profile apply silent airpods",
+  "scenario": "silent",
+  "argv": [
+   "hearing",
+   "profile",
+   "apply",
+   "--tone",
+   "0.5",
+   "--yes"
+  ],
+  "stdout": "This will change:\n  Left tone: 0.125 -> 0.5\n  Right tone: -0.125 -> 0.5\nhearing profile: applied and read back\n",
+  "stderr": "Warning: this changes how sound is presented, including how loud it is, and has not been verified on real AirPods. If it sounds wrong or too loud, take the AirPods out, then turn it off.\n",
+  "exit": 0,
+  "ops": 1265,
+  "trace": "1cff232674cbfc739f598d0d56594af96960c917a30fbc1032678ac4813e6704",
+  "written": 1
+ },
+ {
+  "name": "profile apply write refused",
+  "scenario": "refuse-writes-hearing-on",
+  "argv": [
+   "hearing",
+   "profile",
+   "apply",
+   "--tone",
+   "0.5",
+   "--yes"
+  ],
+  "stdout": "This will change:\n  Left tone: 0.125 -> 0.5\n  Right tone: -0.125 -> 0.5\n",
+  "stderr": "Warning: this changes how sound is presented, including how loud it is, and has not been verified on real AirPods. If it sounds wrong or too loud, take the AirPods out, then turn it off.\nThe AirPods did not acknowledge the hearing profile write. Read the profile again.\nIt may have applied. Read it again with airpods hearing status.\n",
+  "exit": 3,
+  "ops": 1155,
+  "trace": "cc58792c33d3c8c6fb29486440afcacc340379bd760ec4c4b1e9151ff6e5bf4f",
+  "written": 0
+ },
+ {
+  "name": "profile apply write refused hearing aid off",
+  "scenario": "refuse-writes",
+  "argv": [
+   "hearing",
+   "profile",
+   "apply",
+   "--tone",
+   "0.5",
+   "--yes"
+  ],
+  "stdout": "This will change:\n  Left tone: 0.125 -> 0.5\n  Right tone: -0.125 -> 0.5\n",
+  "stderr": "Warning: this changes how sound is presented, including how loud it is, and has not been verified on real AirPods. If it sounds wrong or too loud, take the AirPods out, then turn it off.\nThe AirPods did not acknowledge the hearing profile write. Read the profile again.\nIt may have applied. Read it again with airpods hearing status.\n",
+  "exit": 3,
+  "ops": 1155,
+  "trace": "cc58792c33d3c8c6fb29486440afcacc340379bd760ec4c4b1e9151ff6e5bf4f",
+  "written": 0
+ },
+ {
+  "name": "profile apply bad tone",
+  "scenario": "pro3",
+  "argv": [
+   "hearing",
+   "profile",
+   "apply",
+   "--tone",
+   "2",
+   "--yes"
+  ],
+  "stdout": "",
+  "stderr": "usage: airpods hearing profile apply [-h] [--file FILE] [--left LEFT]\n                                     [--right RIGHT]\n                                     [--amplification AMPLIFICATION]\n                                     [--balance BALANCE] [--tone TONE]\n                                     [--conversation-boost {on,off}] [--yes]\nairpods hearing profile apply: error: tone must be -1 to 1\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "profile apply gains out of range",
+  "scenario": "pro3",
+  "argv": [
+   "hearing",
+   "profile",
+   "apply",
+   "--amplification",
+   "1.5",
+   "--balance",
+   "1",
+   "--yes"
+  ],
+  "stdout": "",
+  "stderr": "usage: airpods hearing profile apply [-h] [--file FILE] [--left LEFT]\n                                     [--right RIGHT]\n                                     [--amplification AMPLIFICATION]\n                                     [--balance BALANCE] [--tone TONE]\n                                     [--conversation-boost {on,off}] [--yes]\nairpods hearing profile apply: error: amplification 1.5 with balance 1 puts the ears' gains at left 1, right 2; each must be -1.5 to 1.5\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "profile apply amplification out of range",
+  "scenario": "pro3",
+  "argv": [
+   "hearing",
+   "profile",
+   "apply",
+   "--amplification",
+   "1.6",
+   "--yes"
+  ],
+  "stdout": "",
+  "stderr": "usage: airpods hearing profile apply [-h] [--file FILE] [--left LEFT]\n                                     [--right RIGHT]\n                                     [--amplification AMPLIFICATION]\n                                     [--balance BALANCE] [--tone TONE]\n                                     [--conversation-boost {on,off}] [--yes]\nairpods hearing profile apply: error: amplification must be -1.5 to 1.5\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "profile apply balance out of range",
+  "scenario": "pro3",
+  "argv": [
+   "hearing",
+   "profile",
+   "apply",
+   "--balance=-3.5",
+   "--yes"
+  ],
+  "stdout": "",
+  "stderr": "usage: airpods hearing profile apply [-h] [--file FILE] [--left LEFT]\n                                     [--right RIGHT]\n                                     [--amplification AMPLIFICATION]\n                                     [--balance BALANCE] [--tone TONE]\n                                     [--conversation-boost {on,off}] [--yes]\nairpods hearing profile apply: error: balance must be -3 to 3\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "profile apply gain beyond stored balance",
+  "scenario": "pro3",
+  "argv": [
+   "hearing",
+   "profile",
+   "apply",
+   "--amplification",
+   "1.4",
+   "--yes"
+  ],
+  "stdout": "",
+  "stderr": "Error: Nothing was sent: amplification 1.4 with balance -0.5 puts the ears' gains at left 1.65, right 1.15; each must be -1.5 to 1.5.\n",
+  "exit": 1,
+  "ops": 248,
+  "trace": "cf72bea32c40728732796128536c962a820570e5af8d347504dacbb0072ab155",
+  "written": 0
+ },
+ {
+  "name": "profile apply wide balance",
+  "scenario": "hearing-on",
+  "argv": [
+   "hearing",
+   "profile",
+   "apply",
+   "--balance",
+   "3",
+   "--yes"
+  ],
+  "stdout": "This will change:\n  Left gain: 0.25 -> -1.5\n  Right gain: -0.25 -> 1.5\nhearing profile: applied and read back\n",
+  "stderr": "Warning: this changes how sound is presented, including how loud it is, and has not been verified on real AirPods. If it sounds wrong or too loud, take the AirPods out, then turn it off.\n",
+  "exit": 0,
+  "ops": 1265,
+  "trace": "c786212f80c0310e8f697ae0f2e16f279b352fde6164b368b8e7d8399e648fb6",
+  "written": 1
+ },
+ {
+  "name": "profile apply misspelt",
+  "scenario": "pro3",
+  "argv": [
+   "hearing",
+   "profile",
+   "apply",
+   "--file",
+   "testdata/profile_misspelt.json",
+   "--yes"
+  ],
+  "stdout": "",
+  "stderr": "usage: airpods hearing profile apply [-h] [--file FILE] [--left LEFT]\n                                     [--right RIGHT]\n                                     [--amplification AMPLIFICATION]\n                                     [--balance BALANCE] [--tone TONE]\n                                     [--conversation-boost {on,off}] [--yes]\nairpods hearing profile apply: error: testdata/profile_misspelt.json: json: unknown field \"amplifcation\"\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "profile apply empty",
+  "scenario": "pro3",
+  "argv": [
+   "hearing",
+   "profile",
+   "apply",
+   "--yes"
+  ],
+  "stdout": "",
+  "stderr": "usage: airpods hearing profile apply [-h] [--file FILE] [--left LEFT]\n                                     [--right RIGHT]\n                                     [--amplification AMPLIFICATION]\n                                     [--balance BALANCE] [--tone TONE]\n                                     [--conversation-boost {on,off}] [--yes]\nairpods hearing profile apply: error: nothing to apply: give --file, or at least one of --left, --right, --amplification, --balance, --tone and --conversation-boost\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "profile json refused",
+  "scenario": "pro3",
+  "argv": [
+   "--json",
+   "hearing",
+   "profile",
+   "apply",
+   "--tone",
+   "0.5",
+   "--yes"
+  ],
+  "stdout": "",
+  "stderr": "usage: airpods [-h] [--version] [--serial SERIAL] [--json] [--debug]\n               {help,completion,list,status,settings,get,set,audio,game,nearby,perf,info,hearing,hardware,experimental,reconnect,connect,pair,pair-phone,disconnect,reconnect-policy,firmware,diag} ...\nairpods: error: --json works only with status, settings, get, list, info and the read commands of hearing, hardware and experimental\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "hardware status",
+  "scenario": "pro3",
+  "argv": [
+   "hardware",
+   "status"
+  ],
+  "stdout": "Left: Passed\nLeft measured: 2025-06-15 15:06\nRight: Passed (speaker)\nRight measured: 2025-06-15 15:11\nRead at: 22:13:20\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 148,
+  "trace": "bcef602bfbb068ac9eeeb0ec9d617835346a0e33871199b22d01cbfae33f6eba",
+  "written": 0
+ },
+ {
+  "name": "hardware status json",
+  "scenario": "pro3",
+  "argv": [
+   "--json",
+   "hardware",
+   "status"
+  ],
+  "stdout": "{\n  \"schema\": 1,\n  \"saved\": true,\n  \"read_at\": \"2023-11-14T22:13:20Z\",\n  \"left\": {\n    \"result\": \"Passed\",\n    \"measured_at_seconds\": 1750000000,\n    \"measured_at\": \"2025-06-15 15:06\",\n    \"failures\": []\n  },\n  \"right\": {\n    \"result\": \"Passed (speaker)\",\n    \"measured_at_seconds\": 1750000300,\n    \"measured_at\": \"2025-06-15 15:11\",\n    \"failures\": [\n      \"speaker\"\n    ]\n  }\n}\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 148,
+  "trace": "bcef602bfbb068ac9eeeb0ec9d617835346a0e33871199b22d01cbfae33f6eba",
+  "written": 0
+ },
+ {
+  "name": "hardware status none saved",
+  "scenario": "no-diagnostics",
+  "argv": [
+   "hardware",
+   "status"
+  ],
+  "stdout": "The AirPods have no saved hardware results.\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 114,
+  "trace": "897b3311041ef8c77f78ee017f821d8f1de1ee4c0b74d9c9277b7a4ef92ce500",
+  "written": 0
+ },
+ {
+  "name": "hardware status none saved json",
+  "scenario": "no-diagnostics",
+  "argv": [
+   "--json",
+   "hardware",
+   "status"
+  ],
+  "stdout": "{\n  \"schema\": 1,\n  \"saved\": false,\n  \"read_at\": null,\n  \"left\": null,\n  \"right\": null\n}\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 114,
+  "trace": "897b3311041ef8c77f78ee017f821d8f1de1ee4c0b74d9c9277b7a4ef92ce500",
+  "written": 0
+ },
+ {
+  "name": "hardware status other model",
+  "scenario": "pro1",
+  "argv": [
+   "hardware",
+   "status"
+  ],
+  "stdout": "",
+  "stderr": "Error: Not available on these AirPods.\n",
+  "exit": 1,
+  "ops": 17,
+  "trace": "81972ec2ef5b660682037140792bd2750719191d501119f345a3c8504f0a4bde",
+  "written": 0
+ },
+ {
+  "name": "hardware status disconnected",
+  "scenario": "disconnected",
+  "argv": [
+   "hardware",
+   "status"
+  ],
+  "stdout": "",
+  "stderr": "Error: Connect the dongle's AirPods first.\n",
+  "exit": 1,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da65c77864909833335273dee37312d5030838710904a976f31",
+  "written": 0
+ },
+ {
+  "name": "hardware status microphone",
+  "scenario": "microphone",
+  "argv": [
+   "hardware",
+   "status"
+  ],
+  "stdout": "",
+  "stderr": "Error: Stop recording first; these reads wait until the microphone is free.\n",
+  "exit": 1,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da65c77864909833335273dee37312d5030838710904a976f31",
+  "written": 0
+ },
+ {
+  "name": "hardware status no rpc",
+  "scenario": "no-rpc",
+  "argv": [
+   "hardware",
+   "status"
+  ],
+  "stdout": "",
+  "stderr": "Error: Update the dongle firmware first; it cannot serve these reads.\n",
+  "exit": 1,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da65c77864909833335273dee37312d5030838710904a976f31",
+  "written": 0
+ },
+ {
+  "name": "hardware data",
+  "scenario": "pro3",
+  "argv": [
+   "hardware",
+   "data"
+  ],
+  "stdout": "Hearing test mode: 0\nDosimetry sensitivity: 1\nVolume curve: 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5\nThese are raw values. They do not establish a sound level.\nRead at: 22:13:20\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 192,
+  "trace": "4d86e253439fd84f190925fab30418b3c4a25a686e21c60d0ca0888c7c0f9098",
+  "written": 0
+ },
+ {
+  "name": "hardware data json",
+  "scenario": "pro3",
+  "argv": [
+   "--json",
+   "hardware",
+   "data"
+  ],
+  "stdout": "{\n  \"schema\": 1,\n  \"available\": true,\n  \"read_at\": \"2023-11-14T22:13:20Z\",\n  \"test_mode\": 0,\n  \"sensitivity\": 1,\n  \"volume_curve\": [\n    0.5,\n    0.5,\n    0.5,\n    0.5,\n    0.5,\n    0.5,\n    0.5,\n    0.5,\n    0.5,\n    0.5,\n    0.5,\n    0.5,\n    0.5,\n    0.5,\n    0.5,\n    0.5,\n    0.5\n  ]\n}\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 192,
+  "trace": "4d86e253439fd84f190925fab30418b3c4a25a686e21c60d0ca0888c7c0f9098",
+  "written": 0
+ },
+ {
+  "name": "hardware data none",
+  "scenario": "no-diagnostics",
+  "argv": [
+   "hardware",
+   "data"
+  ],
+  "stdout": "The AirPods expose none of this data.\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 114,
+  "trace": "897b3311041ef8c77f78ee017f821d8f1de1ee4c0b74d9c9277b7a4ef92ce500",
+  "written": 0
+ },
+ {
+  "name": "hardware data other model",
+  "scenario": "airpods4",
+  "argv": [
+   "hardware",
+   "data"
+  ],
+  "stdout": "",
+  "stderr": "Error: Not available on these AirPods.\n",
+  "exit": 1,
+  "ops": 17,
+  "trace": "81972ec2ef5b660682037140792bd2750719191d501119f345a3c8504f0a4bde",
+  "written": 0
+ },
+ {
+  "name": "hardware check flag",
+  "scenario": "case",
+  "argv": [
+   "hardware",
+   "check",
+   "--buds-in-case"
+  ],
+  "stdout": "check: close the case now; left waiting, right waiting; 120 s left\ncheck: new results arrived; left new result, right new result; 118 s left\nLeft: Passed\nLeft measured: 2025-10-09 08:53\nRight: Passed\nRight measured: 2025-10-09 08:58\nRead at: 22:13:22\nThese are what the AirPods saved from their own self-check, not a medical or repair diagnosis.\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 801,
+  "trace": "ea92a98dd59c9f9a4533789f775ac42763b2b86dbdd0532b6c7d98d9f7ec4aef",
+  "written": 1
+ },
+ {
+  "name": "hardware check confirmed",
+  "scenario": "case",
+  "argv": [
+   "hardware",
+   "check"
+  ],
+  "answer": "y",
+  "stdout": "check: close the case now; left waiting, right waiting; 120 s left\ncheck: new results arrived; left new result, right new result; 118 s left\nLeft: Passed\nLeft measured: 2025-10-09 08:53\nRight: Passed\nRight measured: 2025-10-09 08:58\nRead at: 22:13:22\nThese are what the AirPods saved from their own self-check, not a medical or repair diagnosis.\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 801,
+  "trace": "ea92a98dd59c9f9a4533789f775ac42763b2b86dbdd0532b6c7d98d9f7ec4aef",
+  "asked": 1,
+  "written": 1
+ },
+ {
+  "name": "hardware check declined",
+  "scenario": "case",
+  "argv": [
+   "hardware",
+   "check"
+  ],
+  "answer": "n",
+  "stdout": "",
+  "stderr": "Error: Nothing was sent: not confirmed.\n",
+  "exit": 1,
+  "ops": 74,
+  "trace": "dc7227a403fd386a79106f4356b4ed8aa121fc57a7d7378fd748d59fc6d5d0ab",
+  "asked": 1,
+  "written": 0
+ },
+ {
+  "name": "hardware check nobody",
+  "scenario": "case",
+  "argv": [
+   "hardware",
+   "check"
+  ],
+  "stdout": "",
+  "stderr": "Error: Nothing was sent: confirm with --buds-in-case that both AirPods are in the open case, or run this in a terminal.\n",
+  "exit": 1,
+  "ops": 74,
+  "trace": "dc7227a403fd386a79106f4356b4ed8aa121fc57a7d7378fd748d59fc6d5d0ab",
+  "written": 0
+ },
+ {
+  "name": "hardware check timeout",
+  "scenario": "pro3",
+  "argv": [
+   "hardware",
+   "check",
+   "--buds-in-case"
+  ],
+  "stdout": "check: close the case now; left waiting, right waiting; 120 s left\ncheck: close the case now; left waiting, right waiting; 105 s left\ncheck: close the case now; left waiting, right waiting; 90 s left\ncheck: close the case now; left waiting, right waiting; 75 s left\ncheck: close the case now; left waiting, right waiting; 60 s left\ncheck: close the case now; left waiting, right waiting; 45 s left\ncheck: close the case now; left waiting, right waiting; 30 s left\ncheck: close the case now; left waiting, right waiting; 15 s left\ncheck: no new results in time; left waiting, right waiting; 0 s left\n",
+  "stderr": "Error: No new results in 2 minutes. The AirPods may still finish the check; read the results later with airpods hardware status.\n",
+  "exit": 1,
+  "ops": 9392,
+  "trace": "5255f7ad5f283d3f1ba142cafdadfdb52e5345efaf7a7b13b87e68db3dad5571",
+  "written": 1
+ },
+ {
+  "name": "hardware check in ear",
+  "scenario": "case-in-ear",
+  "argv": [
+   "hardware",
+   "check",
+   "--buds-in-case"
+  ],
+  "stdout": "",
+  "stderr": "Error: Both AirPods must be in the open case, not in your ears, and the case report must be recent.\n",
+  "exit": 1,
+  "ops": 74,
+  "trace": "dc7227a403fd386a79106f4356b4ed8aa121fc57a7d7378fd748d59fc6d5d0ab",
+  "written": 0
+ },
+ {
+  "name": "hardware check other firmware",
+  "scenario": "case-other-firmware",
+  "argv": [
+   "hardware",
+   "check",
+   "--buds-in-case"
+  ],
+  "stdout": "",
+  "stderr": "Error: The in-case check is only verified on AirPods Pro 3 (A3063, A3064 or A3065) with firmware 9A348.\n",
+  "exit": 1,
+  "ops": 74,
+  "trace": "dc7227a403fd386a79106f4356b4ed8aa121fc57a7d7378fd748d59fc6d5d0ab",
+  "written": 0
+ },
+ {
+  "name": "hardware check streaming",
+  "scenario": "case-streaming",
+  "argv": [
+   "hardware",
+   "check",
+   "--buds-in-case"
+  ],
+  "stdout": "",
+  "stderr": "Error: The in-case check needs the audio idle. Pause playback and recording and disconnect phone audio first.\n",
+  "exit": 1,
+  "ops": 74,
+  "trace": "dc7227a403fd386a79106f4356b4ed8aa121fc57a7d7378fd748d59fc6d5d0ab",
+  "written": 0
+ },
+ {
+  "name": "hardware check other model",
+  "scenario": "pro1",
+  "argv": [
+   "hardware",
+   "check",
+   "--buds-in-case"
+  ],
+  "stdout": "",
+  "stderr": "Error: The in-case check is only verified on AirPods Pro 3 (A3063, A3064 or A3065) with firmware 9A348.\n",
+  "exit": 1,
+  "ops": 74,
+  "trace": "dc7227a403fd386a79106f4356b4ed8aa121fc57a7d7378fd748d59fc6d5d0ab",
+  "written": 0
+ },
+ {
+  "name": "hardware check json refused",
+  "scenario": "case",
+  "argv": [
+   "--json",
+   "hardware",
+   "check",
+   "--buds-in-case"
+  ],
+  "stdout": "",
+  "stderr": "usage: airpods [-h] [--version] [--serial SERIAL] [--json] [--debug]\n               {help,completion,list,status,settings,get,set,audio,game,nearby,perf,info,hearing,hardware,experimental,reconnect,connect,pair,pair-phone,disconnect,reconnect-policy,firmware,diag} ...\nairpods: error: --json works only with status, settings, get, list, info and the read commands of hearing, hardware and experimental\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "hardware check refused write",
+  "scenario": "refuse-writes",
+  "argv": [
+   "hardware",
+   "check",
+   "--buds-in-case"
+  ],
+  "stdout": "check: close the case now; left waiting, right waiting; 120 s left\n",
+  "stderr": "The AirPods did not acknowledge the hardware check request. Do not start another check yet; read the results with airpods hardware status.\n",
+  "exit": 3,
+  "ops": 652,
+  "trace": "d8b4f86d55c00af1fe0544803a78abd8376ed18fe95be4de209b155b314ce1dd",
+  "written": 0
+ },
+ {
+  "name": "hardware no subcommand",
+  "scenario": "pro3",
+  "argv": [
+   "hardware"
+  ],
+  "stdout": "",
+  "stderr": "usage: airpods hardware [-h] {status,data,check} ...\nairpods hardware: error: the following arguments are required: subcommand\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "help hardware",
+  "scenario": "pro3",
+  "argv": [
+   "help",
+   "hardware"
+  ],
+  "stdout": "usage: airpods hardware [-h] {status,data,check} ...\n\nThese are results from the AirPods' own self-check, not a medical or repair\ndiagnosis.\n\npositional arguments:\n  {status,data,check}\n    status             read the saved result for each ear\n    data               read hearing test mode, dosimetry sensitivity and volume\n                       curve, as raw values\n    check              run the in-case check and wait for its result\n\noptions:\n  -h, --help           show this help message and exit\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "exp no flag",
+  "scenario": "pro3",
+  "argv": [
+   "experimental",
+   "transparency",
+   "show"
+  ],
+  "stdout": "",
+  "stderr": "usage: airpods experimental [-h] [--experimental]\n                            {transparency,loud-sound-reduction,eq,rename} ...\nairpods experimental: error: these commands need --experimental: they may not work through the dongle\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "exp no subcommand",
+  "scenario": "pro3",
+  "argv": [
+   "experimental",
+   "--experimental"
+  ],
+  "stdout": "",
+  "stderr": "usage: airpods experimental [-h] [--experimental]\n                            {transparency,loud-sound-reduction,eq,rename} ...\nairpods experimental: error: the following arguments are required: subcommand\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "exp transparency show",
+  "scenario": "pro3",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "transparency",
+   "show"
+  ],
+  "stdout": "Custom Transparency: off\nAmplification: left 0.5, right 0.5\nTone: left 0, right 0\nAmbient noise reduction: left 0.25, right 0.25\nConversation Boost: left off, right off\n",
+  "stderr": "Warning: experimental: this may not work through the dongle.\n",
+  "exit": 0,
+  "ops": 248,
+  "trace": "58b55314a24473e7785c0918e45f2b363700b5bcf921b3810d594160d6027787",
+  "written": 0
+ },
+ {
+  "name": "exp transparency show flag after",
+  "scenario": "pro3",
+  "argv": [
+   "experimental",
+   "transparency",
+   "show",
+   "--experimental"
+  ],
+  "stdout": "Custom Transparency: off\nAmplification: left 0.5, right 0.5\nTone: left 0, right 0\nAmbient noise reduction: left 0.25, right 0.25\nConversation Boost: left off, right off\n",
+  "stderr": "Warning: experimental: this may not work through the dongle.\n",
+  "exit": 0,
+  "ops": 248,
+  "trace": "58b55314a24473e7785c0918e45f2b363700b5bcf921b3810d594160d6027787",
+  "written": 0
+ },
+ {
+  "name": "exp transparency json",
+  "scenario": "pro3",
+  "argv": [
+   "--json",
+   "experimental",
+   "--experimental",
+   "transparency",
+   "show"
+  ],
+  "stdout": "{\n  \"schema\": 1,\n  \"enabled\": false,\n  \"left_amplification\": 0.5,\n  \"right_amplification\": 0.5,\n  \"left_tone\": 0,\n  \"right_tone\": 0,\n  \"left_conversation_boost\": false,\n  \"right_conversation_boost\": false,\n  \"left_ambient_noise_reduction\": 0.25,\n  \"right_ambient_noise_reduction\": 0.25\n}\n",
+  "stderr": "Warning: experimental: this may not work through the dongle.\n",
+  "exit": 0,
+  "ops": 248,
+  "trace": "58b55314a24473e7785c0918e45f2b363700b5bcf921b3810d594160d6027787",
+  "written": 0
+ },
+ {
+  "name": "exp transparency other model",
+  "scenario": "airpods4",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "transparency",
+   "show"
+  ],
+  "stdout": "",
+  "stderr": "Warning: experimental: this may not work through the dongle.\nError: Custom Transparency is not supported by the model these AirPods report.\n",
+  "exit": 1,
+  "ops": 128,
+  "trace": "19b41102d7f497f15f24f9d20890375f872eb2bdf9b80dd91b5312bb110323d5",
+  "written": 0
+ },
+ {
+  "name": "exp transparency set",
+  "scenario": "pro3",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "transparency",
+   "set",
+   "--enabled",
+   "on",
+   "--ear",
+   "left",
+   "--amplification",
+   "0.25",
+   "--tone",
+   "-0.5",
+   "--noise-reduction",
+   "0.5",
+   "--conversation-boost",
+   "on"
+  ],
+  "stdout": "transparency: written and read back\nCustom Transparency: on\nAmplification: left 0.25, right 0.5\nTone: left -0.5, right 0\nAmbient noise reduction: left 0.5, right 0.25\nConversation Boost: left on, right off\n",
+  "stderr": "Warning: experimental: this may not work through the dongle.\n",
+  "exit": 0,
+  "ops": 560,
+  "trace": "b8f9814fb1a498fab1895acff54b4ac02ffc41c5111134cb8c00ca2c9f607275",
+  "written": 1
+ },
+ {
+  "name": "exp transparency set amplification 2",
+  "scenario": "pro3",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "transparency",
+   "set",
+   "--amplification",
+   "2"
+  ],
+  "stdout": "transparency: written and read back\nCustom Transparency: off\nAmplification: left 2, right 2\nTone: left 0, right 0\nAmbient noise reduction: left 0.25, right 0.25\nConversation Boost: left off, right off\n",
+  "stderr": "Warning: experimental: this may not work through the dongle.\n",
+  "exit": 0,
+  "ops": 560,
+  "trace": "45bd9f8e121e2b6ae1160773a6332c7f9dd658f4a2e99031fb2d28a435739a9e",
+  "written": 1
+ },
+ {
+  "name": "exp transparency short record",
+  "scenario": "transparency-short",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "transparency",
+   "show"
+  ],
+  "stdout": "Custom Transparency: off\nAmplification: left 0.5, right 0.5\nTone: left 0, right 0\nAmbient noise reduction: left 0.25, right 0.25\nConversation Boost: left off, right off\n",
+  "stderr": "Warning: experimental: this may not work through the dongle.\n",
+  "exit": 0,
+  "ops": 248,
+  "trace": "58b55314a24473e7785c0918e45f2b363700b5bcf921b3810d594160d6027787",
+  "written": 0
+ },
+ {
+  "name": "exp transparency set short record",
+  "scenario": "transparency-short",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "transparency",
+   "set",
+   "--tone",
+   "0.5"
+  ],
+  "stdout": "transparency: written and read back\nCustom Transparency: off\nAmplification: left 0.5, right 0.5\nTone: left 0.5, right 0.5\nAmbient noise reduction: left 0.25, right 0.25\nConversation Boost: left off, right off\n",
+  "stderr": "Warning: experimental: this may not work through the dongle.\n",
+  "exit": 0,
+  "ops": 560,
+  "trace": "353ac093cc5a356fa04859621266bf69b28b7f0748ad008543704a3cefe1e5ab",
+  "written": 1
+ },
+ {
+  "name": "exp transparency set same",
+  "scenario": "pro3",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "transparency",
+   "set",
+   "--enabled",
+   "off"
+  ],
+  "stdout": "transparency: already stored; no write sent\n",
+  "stderr": "Warning: experimental: this may not work through the dongle.\n",
+  "exit": 0,
+  "ops": 248,
+  "trace": "58b55314a24473e7785c0918e45f2b363700b5bcf921b3810d594160d6027787",
+  "written": 0
+ },
+ {
+  "name": "exp transparency set bad",
+  "scenario": "pro3",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "transparency",
+   "set",
+   "--tone",
+   "3"
+  ],
+  "stdout": "",
+  "stderr": "usage: airpods experimental transparency set [-h] [--experimental]\n                                             [--enabled {on,off}]\n                                             [--ear {left,right,both}]\n                                             [--amplification AMPLIFICATION]\n                                             [--tone TONE]\n                                             [--noise-reduction NOISE_REDUCTION]\n                                             [--conversation-boost {on,off}]\nairpods experimental transparency set: error: --tone must be -1 to 1\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "exp transparency set nothing",
+  "scenario": "pro3",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "transparency",
+   "set"
+  ],
+  "stdout": "",
+  "stderr": "usage: airpods experimental transparency set [-h] [--experimental]\n                                             [--enabled {on,off}]\n                                             [--ear {left,right,both}]\n                                             [--amplification AMPLIFICATION]\n                                             [--tone TONE]\n                                             [--noise-reduction NOISE_REDUCTION]\n                                             [--conversation-boost {on,off}]\nairpods experimental transparency set: error: nothing to set: give at least one of --enabled, --amplification, --tone, --noise-reduction and --conversation-boost\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "exp transparency set hearing on",
+  "scenario": "hearing-on",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "transparency",
+   "set",
+   "--enabled",
+   "on"
+  ],
+  "stdout": "",
+  "stderr": "Warning: experimental: this may not work through the dongle.\nError: Hearing Aid and Media Assist must be reported off before Custom Transparency can be changed, except to turn it off.\n",
+  "exit": 1,
+  "ops": 496,
+  "trace": "e523eacb745f91d6a78e38e4aa5423154d225960480db48b689bf98ed310af6b",
+  "written": 0
+ },
+ {
+  "name": "exp transparency set refused write",
+  "scenario": "refuse-writes",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "transparency",
+   "set",
+   "--enabled",
+   "on"
+  ],
+  "stdout": "",
+  "stderr": "Warning: experimental: this may not work through the dongle.\nThe AirPods did not acknowledge Custom Transparency. Read it again.\n",
+  "exit": 3,
+  "ops": 528,
+  "trace": "068a94cdac06397132abdb702b9e4e3f2fdca0ec04369f7c5511bf5fc723046d",
+  "written": 0
+ },
+ {
+  "name": "exp loud get",
+  "scenario": "pro3",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "loud-sound-reduction",
+   "get"
+  ],
+  "stdout": "Loud Sound Reduction: off\n",
+  "stderr": "Warning: experimental: this may not work through the dongle.\n",
+  "exit": 0,
+  "ops": 162,
+  "trace": "f19186b000183d1a95e5f5d5b058fc022e0491689bf39e1e5eac8e9f434ece27",
+  "written": 0
+ },
+ {
+  "name": "exp loud json",
+  "scenario": "pro3",
+  "argv": [
+   "--json",
+   "experimental",
+   "--experimental",
+   "loud-sound-reduction",
+   "get"
+  ],
+  "stdout": "{\n  \"schema\": 1,\n  \"state\": \"off\"\n}\n",
+  "stderr": "Warning: experimental: this may not work through the dongle.\n",
+  "exit": 0,
+  "ops": 162,
+  "trace": "f19186b000183d1a95e5f5d5b058fc022e0491689bf39e1e5eac8e9f434ece27",
+  "written": 0
+ },
+ {
+  "name": "exp loud get on",
+  "scenario": "loud-on",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "loud-sound-reduction",
+   "get"
+  ],
+  "stdout": "Loud Sound Reduction: on\n",
+  "stderr": "Warning: experimental: this may not work through the dongle.\n",
+  "exit": 0,
+  "ops": 162,
+  "trace": "f19186b000183d1a95e5f5d5b058fc022e0491689bf39e1e5eac8e9f434ece27",
+  "written": 0
+ },
+ {
+  "name": "exp loud set",
+  "scenario": "pro3",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "loud-sound-reduction",
+   "set",
+   "on"
+  ],
+  "stdout": "loud-sound-reduction: on (written and read back)\n",
+  "stderr": "Warning: experimental: this may not work through the dongle.\n",
+  "exit": 0,
+  "ops": 396,
+  "trace": "463280eefa7e90ef782073ebace27dae8b13c6cc2b525d5b4e116b8c6845c454",
+  "written": 1
+ },
+ {
+  "name": "exp loud set same",
+  "scenario": "loud-on",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "loud-sound-reduction",
+   "set",
+   "on"
+  ],
+  "stdout": "loud-sound-reduction: on (already reported; no write sent)\n",
+  "stderr": "Warning: experimental: this may not work through the dongle.\n",
+  "exit": 0,
+  "ops": 162,
+  "trace": "f19186b000183d1a95e5f5d5b058fc022e0491689bf39e1e5eac8e9f434ece27",
+  "written": 0
+ },
+ {
+  "name": "exp loud other model",
+  "scenario": "max",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "loud-sound-reduction",
+   "get"
+  ],
+  "stdout": "",
+  "stderr": "Warning: experimental: this may not work through the dongle.\nError: Loud Sound Reduction is not supported by the model these AirPods report.\n",
+  "exit": 1,
+  "ops": 50,
+  "trace": "66f53873e87dbd051bdc2ccc57939c213f25d7d7c0efb9c4e6cca8682be9f83d",
+  "written": 0
+ },
+ {
+  "name": "exp loud max 2",
+  "scenario": "max2",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "loud-sound-reduction",
+   "get"
+  ],
+  "stdout": "",
+  "stderr": "Warning: experimental: this may not work through the dongle.\nError: Loud Sound Reduction is not supported by the model these AirPods report.\n",
+  "exit": 1,
+  "ops": 50,
+  "trace": "66f53873e87dbd051bdc2ccc57939c213f25d7d7c0efb9c4e6cca8682be9f83d",
+  "written": 0
+ },
+ {
+  "name": "exp loud refused write",
+  "scenario": "refuse-writes",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "loud-sound-reduction",
+   "set",
+   "on"
+  ],
+  "stdout": "",
+  "stderr": "Warning: experimental: this may not work through the dongle.\nThe AirPods did not acknowledge Loud Sound Reduction. Read it again.\n",
+  "exit": 3,
+  "ops": 372,
+  "trace": "65e678c69c4536f7caa5c5b18e79c584bf28112cbae06b07b3c9fa6305ed316b",
+  "written": 0
+ },
+ {
+  "name": "exp eq show",
+  "scenario": "pro3",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "eq",
+   "show"
+  ],
+  "stdout": "EQ: off\nLow: 30\nMid: 50\nHigh: 70\n",
+  "stderr": "Warning: experimental: this may not work through the dongle.\n",
+  "exit": 0,
+  "ops": 46,
+  "trace": "a9312b01b63d959bd75102825c5100d376d44358caa969f6e441820a9d49a9eb",
+  "written": 0
+ },
+ {
+  "name": "exp eq show flag after",
+  "scenario": "pro3",
+  "argv": [
+   "experimental",
+   "eq",
+   "show",
+   "--experimental"
+  ],
+  "stdout": "EQ: off\nLow: 30\nMid: 50\nHigh: 70\n",
+  "stderr": "Warning: experimental: this may not work through the dongle.\n",
+  "exit": 0,
+  "ops": 46,
+  "trace": "a9312b01b63d959bd75102825c5100d376d44358caa969f6e441820a9d49a9eb",
+  "written": 0
+ },
+ {
+  "name": "exp eq json",
+  "scenario": "pro3",
+  "argv": [
+   "--json",
+   "experimental",
+   "--experimental",
+   "eq",
+   "show"
+  ],
+  "stdout": "{\n  \"schema\": 1,\n  \"enabled\": false,\n  \"low\": 30,\n  \"mid\": 50,\n  \"high\": 70\n}\n",
+  "stderr": "Warning: experimental: this may not work through the dongle.\n",
+  "exit": 0,
+  "ops": 46,
+  "trace": "a9312b01b63d959bd75102825c5100d376d44358caa969f6e441820a9d49a9eb",
+  "written": 0
+ },
+ {
+  "name": "exp eq show no report",
+  "scenario": "no-eq",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "eq",
+   "show"
+  ],
+  "stdout": "",
+  "stderr": "Warning: experimental: this may not work through the dongle.\nError: These AirPods have not reported their EQ on this connection, so it cannot be read or changed.\n",
+  "exit": 1,
+  "ops": 46,
+  "trace": "a9312b01b63d959bd75102825c5100d376d44358caa969f6e441820a9d49a9eb",
+  "written": 0
+ },
+ {
+  "name": "exp eq set",
+  "scenario": "pro3",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "eq",
+   "set",
+   "--enabled",
+   "on",
+   "--low",
+   "10",
+   "--high",
+   "90"
+  ],
+  "stdout": "eq: confirmed by the AirPods\nEQ: on\nLow: 10\nMid: 50\nHigh: 90\n",
+  "stderr": "Warning: experimental: this may not work through the dongle.\n",
+  "exit": 0,
+  "ops": 185,
+  "trace": "b1e23480000f2a4fd70e76766f51a498a5b3fabf7177f43d09f24d53bbdfc439",
+  "written": 1
+ },
+ {
+  "name": "exp eq set same",
+  "scenario": "pro3",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "eq",
+   "set",
+   "--enabled",
+   "off",
+   "--mid",
+   "50"
+  ],
+  "stdout": "eq: already reported; no write sent\nEQ: off\nLow: 30\nMid: 50\nHigh: 70\n",
+  "stderr": "Warning: experimental: this may not work through the dongle.\n",
+  "exit": 0,
+  "ops": 46,
+  "trace": "a9312b01b63d959bd75102825c5100d376d44358caa969f6e441820a9d49a9eb",
+  "written": 0
+ },
+ {
+  "name": "exp eq set unconfirmed",
+  "scenario": "silent",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "eq",
+   "set",
+   "--low",
+   "10"
+  ],
+  "stdout": "",
+  "stderr": "Warning: experimental: this may not work through the dongle.\nThe EQ change was sent, but the AirPods did not report it. Read the EQ again before changing it.\n",
+  "exit": 3,
+  "ops": 3945,
+  "trace": "5cb4e9bb27e60346c2a0cd97efb0fd5ffd67b0b8f61a6015c0cb41c23f8dcd50",
+  "written": 1
+ },
+ {
+  "name": "exp eq set no report",
+  "scenario": "no-eq",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "eq",
+   "set",
+   "--low",
+   "10"
+  ],
+  "stdout": "",
+  "stderr": "Warning: experimental: this may not work through the dongle.\nError: These AirPods have not reported their EQ on this connection, so it cannot be read or changed.\n",
+  "exit": 1,
+  "ops": 46,
+  "trace": "a9312b01b63d959bd75102825c5100d376d44358caa969f6e441820a9d49a9eb",
+  "written": 0
+ },
+ {
+  "name": "exp eq set unknown model",
+  "scenario": "unlisted",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "eq",
+   "set",
+   "--low",
+   "10"
+  ],
+  "stdout": "",
+  "stderr": "Warning: experimental: this may not work through the dongle.\nError: The dongle did not pass the EQ change on: it has no current EQ report from these AirPods, the report changed, or it does not know their model. Nothing was sent. Read the EQ again.\n",
+  "exit": 1,
+  "ops": 136,
+  "trace": "58135eefa6ed331a4120abb3a5e678be7083fe2b6564227c95e1359aed356b22",
+  "written": 0
+ },
+ {
+  "name": "exp eq out of range",
+  "scenario": "pro3",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "eq",
+   "set",
+   "--low",
+   "101"
+  ],
+  "stdout": "",
+  "stderr": "usage: airpods experimental eq set [-h] [--experimental] [--enabled {on,off}]\n                                   [--low LOW] [--mid MID] [--high HIGH]\nairpods experimental eq set: error: --low must be 0 to 100\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "exp eq set nothing",
+  "scenario": "pro3",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "eq",
+   "set"
+  ],
+  "stdout": "",
+  "stderr": "usage: airpods experimental eq set [-h] [--experimental] [--enabled {on,off}]\n                                   [--low LOW] [--mid MID] [--high HIGH]\nairpods experimental eq set: error: nothing to set: give at least one of --enabled, --low, --mid and --high\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "exp eq no action",
+  "scenario": "pro3",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "eq"
+  ],
+  "stdout": "",
+  "stderr": "usage: airpods experimental eq [-h] {show,set} ...\nairpods experimental eq: error: the following arguments are required: action\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "help experimental eq set",
+  "scenario": "pro3",
+  "argv": [
+   "experimental",
+   "eq",
+   "set",
+   "-h"
+  ],
+  "stdout": "usage: airpods experimental eq set [-h] [--experimental] [--enabled {on,off}]\n                                   [--low LOW] [--mid MID] [--high HIGH]\n\nWhat is not given stays as the AirPods reported it. Only a new EQ report with\nexactly these values confirms the change.\n\noptions:\n  -h, --help          show this help message and exit\n  --experimental      run it, although it may not work through the dongle\n  --enabled {on,off}\n  --low LOW           0 to 100\n  --mid MID           0 to 100\n  --high HIGH         0 to 100\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "exp rename",
+  "scenario": "pro3",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "rename",
+   "New name"
+  ],
+  "stdout": "",
+  "stderr": "Warning: experimental: this may not work through the dongle.\nError: The dongle refused to pass the name on to the AirPods: its firmware only sends a fixed list of AirPods requests. Nothing was sent.\n",
+  "exit": 1,
+  "ops": 46,
+  "trace": "2479274c9d73e88eeb433e5a93e189de6c88e55bb9df008fb47b39dfc00420b5",
+  "written": 0
+ },
+ {
+  "name": "exp rename any model",
+  "scenario": "pro1-any-packet",
+  "argv": [
+   "experimental",
+   "rename",
+   "New name",
+   "--experimental"
+  ],
+  "stdout": "rename: sent\nSent to the AirPods. The old name may show until they reconnect.\n",
+  "stderr": "Warning: experimental: this may not work through the dongle.\n",
+  "exit": 0,
+  "ops": 48,
+  "trace": "857751a76c4a93466e4f036d7d28fcf8f41503b5ff488ac3dc5caea63371b429",
+  "written": 1
+ },
+ {
+  "name": "exp rename too long",
+  "scenario": "pro3",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "rename",
+   "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  ],
+  "stdout": "",
+  "stderr": "usage: airpods experimental rename [-h] [--experimental] name\nairpods experimental rename: error: Use a name of 1 to 64 UTF-8 bytes with no control characters.\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "exp rename blank",
+  "scenario": "pro3",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "rename",
+   " "
+  ],
+  "stdout": "",
+  "stderr": "usage: airpods experimental rename [-h] [--experimental] name\nairpods experimental rename: error: Use a name of 1 to 64 UTF-8 bytes with no control characters.\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "exp rename disconnected",
+  "scenario": "disconnected",
+  "argv": [
+   "experimental",
+   "--experimental",
+   "rename",
+   "x"
+  ],
+  "stdout": "",
+  "stderr": "Warning: experimental: this may not work through the dongle.\nError: Connect the dongle's AirPods before reading or changing hearing data.\n",
+  "exit": 1,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da65c77864909833335273dee37312d5030838710904a976f31",
+  "written": 0
+ },
+ {
+  "name": "exp json refused",
+  "scenario": "pro3",
+  "argv": [
+   "--json",
+   "experimental",
+   "--experimental",
+   "rename",
+   "x"
+  ],
+  "stdout": "",
+  "stderr": "usage: airpods [-h] [--version] [--serial SERIAL] [--json] [--debug]\n               {help,completion,list,status,settings,get,set,audio,game,nearby,perf,info,hearing,hardware,experimental,reconnect,connect,pair,pair-phone,disconnect,reconnect-policy,firmware,diag} ...\nairpods: error: --json works only with status, settings, get, list, info and the read commands of hearing, hardware and experimental\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "help experimental",
+  "scenario": "pro3",
+  "argv": [
+   "help",
+   "experimental"
+  ],
+  "stdout": "usage: airpods experimental [-h] [--experimental]\n                            {transparency,loud-sound-reduction,eq,rename} ...\n\nNone of these has run on real AirPods, and they may not work through the dongle.\nEach one needs --experimental, before or after its subcommand.\n\npositional arguments:\n  {transparency,loud-sound-reduction,eq,rename}\n    transparency        read or change Custom Transparency\n    loud-sound-reduction\n                        read or change Loud Sound Reduction\n    eq                  read the AirPods' EQ, or change it and wait for their\n                        report\n    rename              send a new AirPods name; the AirPods never confirm it\n\noptions:\n  -h, --help            show this help message and exit\n  --experimental        run it, although it may not work through the dongle\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "written": 0
+ },
+ {
+  "name": "status details",
+  "scenario": "pro3",
+  "argv": [
+   "status",
+   "--details"
+  ],
+  "stdout": "AirPods: connected\nSettings: ready\nCodec: AAC\nBattery left: 80% (1 s old)\nBattery right: 70% (1 s old)\nBattery case: unknown\nDongle serial: SIM0001\nAirPods address: 01:02:03:04:05:06\nNoise control: anc\nIn use: nothing\nDongle capabilities: control, listening, pair-phone, raw-transport, typed-rpc, lease, per-component, host-volume, runtime-bootsel, routing\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da65c77864909833335273dee37312d5030838710904a976f31",
+  "written": 0
+ },
+ {
+  "name": "status details json",
+  "scenario": "pro3",
+  "argv": [
+   "--json",
+   "status",
+   "--details"
+  ],
+  "stdout": "{\n  \"schema\": 1,\n  \"state\": \"connected\",\n  \"settings_ready\": true,\n  \"codec\": \"AAC\",\n  \"batteries\": {\n    \"left\": 80,\n    \"right\": 70,\n    \"case\": null\n  },\n  \"details\": {\n    \"dongle_serial\": \"SIM0001\",\n    \"airpods_address\": \"01:02:03:04:05:06\",\n    \"noise_control\": \"anc\",\n    \"in_use\": [],\n    \"dongle_capabilities\": [\n      \"control\",\n      \"listening\",\n      \"pair-phone\",\n      \"raw-transport\",\n      \"typed-rpc\",\n      \"lease\",\n      \"per-component\",\n      \"host-volume\",\n      \"runtime-bootsel\",\n      \"routing\"\n    ],\n    \"battery_left\": {\n      \"level\": 80,\n      \"current\": false,\n      \"charging\": false,\n      \"age_ms\": 1000\n    },\n    \"battery_right\": {\n      \"level\": 70,\n      \"current\": false,\n      \"charging\": false,\n      \"age_ms\": 1000\n    },\n    \"battery_case\": {\n      \"level\": null,\n      \"current\": false,\n      \"charging\": false,\n      \"age_ms\": null\n    }\n  }\n}\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da65c77864909833335273dee37312d5030838710904a976f31",
+  "written": 0
+ },
+ {
+  "name": "status details disconnected",
+  "scenario": "disconnected",
+  "argv": [
+   "status",
+   "--details"
+  ],
+  "stdout": "AirPods: disconnected\nSettings: not ready\nCodec: AAC\nBattery left: 80% (1 s old)\nBattery right: 70% (1 s old)\nBattery case: unknown\nDongle serial: SIM0001\nAirPods address: none\nNoise control: anc\nIn use: nothing\nDongle capabilities: control, listening, pair-phone, raw-transport, typed-rpc, lease, per-component, host-volume, runtime-bootsel, routing\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da65c77864909833335273dee37312d5030838710904a976f31",
+  "written": 0
+ }
+]

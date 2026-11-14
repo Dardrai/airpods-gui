@@ -1,0 +1,2672 @@
+[
+ {
+  "name": "list-zero",
+  "argv": [
+   "list"
+  ],
+  "dongles": null,
+  "stdout": "No dongles found.\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "list-one-connected",
+  "argv": [
+   "list"
+  ],
+  "dongles": [
+   {
+    "serial": "SIM0001",
+    "pid": 16405,
+    "path": "/dev/hidraw3",
+    "openable": true
+   }
+  ],
+  "stdout": "SIM0001  4015  /dev/hidraw3  connected\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da6"
+ },
+ {
+  "name": "list-one-not-connected",
+  "argv": [
+   "list"
+  ],
+  "dongles": [
+   {
+    "serial": "SIM0001",
+    "pid": 16405,
+    "path": "/dev/hidraw3",
+    "openable": true,
+    "sim": {
+     "flags": 0
+    }
+   }
+  ],
+  "stdout": "SIM0001  4015  /dev/hidraw3  not connected\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da6"
+ },
+ {
+  "name": "list-control-only-id",
+  "argv": [
+   "list"
+  ],
+  "dongles": [
+   {
+    "serial": "SIM0001",
+    "pid": 16389,
+    "path": "/dev/hidraw3",
+    "openable": true
+   }
+  ],
+  "stdout": "SIM0001  4005  /dev/hidraw3  connected\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da6"
+ },
+ {
+  "name": "list-several",
+  "argv": [
+   "list"
+  ],
+  "dongles": [
+   {
+    "serial": "SIM0001",
+    "pid": 16405,
+    "path": "/dev/hidraw3",
+    "openable": true
+   },
+   {
+    "serial": "SIM0002-LONGER",
+    "pid": 16389,
+    "path": "/dev/hidraw12",
+    "openable": true,
+    "sim": {
+     "flags": 0
+    }
+   }
+  ],
+  "stdout": "SIM0001         4015  /dev/hidraw3   connected\nSIM0002-LONGER  4005  /dev/hidraw12  not connected\nSeveral dongles attached. Pick one with: airpods --serial SERIAL COMMAND\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 2,
+  "trace": "3dd53a9a2e014da63dd53a9a2e014da6"
+ },
+ {
+  "name": "list-denied-only",
+  "argv": [
+   "list"
+  ],
+  "dongles": [
+   {
+    "serial": "SIM0003",
+    "pid": 16405,
+    "path": "/dev/hidraw7",
+    "openable": false,
+    "err": "found /dev/hidraw7 but no permission to open it; install the AirPods udev rule; see the docs"
+   }
+  ],
+  "stdout": "SIM0003  4015  /dev/hidraw7  cannot be opened: found /dev/hidraw7 but no permission to open it; install the AirPods udev rule; see the docs\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "list-denied-and-one",
+  "argv": [
+   "list"
+  ],
+  "dongles": [
+   {
+    "serial": "SIM0001",
+    "pid": 16405,
+    "path": "/dev/hidraw3",
+    "openable": true
+   },
+   {
+    "serial": "SIM0003",
+    "pid": 16405,
+    "path": "/dev/hidraw7",
+    "openable": false,
+    "err": "found /dev/hidraw7 but no permission to open it; install the AirPods udev rule; see the docs"
+   }
+  ],
+  "stdout": "SIM0001  4015  /dev/hidraw3  connected\nSIM0003  4015  /dev/hidraw7  cannot be opened: found /dev/hidraw7 but no permission to open it; install the AirPods udev rule; see the docs\nSeveral dongles attached. Pick one with: airpods --serial SERIAL COMMAND\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da6e3b0c44298fc1c14"
+ },
+ {
+  "name": "list-unopenable-no-reason",
+  "argv": [
+   "list"
+  ],
+  "dongles": [
+   {
+    "serial": "SIM0004",
+    "pid": 16405,
+    "path": "/dev/hidraw9",
+    "openable": false
+   }
+  ],
+  "stdout": "SIM0004  4015  /dev/hidraw9  cannot be opened\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "list-no-serial-alone",
+  "argv": [
+   "list"
+  ],
+  "dongles": [
+   {
+    "serial": "",
+    "pid": 16405,
+    "path": "/dev/hidraw8",
+    "openable": true
+   }
+  ],
+  "stdout": "-  4015  /dev/hidraw8  connected\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da6"
+ },
+ {
+  "name": "list-no-serial-with-other",
+  "argv": [
+   "list"
+  ],
+  "dongles": [
+   {
+    "serial": "SIM0001",
+    "pid": 16405,
+    "path": "/dev/hidraw3",
+    "openable": true
+   },
+   {
+    "serial": "",
+    "pid": 16405,
+    "path": "/dev/hidraw8",
+    "openable": true
+   }
+  ],
+  "stdout": "SIM0001  4015  /dev/hidraw3  connected\n-        4015  /dev/hidraw8  cannot be selected: it has no USB serial\nSeveral dongles attached. Pick one with: airpods --serial SERIAL COMMAND\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da6e3b0c44298fc1c14"
+ },
+ {
+  "name": "list-same-serial",
+  "argv": [
+   "list"
+  ],
+  "dongles": [
+   {
+    "serial": "SIM0001",
+    "pid": 16405,
+    "path": "/dev/hidraw3",
+    "openable": true
+   },
+   {
+    "serial": "SIM0001",
+    "pid": 16405,
+    "path": "/dev/hidraw4",
+    "openable": true
+   }
+  ],
+  "stdout": "SIM0001  4015  /dev/hidraw3  cannot be selected: its USB serial is not unique\nSIM0001  4015  /dev/hidraw4  cannot be selected: its USB serial is not unique\nSeveral dongles attached. Pick one with: airpods --serial SERIAL COMMAND\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14e3b0c44298fc1c14"
+ },
+ {
+  "name": "list-status-read-fails",
+  "argv": [
+   "list"
+  ],
+  "dongles": [
+   {
+    "serial": "SIM0001",
+    "pid": 16405,
+    "path": "/dev/hidraw3",
+    "openable": true,
+    "sim": {
+     "get_fail_at": 1,
+     "fail_message": "boom"
+    }
+   }
+  ],
+  "stdout": "SIM0001  4015  /dev/hidraw3  cannot be opened: boom\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da6"
+ },
+ {
+  "name": "list-open-fails",
+  "argv": [
+   "list"
+  ],
+  "dongles": [
+   {
+    "serial": "SIM0001",
+    "pid": 16405,
+    "path": "/dev/hidraw3",
+    "openable": true,
+    "sim": {
+     "open_error": "gone"
+    }
+   }
+  ],
+  "stdout": "SIM0001  4015  /dev/hidraw3  cannot be opened: gone\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "list-serial-filter",
+  "argv": [
+   "--serial",
+   "SIM0002-LONGER",
+   "list"
+  ],
+  "dongles": [
+   {
+    "serial": "SIM0001",
+    "pid": 16405,
+    "path": "/dev/hidraw3",
+    "openable": true
+   },
+   {
+    "serial": "SIM0002-LONGER",
+    "pid": 16389,
+    "path": "/dev/hidraw12",
+    "openable": true,
+    "sim": {
+     "flags": 0
+    }
+   }
+  ],
+  "stdout": "SIM0002-LONGER  4005  /dev/hidraw12  not connected\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 1,
+  "trace": "e3b0c44298fc1c143dd53a9a2e014da6"
+ },
+ {
+  "name": "list-serial-filter-none",
+  "argv": [
+   "--serial",
+   "NOPE",
+   "list"
+  ],
+  "dongles": [
+   {
+    "serial": "SIM0001",
+    "pid": 16405,
+    "path": "/dev/hidraw3",
+    "openable": true
+   },
+   {
+    "serial": "SIM0002-LONGER",
+    "pid": 16389,
+    "path": "/dev/hidraw12",
+    "openable": true,
+    "sim": {
+     "flags": 0
+    }
+   }
+  ],
+  "stdout": "No dongle with serial NOPE found.\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14e3b0c44298fc1c14"
+ },
+ {
+  "name": "list-help",
+  "argv": [
+   "list",
+   "-h"
+  ],
+  "dongles": null,
+  "stdout": "usage: airpods list [-h] [--serials]\n\noptions:\n  -h, --help  show this help message and exit\n  --serials   print only the USB serials, one per line, without opening any\n              dongle\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "list-help-topic",
+  "argv": [
+   "help",
+   "list"
+  ],
+  "dongles": null,
+  "stdout": "usage: airpods list [-h] [--serials]\n\noptions:\n  -h, --help  show this help message and exit\n  --serials   print only the USB serials, one per line, without opening any\n              dongle\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "list-extra-argument",
+  "argv": [
+   "list",
+   "x"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "usage: airpods [-h] [--version] [--serial SERIAL] [--json] [--debug]\n               {help,completion,list,status,settings,get,set,audio,game,nearby,perf,info,hearing,hardware,experimental,reconnect,connect,pair,pair-phone,disconnect,reconnect-policy,firmware,diag} ...\nairpods: error: unrecognized arguments: x\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "json-status",
+  "argv": [
+   "--json",
+   "status"
+  ],
+  "dongles": null,
+  "stdout": "{\n  \"schema\": 1,\n  \"state\": \"connected\",\n  \"settings_ready\": true,\n  \"codec\": \"AAC\",\n  \"batteries\": {\n    \"left\": 80,\n    \"right\": 70,\n    \"case\": null\n  }\n}\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da6"
+ },
+ {
+  "name": "json-status-disconnected",
+  "argv": [
+   "--json",
+   "status"
+  ],
+  "sim": {
+   "flags": 0,
+   "battery": [
+    255,
+    255,
+    255
+   ],
+   "codec": 0
+  },
+  "dongles": null,
+  "stdout": "{\n  \"schema\": 1,\n  \"state\": \"disconnected\",\n  \"settings_ready\": false,\n  \"codec\": \"unknown\",\n  \"batteries\": {\n    \"left\": null,\n    \"right\": null,\n    \"case\": null\n  }\n}\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da6"
+ },
+ {
+  "name": "json-status-all-batteries",
+  "argv": [
+   "--json",
+   "status"
+  ],
+  "sim": {
+   "battery": [
+    0,
+    100,
+    101
+   ]
+  },
+  "dongles": null,
+  "stdout": "{\n  \"schema\": 1,\n  \"state\": \"connected\",\n  \"settings_ready\": true,\n  \"codec\": \"AAC\",\n  \"batteries\": {\n    \"left\": 0,\n    \"right\": 100,\n    \"case\": null\n  }\n}\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da6"
+ },
+ {
+  "name": "json-status-read-fails",
+  "argv": [
+   "--json",
+   "status"
+  ],
+  "sim": {
+   "get_fail_at": 1,
+   "fail_message": "boom"
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: boom\n",
+  "exit": 1,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da6"
+ },
+ {
+  "name": "json-status-no-dongle",
+  "argv": [
+   "--json",
+   "status"
+  ],
+  "sim": {
+   "open_error": "Expected exactly one matching Pico HID interface (CAFE:4015/4005)"
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: Expected exactly one matching Pico HID interface (CAFE:4015/4005)\n",
+  "exit": 1,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "json-settings",
+  "argv": [
+   "--json",
+   "settings"
+  ],
+  "dongles": null,
+  "stdout": "{\n  \"schema\": 1,\n  \"settings\": [\n    {\n      \"name\": \"mode\",\n      \"raw\": 2,\n      \"decoded\": \"anc\",\n      \"age_ms\": 1200,\n      \"unknown\": false\n    },\n    {\n      \"name\": \"microphone\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"ear-detection\",\n      \"raw\": 2,\n      \"decoded\": \"on\",\n      \"age_ms\": 300,\n      \"unknown\": false\n    },\n    {\n      \"name\": \"one-bud-anc\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"conversation-awareness\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"personalized-volume\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"allow-off\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"pause-when-asleep\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"case-sounds\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"optimized-charging\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"volume-swipe\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"press-speed\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"hold-duration\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"swipe-duration\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"call-controls\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"crown-direction\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"tone-volume\",\n      \"raw\": 20530,\n      \"decoded\": \"50\",\n      \"age_ms\": 40,\n      \"unknown\": false\n    },\n    {\n      \"name\": \"case-volume\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"adaptive-strength\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"hold-modes\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"hold-actions\",\n      \"raw\": 1281,\n      \"decoded\": \"noise-control,siri\",\n      \"age_ms\": 7,\n      \"unknown\": false\n    },\n    {\n      \"name\": \"connect-automatically\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"allow-auto-connect\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"en352-protection\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"gain-swipe\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    }\n  ]\n}\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 16,
+  "trace": "919e6cd96c9a51fb"
+ },
+ {
+  "name": "json-settings-empty",
+  "argv": [
+   "--json",
+   "settings"
+  ],
+  "sim": {
+   "settings": []
+  },
+  "dongles": null,
+  "stdout": "{\n  \"schema\": 1,\n  \"settings\": [\n    {\n      \"name\": \"mode\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"microphone\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"ear-detection\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"one-bud-anc\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"conversation-awareness\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"personalized-volume\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"allow-off\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"pause-when-asleep\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"case-sounds\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"optimized-charging\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"volume-swipe\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"press-speed\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"hold-duration\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"swipe-duration\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"call-controls\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"crown-direction\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"tone-volume\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"case-volume\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"adaptive-strength\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"hold-modes\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"hold-actions\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"connect-automatically\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"allow-auto-connect\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"en352-protection\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"gain-swipe\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    }\n  ]\n}\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 12,
+  "trace": "1b9377257493ba0a"
+ },
+ {
+  "name": "json-settings-undecodable",
+  "argv": [
+   "--json",
+   "settings"
+  ],
+  "sim": {
+   "settings": [
+    {
+     "control": 13,
+     "age": 5,
+     "revision": 1,
+     "value": 99
+    },
+    {
+     "control": 22,
+     "age": 6,
+     "revision": 1,
+     "value": 65535
+    }
+   ]
+  },
+  "dongles": null,
+  "stdout": "{\n  \"schema\": 1,\n  \"settings\": [\n    {\n      \"name\": \"mode\",\n      \"raw\": 99,\n      \"decoded\": null,\n      \"age_ms\": 5,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"microphone\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"ear-detection\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"one-bud-anc\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"conversation-awareness\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"personalized-volume\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"allow-off\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"pause-when-asleep\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"case-sounds\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"optimized-charging\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"volume-swipe\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"press-speed\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"hold-duration\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"swipe-duration\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"call-controls\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"crown-direction\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"tone-volume\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"case-volume\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"adaptive-strength\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"hold-modes\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"hold-actions\",\n      \"raw\": 65535,\n      \"decoded\": null,\n      \"age_ms\": 6,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"connect-automatically\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"allow-auto-connect\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"en352-protection\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    },\n    {\n      \"name\": \"gain-swipe\",\n      \"raw\": null,\n      \"decoded\": null,\n      \"age_ms\": null,\n      \"unknown\": true\n    }\n  ]\n}\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 12,
+  "trace": "1b9377257493ba0a"
+ },
+ {
+  "name": "json-settings-no-capability",
+  "argv": [
+   "--json",
+   "settings"
+  ],
+  "sim": {
+   "capabilities": 0
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: Firmware does not advertise typed settings support\n",
+  "exit": 1,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da6"
+ },
+ {
+  "name": "json-settings-rejected",
+  "argv": [
+   "--json",
+   "settings"
+  ],
+  "sim": {
+   "fail": {
+    "2": 4
+   }
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: RPC failure: AirPods disconnected\n",
+  "exit": 1,
+  "ops": 11,
+  "trace": "6e0072b854ba6648"
+ },
+ {
+  "name": "json-get",
+  "argv": [
+   "--json",
+   "get",
+   "tone-volume"
+  ],
+  "dongles": null,
+  "stdout": "{\n  \"schema\": 1,\n  \"setting\": {\n    \"name\": \"tone-volume\",\n    \"raw\": 20530,\n    \"decoded\": \"50\",\n    \"age_ms\": 40,\n    \"unknown\": false\n  }\n}\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 16,
+  "trace": "919e6cd96c9a51fb"
+ },
+ {
+  "name": "json-get-unreported",
+  "argv": [
+   "--json",
+   "get",
+   "microphone"
+  ],
+  "dongles": null,
+  "stdout": "{\n  \"schema\": 1,\n  \"setting\": {\n    \"name\": \"microphone\",\n    \"raw\": null,\n    \"decoded\": null,\n    \"age_ms\": null,\n    \"unknown\": true\n  }\n}\n",
+  "stderr": "",
+  "exit": 1,
+  "ops": 16,
+  "trace": "919e6cd96c9a51fb"
+ },
+ {
+  "name": "json-get-undecodable",
+  "argv": [
+   "--json",
+   "get",
+   "mode"
+  ],
+  "sim": {
+   "settings": [
+    {
+     "control": 13,
+     "age": 5,
+     "revision": 1,
+     "value": 99
+    }
+   ]
+  },
+  "dongles": null,
+  "stdout": "{\n  \"schema\": 1,\n  \"setting\": {\n    \"name\": \"mode\",\n    \"raw\": 99,\n    \"decoded\": null,\n    \"age_ms\": 5,\n    \"unknown\": true\n  }\n}\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 12,
+  "trace": "1b9377257493ba0a"
+ },
+ {
+  "name": "json-get-bad-setting",
+  "argv": [
+   "--json",
+   "get",
+   "bogus"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "usage: airpods get [-h]\n                   {mode,microphone,ear-detection,one-bud-anc,conversation-awareness,personalized-volume,allow-off,pause-when-asleep,case-sounds,optimized-charging,volume-swipe,press-speed,hold-duration,swipe-duration,call-controls,crown-direction,tone-volume,case-volume,adaptive-strength,hold-modes,hold-actions,connect-automatically,allow-auto-connect,en352-protection,gain-swipe}\nairpods get: error: argument setting: invalid choice: 'bogus' (choose from mode, microphone, ear-detection, one-bud-anc, conversation-awareness, personalized-volume, allow-off, pause-when-asleep, case-sounds, optimized-charging, volume-swipe, press-speed, hold-duration, swipe-duration, call-controls, crown-direction, tone-volume, case-volume, adaptive-strength, hold-modes, hold-actions, connect-automatically, allow-auto-connect, en352-protection, gain-swipe)\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "json-list-zero",
+  "argv": [
+   "--json",
+   "list"
+  ],
+  "dongles": [],
+  "stdout": "{\n  \"schema\": 1,\n  \"dongles\": []\n}\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": ""
+ },
+ {
+  "name": "json-list-several",
+  "argv": [
+   "--json",
+   "list"
+  ],
+  "dongles": [
+   {
+    "serial": "SIM0001",
+    "pid": 16405,
+    "path": "/dev/hidraw3",
+    "openable": true
+   },
+   {
+    "serial": "SIM0002",
+    "pid": 16389,
+    "path": "/dev/hidraw12",
+    "openable": true,
+    "sim": {
+     "flags": 0
+    }
+   },
+   {
+    "serial": "SIM0003",
+    "pid": 16405,
+    "path": "/dev/hidraw7",
+    "openable": false,
+    "err": "found /dev/hidraw7 but no permission to open it; install the AirPods udev rule; see the docs"
+   },
+   {
+    "serial": "",
+    "pid": 16405,
+    "path": "/dev/hidraw8",
+    "openable": true
+   }
+  ],
+  "stdout": "{\n  \"schema\": 1,\n  \"dongles\": [\n    {\n      \"serial\": \"SIM0001\",\n      \"usb_id\": \"4015\",\n      \"path\": \"/dev/hidraw3\",\n      \"connected\": true,\n      \"error\": null\n    },\n    {\n      \"serial\": \"SIM0002\",\n      \"usb_id\": \"4005\",\n      \"path\": \"/dev/hidraw12\",\n      \"connected\": false,\n      \"error\": null\n    },\n    {\n      \"serial\": \"SIM0003\",\n      \"usb_id\": \"4015\",\n      \"path\": \"/dev/hidraw7\",\n      \"connected\": null,\n      \"error\": \"cannot be opened: found /dev/hidraw7 but no permission to open it; install the AirPods udev rule; see the docs\"\n    },\n    {\n      \"serial\": null,\n      \"usb_id\": \"4015\",\n      \"path\": \"/dev/hidraw8\",\n      \"connected\": null,\n      \"error\": \"cannot be selected: it has no USB serial\"\n    }\n  ]\n}\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 2,
+  "trace": "3dd53a9a2e014da63dd53a9a2e014da6e3b0c44298fc1c14e3b0c44298fc1c14"
+ },
+ {
+  "name": "json-list-filter",
+  "argv": [
+   "--json",
+   "--serial",
+   "SIM0002",
+   "list"
+  ],
+  "dongles": [
+   {
+    "serial": "SIM0001",
+    "pid": 16405,
+    "path": "/dev/hidraw3",
+    "openable": true
+   },
+   {
+    "serial": "SIM0002",
+    "pid": 16389,
+    "path": "/dev/hidraw12",
+    "openable": true,
+    "sim": {
+     "flags": 0
+    }
+   }
+  ],
+  "stdout": "{\n  \"schema\": 1,\n  \"dongles\": [\n    {\n      \"serial\": \"SIM0002\",\n      \"usb_id\": \"4005\",\n      \"path\": \"/dev/hidraw12\",\n      \"connected\": false,\n      \"error\": null\n    }\n  ]\n}\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 1,
+  "trace": "e3b0c44298fc1c143dd53a9a2e014da6"
+ },
+ {
+  "name": "json-refused-for-set",
+  "argv": [
+   "--json",
+   "set",
+   "mode",
+   "off"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "usage: airpods [-h] [--version] [--serial SERIAL] [--json] [--debug]\n               {help,completion,list,status,settings,get,set,audio,game,nearby,perf,info,hearing,hardware,experimental,reconnect,connect,pair,pair-phone,disconnect,reconnect-policy,firmware,diag} ...\nairpods: error: --json works only with status, settings, get, list, info and the read commands of hearing, hardware and experimental\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "json-after-command",
+  "argv": [
+   "status",
+   "--json"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "usage: airpods [-h] [--version] [--serial SERIAL] [--json] [--debug]\n               {help,completion,list,status,settings,get,set,audio,game,nearby,perf,info,hearing,hardware,experimental,reconnect,connect,pair,pair-phone,disconnect,reconnect-policy,firmware,diag} ...\nairpods: error: --json must come before the command\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "json-abbreviated",
+  "argv": [
+   "--js",
+   "status"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "usage: airpods [-h] [--version] [--serial SERIAL] [--json] [--debug]\n               {help,completion,list,status,settings,get,set,audio,game,nearby,perf,info,hearing,hardware,experimental,reconnect,connect,pair,pair-phone,disconnect,reconnect-policy,firmware,diag} ...\nairpods: error: unrecognized arguments: --js\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "json-help",
+  "argv": [
+   "--json",
+   "--help"
+  ],
+  "dongles": null,
+  "stdout": "usage: airpods [-h] [--version] [--serial SERIAL] [--json] [--debug]\n               {help,completion,list,status,settings,get,set,audio,game,nearby,perf,info,hearing,hardware,experimental,reconnect,connect,pair,pair-phone,disconnect,reconnect-policy,firmware,diag} ...\n\nControl AirPods through the dongle's existing USB HID interface.\n\npositional arguments:\n  {help,completion,list,status,settings,get,set,audio,game,nearby,perf,info,hearing,hardware,experimental,reconnect,connect,pair,pair-phone,disconnect,reconnect-policy,firmware,diag}\n    help                show commands or help for a setting\n    completion          print a shell completion script\n    list                list attached dongles; works with none attached\n    status              show connection, codec and batteries without changing\n                        settings\n    settings            list readable setting values and their report ages\n    get                 read one reported setting\n    set                 change one setting and wait for device confirmation\n    audio               show the audio profile, or change it with audio set\n    game                turn game mode on or off\n    nearby              search for the AirPods by signal strength for a\n                        bounded time\n    perf                show the dongle performance counters\n    info                show model, firmware and serial, and what the model can\n                        do\n    hearing             read Hearing Aid and Media Assist, or change them\n    hardware            read saved hardware results and data, or run the in-case\n                        check\n    experimental        transparency, loud sound reduction, EQ and rename; needs\n                        --experimental\n    reconnect           ask the dongle to reconnect to its AirPods; confirms\n                        only that the dongle took the request\n    connect             connect the AirPods and confirm that the dongle owns\n                        their audio\n    pair                start pairing new AirPods; refused while audio or a\n                        phone is in use\n    pair-phone          open the dongle's phone pairing window\n    disconnect          disconnect AirPods but keep them paired; needs dongle\n                        firmware 0.1.59 or newer\n    reconnect-policy    read or save whether the dongle reconnects by itself;\n                        needs dongle firmware 0.1.63 or newer\n    firmware            show the version of the dongle firmware; needs firmware\n                        with the version report\n    diag                capture read-only audio diagnostics as JSON Lines\n\noptions:\n  -h, --help            show this help message and exit\n  --version             show the version and exit\n  --serial SERIAL       select one Pico by its USB serial; required when\n                        multiple dongles are attached\n  --json                print status, settings, get, list, info and other reads\n                        as JSON\n  --debug               print request channel traffic to stderr: sizes and codes,\n                        no addresses or serials\n\nClose NTPods or other HID control clients before using settings commands.\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "audio-show",
+  "argv": [
+   "audio"
+  ],
+  "dongles": null,
+  "stdout": "Codec: AAC\nBitrate: 192 kbps\nRequested codec: AAC\nRequested bitrate: 192 kbps\nVariable bitrate: off\nActivity: idle\nMicrophone: not active\nInput: 1\nReported delay: not reported\nGame mode: not supported\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 12,
+  "trace": "abd6b9a1f91c12f5"
+ },
+ {
+  "name": "audio-show-rich",
+  "argv": [
+   "audio"
+  ],
+  "sim": {
+   "replies": {
+    "9": "0103030100e8030000e80300000001027d006400"
+   }
+  },
+  "dongles": null,
+  "stdout": "Codec: AAC-ELD\nBitrate: 256 kbps\nRequested codec: AAC-ELD\nRequested bitrate: 256 kbps\nVariable bitrate: on\nActivity: streaming\nMicrophone: not active\nInput: 1\nReported delay: 12.5 ms\nGame mode: not supported\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 12,
+  "trace": "abd6b9a1f91c12f5"
+ },
+ {
+  "name": "audio-show-auto-pending",
+  "argv": [
+   "audio"
+  ],
+  "sim": {
+   "replies": {
+    "9": "01000000000000000000000000000105ffff6400"
+   }
+  },
+  "dongles": null,
+  "stdout": "Codec: unknown\nBitrate: default\nRequested codec: automatic\nRequested bitrate: default\nVariable bitrate: off\nActivity: change pending\nMicrophone: active\nInput: 1\nReported delay: not reported\nGame mode: not supported\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 12,
+  "trace": "abd6b9a1f91c12f5"
+ },
+ {
+  "name": "audio-show-no-capability",
+  "argv": [
+   "audio"
+  ],
+  "sim": {
+   "capabilities": 0
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: Firmware does not advertise typed settings support\n",
+  "exit": 1,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da6"
+ },
+ {
+  "name": "audio-show-malformed",
+  "argv": [
+   "audio"
+  ],
+  "sim": {
+   "replies": {
+    "9": "01"
+   }
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: Unsupported dongle audio profile.\n",
+  "exit": 1,
+  "ops": 12,
+  "trace": "abd6b9a1f91c12f5"
+ },
+ {
+  "name": "audio-show-refused",
+  "argv": [
+   "audio"
+  ],
+  "sim": {
+   "fail": {
+    "9": 7
+   }
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: Firmware does not support this request for this device\n",
+  "exit": 1,
+  "ops": 11,
+  "trace": "69e47d5c58b0364e"
+ },
+ {
+  "name": "audio-help",
+  "argv": [
+   "audio",
+   "-h"
+  ],
+  "dongles": null,
+  "stdout": "usage: airpods audio [-h] {set} ...\n\npositional arguments:\n  {set}\n    set       change codec, bitrate or variable bitrate\n\noptions:\n  -h, --help  show this help message and exit\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "audio-help-topic",
+  "argv": [
+   "help",
+   "audio"
+  ],
+  "dongles": null,
+  "stdout": "usage: airpods audio [-h] {set} ...\n\npositional arguments:\n  {set}\n    set       change codec, bitrate or variable bitrate\n\noptions:\n  -h, --help  show this help message and exit\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "audio-set-help",
+  "argv": [
+   "audio",
+   "set",
+   "-h"
+  ],
+  "dongles": null,
+  "stdout": "usage: airpods audio set [-h] [--codec {auto,sbc,aac,aac-eld}]\n                         [--bitrate BITRATE] [--variable {on,off}]\n\noptions:\n  -h, --help            show this help message and exit\n  --codec {auto,sbc,aac,aac-eld}\n                        without this flag the requested codec stays\n  --bitrate BITRATE     default, or for aac 96000, 128000, 174000, 192000,\n                        220000, or for aac-eld 128000, 174000, 192000, 220000,\n                        256000\n  --variable {on,off}   variable bitrate; aac-eld only\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "audio-set-nothing",
+  "argv": [
+   "audio",
+   "set"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "usage: airpods audio set [-h] [--codec {auto,sbc,aac,aac-eld}]\n                         [--bitrate BITRATE] [--variable {on,off}]\nairpods audio set: error: give at least one of --codec, --bitrate and --variable\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "audio-bad-sub",
+  "argv": [
+   "audio",
+   "bogus"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "usage: airpods audio [-h] {set} ...\nairpods audio: error: argument subcommand: invalid choice: 'bogus' (choose from set)\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "audio-set-bad-codec",
+  "argv": [
+   "audio",
+   "set",
+   "--codec",
+   "flac"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "usage: airpods audio set [-h] [--codec {auto,sbc,aac,aac-eld}]\n                         [--bitrate BITRATE] [--variable {on,off}]\nairpods audio set: error: argument --codec: invalid choice: 'flac' (choose from auto, sbc, aac, aac-eld)\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "audio-set-bad-bitrate",
+  "argv": [
+   "audio",
+   "set",
+   "--bitrate",
+   "12345"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "usage: airpods audio set [-h] [--codec {auto,sbc,aac,aac-eld}]\n                         [--bitrate BITRATE] [--variable {on,off}]\nairpods audio set: error: --bitrate: expected default or a bitrate of aac (96000, 128000, 174000, 192000, 220000) or aac-eld (128000, 174000, 192000, 220000, 256000)\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "audio-set-bad-bitrate-word",
+  "argv": [
+   "audio",
+   "set",
+   "--bitrate",
+   "fast"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "usage: airpods audio set [-h] [--codec {auto,sbc,aac,aac-eld}]\n                         [--bitrate BITRATE] [--variable {on,off}]\nairpods audio set: error: --bitrate: expected default or a bitrate of aac (96000, 128000, 174000, 192000, 220000) or aac-eld (128000, 174000, 192000, 220000, 256000)\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "audio-set-bad-variable",
+  "argv": [
+   "audio",
+   "set",
+   "--variable",
+   "yes"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "usage: airpods audio set [-h] [--codec {auto,sbc,aac,aac-eld}]\n                         [--bitrate BITRATE] [--variable {on,off}]\nairpods audio set: error: argument --variable: invalid choice: 'yes' (choose from on, off)\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "audio-set-aac-256k-refused",
+  "argv": [
+   "audio",
+   "set",
+   "--codec",
+   "aac",
+   "--bitrate",
+   "256000"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "usage: airpods audio set [-h] [--codec {auto,sbc,aac,aac-eld}]\n                         [--bitrate BITRATE] [--variable {on,off}]\nairpods audio set: error: --bitrate: aac expects default, 96000, 128000, 174000, 192000, 220000\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "audio-set-eld-96k-refused",
+  "argv": [
+   "audio",
+   "set",
+   "--codec",
+   "aac-eld",
+   "--bitrate",
+   "96000"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "usage: airpods audio set [-h] [--codec {auto,sbc,aac,aac-eld}]\n                         [--bitrate BITRATE] [--variable {on,off}]\nairpods audio set: error: --bitrate: aac-eld expects default, 128000, 174000, 192000, 220000, 256000\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "audio-set-sbc-bitrate-refused",
+  "argv": [
+   "audio",
+   "set",
+   "--codec",
+   "sbc",
+   "--bitrate",
+   "128000"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "usage: airpods audio set [-h] [--codec {auto,sbc,aac,aac-eld}]\n                         [--bitrate BITRATE] [--variable {on,off}]\nairpods audio set: error: --bitrate needs codec aac or aac-eld, not sbc\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "audio-set-auto-bitrate-refused",
+  "argv": [
+   "audio",
+   "set",
+   "--codec",
+   "auto",
+   "--bitrate",
+   "128000"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "usage: airpods audio set [-h] [--codec {auto,sbc,aac,aac-eld}]\n                         [--bitrate BITRATE] [--variable {on,off}]\nairpods audio set: error: --bitrate needs codec aac or aac-eld, not auto\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "audio-set-aac-variable-refused",
+  "argv": [
+   "audio",
+   "set",
+   "--codec",
+   "aac",
+   "--variable",
+   "on"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "usage: airpods audio set [-h] [--codec {auto,sbc,aac,aac-eld}]\n                         [--bitrate BITRATE] [--variable {on,off}]\nairpods audio set: error: --variable on needs codec aac-eld, not aac\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "audio-set-sbc",
+  "argv": [
+   "audio",
+   "set",
+   "--codec",
+   "sbc"
+  ],
+  "dongles": null,
+  "stdout": "audio set: accepted by dongle\nCodec: AAC\nBitrate: 192 kbps\nRequested codec: AAC\nRequested bitrate: 192 kbps\nVariable bitrate: off\nActivity: idle\nMicrophone: not active\nInput: 1\nReported delay: not reported\nGame mode: not supported\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 23,
+  "trace": "70fe28361d75ea02"
+ },
+ {
+  "name": "audio-set-auto",
+  "argv": [
+   "audio",
+   "set",
+   "--codec",
+   "auto"
+  ],
+  "dongles": null,
+  "stdout": "audio set: accepted by dongle\nCodec: AAC\nBitrate: 192 kbps\nRequested codec: AAC\nRequested bitrate: 192 kbps\nVariable bitrate: off\nActivity: idle\nMicrophone: not active\nInput: 1\nReported delay: not reported\nGame mode: not supported\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 23,
+  "trace": "91d689137b21e27e"
+ },
+ {
+  "name": "audio-set-aac-96k",
+  "argv": [
+   "audio",
+   "set",
+   "--codec",
+   "aac",
+   "--bitrate",
+   "96000"
+  ],
+  "dongles": null,
+  "stdout": "audio set: accepted by dongle\nCodec: AAC\nBitrate: 192 kbps\nRequested codec: AAC\nRequested bitrate: 192 kbps\nVariable bitrate: off\nActivity: idle\nMicrophone: not active\nInput: 1\nReported delay: not reported\nGame mode: not supported\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 23,
+  "trace": "c68dd9de28e28eee"
+ },
+ {
+  "name": "audio-set-eld-variable",
+  "argv": [
+   "audio",
+   "set",
+   "--codec",
+   "aac-eld",
+   "--bitrate",
+   "256000",
+   "--variable",
+   "on"
+  ],
+  "sim": {
+   "replies": {
+    "3": "0103030100e8030000e80300000001027d006400"
+   }
+  },
+  "dongles": null,
+  "stdout": "audio set: accepted by dongle\nCodec: AAC-ELD\nBitrate: 256 kbps\nRequested codec: AAC-ELD\nRequested bitrate: 256 kbps\nVariable bitrate: on\nActivity: streaming\nMicrophone: not active\nInput: 1\nReported delay: 12.5 ms\nGame mode: not supported\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 23,
+  "trace": "ebfea011b7a15216"
+ },
+ {
+  "name": "audio-set-default-bitrate",
+  "argv": [
+   "audio",
+   "set",
+   "--codec",
+   "aac-eld",
+   "--bitrate",
+   "default"
+  ],
+  "dongles": null,
+  "stdout": "audio set: accepted by dongle\nCodec: AAC\nBitrate: 192 kbps\nRequested codec: AAC\nRequested bitrate: 192 kbps\nVariable bitrate: off\nActivity: idle\nMicrophone: not active\nInput: 1\nReported delay: not reported\nGame mode: not supported\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 23,
+  "trace": "c92c73add081dd7d"
+ },
+ {
+  "name": "audio-set-bitrate-only",
+  "argv": [
+   "audio",
+   "set",
+   "--bitrate",
+   "128000"
+  ],
+  "dongles": null,
+  "stdout": "audio set: accepted by dongle\nCodec: AAC\nBitrate: 192 kbps\nRequested codec: AAC\nRequested bitrate: 192 kbps\nVariable bitrate: off\nActivity: idle\nMicrophone: not active\nInput: 1\nReported delay: not reported\nGame mode: not supported\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 23,
+  "trace": "c6c46a3ed64406a2"
+ },
+ {
+  "name": "audio-set-bitrate-wrong-for-current",
+  "argv": [
+   "audio",
+   "set",
+   "--bitrate",
+   "256000"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: --bitrate: aac expects default, 96000, 128000, 174000, 192000, 220000\n",
+  "exit": 1,
+  "ops": 12,
+  "trace": "abd6b9a1f91c12f5"
+ },
+ {
+  "name": "audio-set-variable-on-current-aac",
+  "argv": [
+   "audio",
+   "set",
+   "--variable",
+   "on"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: --variable on needs codec aac-eld, not aac\n",
+  "exit": 1,
+  "ops": 12,
+  "trace": "abd6b9a1f91c12f5"
+ },
+ {
+  "name": "audio-set-already",
+  "argv": [
+   "audio",
+   "set",
+   "--codec",
+   "aac",
+   "--bitrate",
+   "192000"
+  ],
+  "dongles": null,
+  "stdout": "audio set: already requested; no write sent\nCodec: AAC\nBitrate: 192 kbps\nRequested codec: AAC\nRequested bitrate: 192 kbps\nVariable bitrate: off\nActivity: idle\nMicrophone: not active\nInput: 1\nReported delay: not reported\nGame mode: not supported\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 12,
+  "trace": "abd6b9a1f91c12f5"
+ },
+ {
+  "name": "audio-set-rejected-busy",
+  "argv": [
+   "audio",
+   "set",
+   "--codec",
+   "sbc"
+  ],
+  "sim": {
+   "fail": {
+    "3": 2
+   }
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: RPC failure: busy; close competing companion controls\n",
+  "exit": 1,
+  "ops": 22,
+  "trace": "48a40370d20fbbd1"
+ },
+ {
+  "name": "audio-set-rejected-disconnected",
+  "argv": [
+   "audio",
+   "set",
+   "--codec",
+   "sbc"
+  ],
+  "sim": {
+   "fail": {
+    "3": 4
+   }
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: RPC failure: AirPods disconnected\n",
+  "exit": 1,
+  "ops": 22,
+  "trace": "48a40370d20fbbd1"
+ },
+ {
+  "name": "audio-set-unsupported",
+  "argv": [
+   "audio",
+   "set",
+   "--codec",
+   "sbc"
+  ],
+  "sim": {
+   "fail": {
+    "3": 7
+   }
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: Firmware does not support this request for this device\n",
+  "exit": 1,
+  "ops": 22,
+  "trace": "48a40370d20fbbd1"
+ },
+ {
+  "name": "audio-set-device-timeout-unconfirmed",
+  "argv": [
+   "audio",
+   "set",
+   "--codec",
+   "sbc"
+  ],
+  "sim": {
+   "fail": {
+    "3": 5
+   }
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "audio set: not confirmed: RPC failure: device timeout. It may have applied; run airpods audio before retrying.\n",
+  "exit": 3,
+  "ops": 22,
+  "trace": "48a40370d20fbbd1"
+ },
+ {
+  "name": "audio-set-bad-reply-unconfirmed",
+  "argv": [
+   "audio",
+   "set",
+   "--codec",
+   "sbc"
+  ],
+  "sim": {
+   "replies": {
+    "3": "01"
+   }
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "audio set: not confirmed: Unsupported dongle audio profile. It may have applied; run airpods audio before retrying.\n",
+  "exit": 3,
+  "ops": 23,
+  "trace": "70fe28361d75ea02"
+ },
+ {
+  "name": "game-on",
+  "argv": [
+   "game",
+   "on"
+  ],
+  "sim": {
+   "replies": {
+    "9": "0102020000ee020000ee020000000108ffff6400",
+    "4": "0102020000ee020000ee020001010108ffff6400"
+   }
+  },
+  "dongles": null,
+  "stdout": "game: on (accepted by dongle, now waiting for playback)\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 23,
+  "trace": "631318550b56a09e"
+ },
+ {
+  "name": "game-off",
+  "argv": [
+   "game",
+   "off"
+  ],
+  "sim": {
+   "replies": {
+    "9": "0102020000ee020000ee020001030108ffff6400",
+    "4": "0102020000ee020000ee020000000108ffff6400"
+   }
+  },
+  "dongles": null,
+  "stdout": "game: off (accepted by dongle, now off)\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 23,
+  "trace": "73e2fefdacfa7bef"
+ },
+ {
+  "name": "game-already",
+  "argv": [
+   "game",
+   "on"
+  ],
+  "sim": {
+   "replies": {
+    "9": "0102020000ee020000ee020001030108ffff6400"
+   }
+  },
+  "dongles": null,
+  "stdout": "game: on (already requested, now on; no write sent)\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 12,
+  "trace": "abd6b9a1f91c12f5"
+ },
+ {
+  "name": "game-unsupported-by-dongle",
+  "argv": [
+   "game",
+   "on"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: Game mode is not supported by this dongle\n",
+  "exit": 1,
+  "ops": 12,
+  "trace": "abd6b9a1f91c12f5"
+ },
+ {
+  "name": "game-reply-failed",
+  "argv": [
+   "game",
+   "on"
+  ],
+  "sim": {
+   "replies": {
+    "9": "0102020000ee020000ee020000000108ffff6400",
+    "4": "0102020000ee020000ee020001040108ffff6400"
+   }
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: game: the dongle reports failed\n",
+  "exit": 1,
+  "ops": 23,
+  "trace": "631318550b56a09e"
+ },
+ {
+  "name": "game-rejected",
+  "argv": [
+   "game",
+   "on"
+  ],
+  "sim": {
+   "replies": {
+    "9": "0102020000ee020000ee020000000108ffff6400"
+   },
+   "fail": {
+    "4": 4
+   }
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: RPC failure: AirPods disconnected\n",
+  "exit": 1,
+  "ops": 22,
+  "trace": "1ebcd34878dbd389"
+ },
+ {
+  "name": "game-timeout-unconfirmed",
+  "argv": [
+   "game",
+   "on"
+  ],
+  "sim": {
+   "replies": {
+    "9": "0102020000ee020000ee020000000108ffff6400"
+   },
+   "fail": {
+    "4": 5
+   }
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "game: not confirmed: RPC failure: device timeout. It may have applied; run airpods audio before retrying.\n",
+  "exit": 3,
+  "ops": 22,
+  "trace": "1ebcd34878dbd389"
+ },
+ {
+  "name": "game-no-argument",
+  "argv": [
+   "game"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "usage: airpods game [-h] {on,off}\nairpods game: error: the following arguments are required: state\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "game-bad-argument",
+  "argv": [
+   "game",
+   "maybe"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "usage: airpods game [-h] {on,off}\nairpods game: error: argument state: invalid choice: 'maybe' (choose from on, off)\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "game-no-capability",
+  "argv": [
+   "game",
+   "on"
+  ],
+  "sim": {
+   "capabilities": 0
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: Firmware does not advertise typed settings support\n",
+  "exit": 1,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da6"
+ },
+ {
+  "name": "perf",
+  "argv": [
+   "perf"
+  ],
+  "sim": {
+   "replies": {
+    "5": "01010203c8d63800c0030000a00f0000a2080000030000000000000080c802009c0100006207000000000000010000000000040000d801000028020000000300"
+   }
+  },
+  "dongles": null,
+  "stdout": "Uptime: 1h2m5s\nInput: 1\nCodec: AAC\nFlags: 0x03\nBuffer used: 960 of 4000\nBuffer high water: 2210 of 4000\nUnderflow frames: 3\nDropped frames: 0\nEncoded units: 182400\nEncode time: 412 us\nEncode time max: 1890 us\nSend failures: 0\nRecoveries: 1\nHeap capacity: 256.0 KiB\nHeap allocated: 118.0 KiB\nHeap remaining: 138.0 KiB\nHeap arena: 192.0 KiB\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 16,
+  "trace": "29a4889dac1b2742"
+ },
+ {
+  "name": "perf-default",
+  "argv": [
+   "perf"
+  ],
+  "dongles": null,
+  "stdout": "Uptime: 0s\nInput: 0\nCodec: unknown\nFlags: 0x00\nBuffer used: 8 of 4000\nBuffer high water: 16 of 4000\nUnderflow frames: 20\nDropped frames: 24\nEncoded units: 28\nEncode time: 32 us\nEncode time max: 36 us\nSend failures: 40\nRecoveries: 44\nHeap capacity: 8.8 KiB\nHeap allocated: 0.1 KiB\nHeap remaining: 0.1 KiB\nHeap arena: 0.1 KiB\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 16,
+  "trace": "29a4889dac1b2742"
+ },
+ {
+  "name": "perf-not-reported",
+  "argv": [
+   "perf"
+  ],
+  "sim": {
+   "replies": {
+    "5": "01010203c8d63800ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+   }
+  },
+  "dongles": null,
+  "stdout": "Uptime: 1h2m5s\nInput: 1\nCodec: AAC\nFlags: 0x03\nBuffer used: not reported\nBuffer high water: not reported\nUnderflow frames: not reported\nDropped frames: not reported\nEncoded units: not reported\nEncode time: not reported\nEncode time max: not reported\nSend failures: not reported\nRecoveries: not reported\nHeap capacity: not reported\nHeap allocated: not reported\nHeap remaining: not reported\nHeap arena: not reported\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 16,
+  "trace": "29a4889dac1b2742"
+ },
+ {
+  "name": "perf-inconsistent",
+  "argv": [
+   "perf"
+  ],
+  "sim": {
+   "replies": {
+    "5": "01010203c8d6380088130000a00f0000a2080000030000000000000080c802009c0100006207000000000000010000000000040000d801000028020000000300"
+   }
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: Inconsistent dongle performance counters.\n",
+  "exit": 1,
+  "ops": 16,
+  "trace": "29a4889dac1b2742"
+ },
+ {
+  "name": "perf-refused",
+  "argv": [
+   "perf"
+  ],
+  "sim": {
+   "fail": {
+    "5": 7
+   }
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: Firmware does not support this request for this device\n",
+  "exit": 1,
+  "ops": 11,
+  "trace": "6940c09632e7386e"
+ },
+ {
+  "name": "perf-no-capability",
+  "argv": [
+   "perf"
+  ],
+  "sim": {
+   "capabilities": 0
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: Firmware does not advertise typed settings support\n",
+  "exit": 1,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da6"
+ },
+ {
+  "name": "nearby-bounded",
+  "argv": [
+   "nearby",
+   "--seconds",
+   "3"
+  ],
+  "sim": {
+   "replies": {
+    "7": "0181c6012003000000000000000000000000000000c6ffff"
+   }
+  },
+  "dongles": null,
+  "stdout": "nearby: waiting for the first signal\nnearby: -58 dBm, strong signal, trend stronger, heard 800 ms ago\nnearby: -58 dBm, strong signal, trend stronger, heard 800 ms ago\nnearby: stopped\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 67,
+  "trace": "f76d7b78aa568549"
+ },
+ {
+  "name": "nearby-signal-kinds",
+  "argv": [
+   "nearby",
+   "--seconds",
+   "1"
+  ],
+  "sim": {
+   "replies": {
+    "6": "0181c6036400000000000000000000000000000000abffff",
+    "7": "0181c6012003000000000000000000000000000000c6ffff"
+   }
+  },
+  "dongles": null,
+  "stdout": "nearby: -85 dBm, weak signal, trend weaker, heard 100 ms ago\nnearby: stopped\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 45,
+  "trace": "5ed49bb55ce35e9b"
+ },
+ {
+  "name": "nearby-paused",
+  "argv": [
+   "nearby",
+   "--seconds",
+   "2"
+  ],
+  "sim": {
+   "replies": {
+    "7": "0184c6012003000000000000000000000000000000c6ffff"
+   }
+  },
+  "dongles": null,
+  "stdout": "nearby: waiting for the first signal\nnearby: paused while audio is playing\nnearby: stopped\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 56,
+  "trace": "5af8ea1fad9d8f09"
+ },
+ {
+  "name": "nearby-waiting-first",
+  "argv": [
+   "nearby",
+   "--seconds",
+   "2"
+  ],
+  "sim": {
+   "replies": {
+    "7": "01817f01ffffffff00000000000000000000000000000080"
+   }
+  },
+  "dongles": null,
+  "stdout": "nearby: waiting for the first signal\nnearby: waiting for the first signal\nnearby: stopped\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 56,
+  "trace": "5af8ea1fad9d8f09"
+ },
+ {
+  "name": "nearby-stale-signal",
+  "argv": [
+   "nearby",
+   "--seconds",
+   "2"
+  ],
+  "sim": {
+   "replies": {
+    "7": "0181c601204e000000000000000000000000000000c6ffff"
+   }
+  },
+  "dongles": null,
+  "stdout": "nearby: waiting for the first signal\nnearby: waiting for another signal; last heard 20000 ms ago\nnearby: stopped\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 56,
+  "trace": "5af8ea1fad9d8f09"
+ },
+ {
+  "name": "nearby-ends-on-dongle",
+  "argv": [
+   "nearby"
+  ],
+  "dongles": null,
+  "stdout": "nearby: waiting for the first signal\nnearby: the search ended on the dongle\nnearby: stopped\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 45,
+  "trace": "5ed49bb55ce35e9b"
+ },
+ {
+  "name": "nearby-did-not-start",
+  "argv": [
+   "nearby"
+  ],
+  "sim": {
+   "replies": {
+    "6": "0180c6012003000000000000000000000000000000c6ffff",
+    "7": "0180c6012003000000000000000000000000000000c6ffff"
+   }
+  },
+  "dongles": null,
+  "stdout": "nearby: stopped\n",
+  "stderr": "Error: The finder did not start\n",
+  "exit": 1,
+  "ops": 89,
+  "trace": "f94825eb484403a0"
+ },
+ {
+  "name": "nearby-no-identity",
+  "argv": [
+   "nearby"
+  ],
+  "sim": {
+   "replies": {
+    "7": "01007f01ffffffff00000000000000000000000000000080"
+   }
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: Searching is not available for this pair of AirPods yet\n",
+  "exit": 1,
+  "ops": 12,
+  "trace": "ec3ec0d1bd07681e"
+ },
+ {
+  "name": "nearby-start-refused",
+  "argv": [
+   "nearby"
+  ],
+  "sim": {
+   "fail": {
+    "6": 7
+   }
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: Firmware does not support this request for this device\n",
+  "exit": 1,
+  "ops": 22,
+  "trace": "2dd55092abc9ab0e"
+ },
+ {
+  "name": "nearby-stop-fails",
+  "argv": [
+   "nearby",
+   "--seconds",
+   "2"
+  ],
+  "sim": {
+   "replies": {
+    "7": "0181c6012003000000000000000000000000000000c6ffff"
+   },
+   "fail": {
+    "8": 4
+   }
+  },
+  "dongles": null,
+  "stdout": "nearby: waiting for the first signal\nnearby: -58 dBm, strong signal, trend stronger, heard 800 ms ago\n",
+  "stderr": "nearby: could not stop the finder: RPC failure: AirPods disconnected. Replug the dongle if it keeps searching.\n",
+  "exit": 1,
+  "ops": 55,
+  "trace": "518ea82966254dc9"
+ },
+ {
+  "name": "nearby-seconds-zero",
+  "argv": [
+   "nearby",
+   "--seconds",
+   "0"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "usage: airpods nearby [-h] [--seconds SECONDS]\nairpods nearby: error: --seconds must be 1..300\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "nearby-seconds-too-long",
+  "argv": [
+   "nearby",
+   "--seconds",
+   "301"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "usage: airpods nearby [-h] [--seconds SECONDS]\nairpods nearby: error: --seconds must be 1..300\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "nearby-seconds-word",
+  "argv": [
+   "nearby",
+   "--seconds",
+   "soon"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "usage: airpods nearby [-h] [--seconds SECONDS]\nairpods nearby: error: argument --seconds: invalid int value: 'soon'\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "nearby-no-capability",
+  "argv": [
+   "nearby"
+  ],
+  "sim": {
+   "capabilities": 0
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: Firmware does not advertise typed settings support\n",
+  "exit": 1,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da6"
+ },
+ {
+  "name": "hidden-get-unreported",
+  "argv": [
+   "get",
+   "connect-automatically"
+  ],
+  "dongles": null,
+  "stdout": "connect-automatically: unknown (not reported; may be unsupported)\n",
+  "stderr": "",
+  "exit": 1,
+  "ops": 16,
+  "trace": "919e6cd96c9a51fb"
+ },
+ {
+  "name": "hidden-get-reported",
+  "argv": [
+   "get",
+   "allow-auto-connect"
+  ],
+  "sim": {
+   "settings": [
+    {
+     "control": 54,
+     "age": 11,
+     "revision": 1,
+     "value": 2
+    }
+   ]
+  },
+  "dongles": null,
+  "stdout": "allow-auto-connect: off (report age 11 ms)\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 12,
+  "trace": "1b9377257493ba0a"
+ },
+ {
+  "name": "hidden-set",
+  "argv": [
+   "set",
+   "connect-automatically",
+   "off"
+  ],
+  "dongles": null,
+  "stdout": "connect-automatically: off (confirmed by AirPods)\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 43,
+  "trace": "31ffefff1a831e30"
+ },
+ {
+  "name": "hidden-set-bad",
+  "argv": [
+   "set",
+   "allow-auto-connect",
+   "maybe"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "usage: airpods set [-h]\n                   {mode,microphone,ear-detection,one-bud-anc,conversation-awareness,personalized-volume,allow-off,pause-when-asleep,case-sounds,optimized-charging,volume-swipe,press-speed,hold-duration,swipe-duration,call-controls,crown-direction,tone-volume,case-volume,adaptive-strength,hold-modes,hold-actions,connect-automatically,allow-auto-connect,en352-protection,gain-swipe}\n                   value\nairpods set: error: allow-auto-connect: expected on, off\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "hidden-help",
+  "argv": [
+   "help",
+   "connect-automatically"
+  ],
+  "dongles": null,
+  "stdout": "connect-automatically: on, off\nGet: airpods get connect-automatically\nSet: airpods set connect-automatically VALUE\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "hidden-json",
+  "argv": [
+   "--json",
+   "get",
+   "connect-automatically"
+  ],
+  "sim": {
+   "settings": [
+    {
+     "control": 32,
+     "age": 3,
+     "revision": 1,
+     "value": 1
+    }
+   ]
+  },
+  "dongles": null,
+  "stdout": "{\n  \"schema\": 1,\n  \"setting\": {\n    \"name\": \"connect-automatically\",\n    \"raw\": 1,\n    \"decoded\": \"on\",\n    \"age_ms\": 3,\n    \"unknown\": false\n  }\n}\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 12,
+  "trace": "1b9377257493ba0a"
+ },
+ {
+  "name": "list-serials",
+  "argv": [
+   "list",
+   "--serials"
+  ],
+  "dongles": [
+   {
+    "serial": "SIM0001",
+    "pid": 16405,
+    "path": "/dev/hidraw3",
+    "openable": true
+   },
+   {
+    "serial": "SIM0002",
+    "pid": 16389,
+    "path": "/dev/hidraw12",
+    "openable": false,
+    "err": "denied"
+   }
+  ],
+  "stdout": "SIM0001\nSIM0002\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14e3b0c44298fc1c14"
+ },
+ {
+  "name": "list-serials-zero",
+  "argv": [
+   "list",
+   "--serials"
+  ],
+  "dongles": [],
+  "stdout": "",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": ""
+ },
+ {
+  "name": "list-serials-skips-odd-names",
+  "argv": [
+   "list",
+   "--serials"
+  ],
+  "dongles": [
+   {
+    "serial": "SIM0001",
+    "pid": 16405,
+    "path": "/dev/hidraw3",
+    "openable": true
+   },
+   {
+    "serial": "SIM0001",
+    "pid": 16405,
+    "path": "/dev/hidraw4",
+    "openable": true
+   },
+   {
+    "serial": "",
+    "pid": 16405,
+    "path": "/dev/hidraw5",
+    "openable": true
+   },
+   {
+    "serial": "$(touch x)",
+    "pid": 16405,
+    "path": "/dev/hidraw6",
+    "openable": true
+   }
+  ],
+  "stdout": "SIM0001\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14e3b0c44298fc1c14e3b0c44298fc1c14e3b0c44298fc1c14"
+ },
+ {
+  "name": "list-serials-json-refused",
+  "argv": [
+   "--json",
+   "list",
+   "--serials"
+  ],
+  "dongles": [
+   {
+    "serial": "SIM0001",
+    "pid": 16405,
+    "path": "/dev/hidraw3",
+    "openable": true
+   }
+  ],
+  "stdout": "",
+  "stderr": "usage: airpods list [-h] [--serials]\nairpods list: error: --serials cannot be combined with --json\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "completion-bash",
+  "argv": [
+   "completion",
+   "bash"
+  ],
+  "dongles": null,
+  "stdout": "# bash completion for airpods\n_airpods() {\n    local cur=${COMP_WORDS[COMP_CWORD]}\n    COMPREPLY=()\n    local route=\"\" pending=\"\" word words=\"\" i\n    for ((i = 1; i < COMP_CWORD; i++)); do\n        word=${COMP_WORDS[i]}\n        if [[ -n $pending ]]; then\n            pending=\"\"\n            continue\n        fi\n        case $word in\n            --serial|--codec|--bitrate|--variable|--seconds|--off|--file|--left|--right|--amplification|--balance|--tone|--conversation-boost|--enabled|--ear|--noise-reduction|--low|--mid|--high|--output) pending=$word ;;\n            -*) ;;\n            *) route=\"${route:+$route }$word\" ;;\n        esac\n    done\n    if [[ $pending == --serial ]]; then\n        local serial\n        while IFS= read -r serial; do\n            if [[ $serial == \"$cur\"* ]]; then\n                COMPREPLY+=(\"$serial\")\n            fi\n        done < <(\"${COMP_WORDS[0]}\" list --serials 2>/dev/null)\n        return\n    fi\n    if [[ -n $pending ]]; then\n        case $pending in\n            '--codec') words='auto sbc aac aac-eld' ;;\n            '--bitrate') words='default 96000 128000 174000 192000 220000 256000' ;;\n            '--variable') words='on off' ;;\n            '--off') words='hearing-aid media-assist' ;;\n            '--enabled') words='on off' ;;\n            '--ear') words='left right both' ;;\n            '--conversation-boost') words='on off' ;;\n        esac\n    elif [[ $cur == -* ]]; then\n        words='-h --help'\n        case $route in\n            '') words='-h --help --version --serial --json --debug' ;;\n            'status') words='-h --help --details' ;;\n            'list') words='-h --help --serials' ;;\n            'audio set') words='-h --help --codec --bitrate --variable' ;;\n            'nearby') words='-h --help --seconds' ;;\n            'info') words='-h --help --show-serial --capabilities' ;;\n            'pair') words='-h --help --yes' ;;\n            'hearing aid') words='-h --help --yes' ;;\n            'hearing media-assist') words='-h --help --yes' ;;\n            'hearing recover') words='-h --help --off' ;;\n            'experimental') words='-h --help --experimental' ;;\n            'experimental transparency show') words='-h --help --experimental' ;;\n            'experimental transparency set') words='-h --help --experimental --enabled --ear --amplification --tone --noise-reduction --conversation-boost' ;;\n            'experimental loud-sound-reduction get') words='-h --help --experimental' ;;\n            'experimental loud-sound-reduction set') words='-h --help --experimental' ;;\n            'experimental eq show') words='-h --help --experimental' ;;\n            'experimental eq set') words='-h --help --experimental --enabled --low --mid --high' ;;\n            'experimental rename') words='-h --help --experimental' ;;\n            'hardware check') words='-h --help --buds-in-case' ;;\n            'diag') words='-h --help --version --seconds --serial --output --legacy --inspect --phone --radio --no-trace --replace' ;;\n            'hearing profile apply') words='-h --help --file --left --right --amplification --balance --tone --conversation-boost --yes' ;;\n        esac\n    else\n        case $route in\n            '') words='help completion list status settings get set audio game nearby perf info hearing hardware experimental reconnect connect pair pair-phone disconnect reconnect-policy firmware diag' ;;\n            'help') words='help completion list status settings get set audio game nearby perf info hearing hardware experimental reconnect connect pair pair-phone disconnect reconnect-policy firmware diag mode microphone ear-detection one-bud-anc conversation-awareness personalized-volume allow-off pause-when-asleep case-sounds optimized-charging volume-swipe press-speed hold-duration swipe-duration call-controls crown-direction tone-volume case-volume adaptive-strength hold-modes hold-actions connect-automatically allow-auto-connect en352-protection gain-swipe' ;;\n            'completion') words='bash zsh fish powershell' ;;\n            'get') words='mode microphone ear-detection one-bud-anc conversation-awareness personalized-volume allow-off pause-when-asleep case-sounds optimized-charging volume-swipe press-speed hold-duration swipe-duration call-controls crown-direction tone-volume case-volume adaptive-strength hold-modes hold-actions connect-automatically allow-auto-connect en352-protection gain-swipe' ;;\n            'set') words='mode microphone ear-detection one-bud-anc conversation-awareness personalized-volume allow-off pause-when-asleep case-sounds optimized-charging volume-swipe press-speed hold-duration swipe-duration call-controls crown-direction tone-volume case-volume adaptive-strength hold-modes hold-actions connect-automatically allow-auto-connect en352-protection gain-swipe' ;;\n            'audio') words='set' ;;\n            'game') words='on off' ;;\n            'hearing') words='status aid media-assist recover profile' ;;\n            'hearing profile') words='show apply' ;;\n            'hearing aid') words='on off' ;;\n            'experimental') words='transparency loud-sound-reduction eq rename' ;;\n            'experimental transparency') words='show set' ;;\n            'experimental loud-sound-reduction') words='get set' ;;\n            'experimental loud-sound-reduction set') words='on off' ;;\n            'experimental eq') words='show set' ;;\n            'reconnect-policy') words='manual auto' ;;\n            'hardware') words='status data check' ;;\n            'hearing media-assist') words='on off' ;;\n            'set mode') words='off anc transparency adaptive' ;;\n            'set microphone') words='auto right left' ;;\n            'set ear-detection') words='on off' ;;\n            'set one-bud-anc') words='on off' ;;\n            'set conversation-awareness') words='on off' ;;\n            'set personalized-volume') words='on off' ;;\n            'set allow-off') words='on off' ;;\n            'set pause-when-asleep') words='on off' ;;\n            'set case-sounds') words='on off' ;;\n            'set optimized-charging') words='on off' ;;\n            'set volume-swipe') words='on off' ;;\n            'set press-speed') words='default slower slowest' ;;\n            'set hold-duration') words='default slower slowest' ;;\n            'set swipe-duration') words='default longer longest' ;;\n            'set call-controls') words='default swapped' ;;\n            'set crown-direction') words='default reversed' ;;\n            'set hold-modes') words='off,anc off,transparency anc,transparency off,anc,transparency off,adaptive anc,adaptive off,anc,adaptive transparency,adaptive off,transparency,adaptive anc,transparency,adaptive off,anc,transparency,adaptive' ;;\n            'set hold-actions') words='noise-control,noise-control noise-control,siri siri,noise-control siri,siri' ;;\n            'set connect-automatically') words='on off' ;;\n            'set allow-auto-connect') words='on off' ;;\n            'set en352-protection') words='on off' ;;\n            'set gain-swipe') words='on off' ;;\n        esac\n    fi\n    COMPREPLY=($(compgen -W \"$words\" -- \"$cur\"))\n}\ncomplete -F _airpods airpods airpods.exe\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "completion-zsh",
+  "argv": [
+   "completion",
+   "zsh"
+  ],
+  "dongles": null,
+  "stdout": "#compdef airpods\n# zsh completion for airpods\n_airpods() {\n    local cur=${words[CURRENT]} command=${words[1]}\n    local route=\"\" pending=\"\" word offers=\"\" i\n    for ((i = 2; i < CURRENT; i++)); do\n        word=${words[i]}\n        if [[ -n $pending ]]; then\n            pending=\"\"\n            continue\n        fi\n        case $word in\n            --serial|--codec|--bitrate|--variable|--seconds|--off|--file|--left|--right|--amplification|--balance|--tone|--conversation-boost|--enabled|--ear|--noise-reduction|--low|--mid|--high|--output) pending=$word ;;\n            -*) ;;\n            *) route=\"${route:+$route }$word\" ;;\n        esac\n    done\n    if [[ $pending == --serial ]]; then\n        local -a serials\n        serials=(${(f)\"$($command list --serials 2>/dev/null)\"})\n        compadd -- $serials\n        return\n    fi\n    if [[ -n $pending ]]; then\n        case $pending in\n            '--codec') offers='auto sbc aac aac-eld' ;;\n            '--bitrate') offers='default 96000 128000 174000 192000 220000 256000' ;;\n            '--variable') offers='on off' ;;\n            '--off') offers='hearing-aid media-assist' ;;\n            '--enabled') offers='on off' ;;\n            '--ear') offers='left right both' ;;\n            '--conversation-boost') offers='on off' ;;\n        esac\n    elif [[ $cur == -* ]]; then\n        offers='-h --help'\n        case $route in\n            '') offers='-h --help --version --serial --json --debug' ;;\n            'status') offers='-h --help --details' ;;\n            'list') offers='-h --help --serials' ;;\n            'audio set') offers='-h --help --codec --bitrate --variable' ;;\n            'nearby') offers='-h --help --seconds' ;;\n            'info') offers='-h --help --show-serial --capabilities' ;;\n            'pair') offers='-h --help --yes' ;;\n            'hearing aid') offers='-h --help --yes' ;;\n            'hearing media-assist') offers='-h --help --yes' ;;\n            'hearing recover') offers='-h --help --off' ;;\n            'experimental') offers='-h --help --experimental' ;;\n            'experimental transparency show') offers='-h --help --experimental' ;;\n            'experimental transparency set') offers='-h --help --experimental --enabled --ear --amplification --tone --noise-reduction --conversation-boost' ;;\n            'experimental loud-sound-reduction get') offers='-h --help --experimental' ;;\n            'experimental loud-sound-reduction set') offers='-h --help --experimental' ;;\n            'experimental eq show') offers='-h --help --experimental' ;;\n            'experimental eq set') offers='-h --help --experimental --enabled --low --mid --high' ;;\n            'experimental rename') offers='-h --help --experimental' ;;\n            'hardware check') offers='-h --help --buds-in-case' ;;\n            'diag') offers='-h --help --version --seconds --serial --output --legacy --inspect --phone --radio --no-trace --replace' ;;\n            'hearing profile apply') offers='-h --help --file --left --right --amplification --balance --tone --conversation-boost --yes' ;;\n        esac\n    else\n        case $route in\n            '') offers='help completion list status settings get set audio game nearby perf info hearing hardware experimental reconnect connect pair pair-phone disconnect reconnect-policy firmware diag' ;;\n            'help') offers='help completion list status settings get set audio game nearby perf info hearing hardware experimental reconnect connect pair pair-phone disconnect reconnect-policy firmware diag mode microphone ear-detection one-bud-anc conversation-awareness personalized-volume allow-off pause-when-asleep case-sounds optimized-charging volume-swipe press-speed hold-duration swipe-duration call-controls crown-direction tone-volume case-volume adaptive-strength hold-modes hold-actions connect-automatically allow-auto-connect en352-protection gain-swipe' ;;\n            'completion') offers='bash zsh fish powershell' ;;\n            'get') offers='mode microphone ear-detection one-bud-anc conversation-awareness personalized-volume allow-off pause-when-asleep case-sounds optimized-charging volume-swipe press-speed hold-duration swipe-duration call-controls crown-direction tone-volume case-volume adaptive-strength hold-modes hold-actions connect-automatically allow-auto-connect en352-protection gain-swipe' ;;\n            'set') offers='mode microphone ear-detection one-bud-anc conversation-awareness personalized-volume allow-off pause-when-asleep case-sounds optimized-charging volume-swipe press-speed hold-duration swipe-duration call-controls crown-direction tone-volume case-volume adaptive-strength hold-modes hold-actions connect-automatically allow-auto-connect en352-protection gain-swipe' ;;\n            'audio') offers='set' ;;\n            'game') offers='on off' ;;\n            'hearing') offers='status aid media-assist recover profile' ;;\n            'hearing profile') offers='show apply' ;;\n            'hearing aid') offers='on off' ;;\n            'experimental') offers='transparency loud-sound-reduction eq rename' ;;\n            'experimental transparency') offers='show set' ;;\n            'experimental loud-sound-reduction') offers='get set' ;;\n            'experimental loud-sound-reduction set') offers='on off' ;;\n            'experimental eq') offers='show set' ;;\n            'reconnect-policy') offers='manual auto' ;;\n            'hardware') offers='status data check' ;;\n            'hearing media-assist') offers='on off' ;;\n            'set mode') offers='off anc transparency adaptive' ;;\n            'set microphone') offers='auto right left' ;;\n            'set ear-detection') offers='on off' ;;\n            'set one-bud-anc') offers='on off' ;;\n            'set conversation-awareness') offers='on off' ;;\n            'set personalized-volume') offers='on off' ;;\n            'set allow-off') offers='on off' ;;\n            'set pause-when-asleep') offers='on off' ;;\n            'set case-sounds') offers='on off' ;;\n            'set optimized-charging') offers='on off' ;;\n            'set volume-swipe') offers='on off' ;;\n            'set press-speed') offers='default slower slowest' ;;\n            'set hold-duration') offers='default slower slowest' ;;\n            'set swipe-duration') offers='default longer longest' ;;\n            'set call-controls') offers='default swapped' ;;\n            'set crown-direction') offers='default reversed' ;;\n            'set hold-modes') offers='off,anc off,transparency anc,transparency off,anc,transparency off,adaptive anc,adaptive off,anc,adaptive transparency,adaptive off,transparency,adaptive anc,transparency,adaptive off,anc,transparency,adaptive' ;;\n            'set hold-actions') offers='noise-control,noise-control noise-control,siri siri,noise-control siri,siri' ;;\n            'set connect-automatically') offers='on off' ;;\n            'set allow-auto-connect') offers='on off' ;;\n            'set en352-protection') offers='on off' ;;\n            'set gain-swipe') offers='on off' ;;\n        esac\n    fi\n    compadd -- ${=offers}\n}\nif [[ ${funcstack[1]} == _airpods ]]; then\n    _airpods \"$@\"\nelse\n    compdef _airpods airpods\nfi\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "completion-fish",
+  "argv": [
+   "completion",
+   "fish"
+  ],
+  "dongles": null,
+  "stdout": "# fish completion for airpods\nfunction __airpods_route\n    set -l tokens (commandline -opc)\n    set -l route\n    set -l pending 0\n    for token in $tokens[2..-1]\n        if test $pending = 1\n            set pending 0\n            continue\n        end\n        switch $token\n            case --serial --codec --bitrate --variable --seconds --off --file --left --right --amplification --balance --tone --conversation-boost --enabled --ear --noise-reduction --low --mid --high --output\n                set pending 1\n            case '-*'\n            case '*'\n                set -a route $token\n        end\n    end\n    echo (string join ' ' -- $route)\nend\nfunction __airpods_at\n    test (__airpods_route) = \"$argv\"\nend\nfunction __airpods_serials\n    set -l tokens (commandline -opc)\n    $tokens[1] list --serials 2>/dev/null\nend\ncomplete -c airpods -f\ncomplete -c airpods -n '__airpods_at ' -a 'help completion list status settings get set audio game nearby perf info hearing hardware experimental reconnect connect pair pair-phone disconnect reconnect-policy firmware diag'\ncomplete -c airpods -n '__airpods_at help' -a 'help completion list status settings get set audio game nearby perf info hearing hardware experimental reconnect connect pair pair-phone disconnect reconnect-policy firmware diag mode microphone ear-detection one-bud-anc conversation-awareness personalized-volume allow-off pause-when-asleep case-sounds optimized-charging volume-swipe press-speed hold-duration swipe-duration call-controls crown-direction tone-volume case-volume adaptive-strength hold-modes hold-actions connect-automatically allow-auto-connect en352-protection gain-swipe'\ncomplete -c airpods -n '__airpods_at completion' -a 'bash zsh fish powershell'\ncomplete -c airpods -n '__airpods_at get' -a 'mode microphone ear-detection one-bud-anc conversation-awareness personalized-volume allow-off pause-when-asleep case-sounds optimized-charging volume-swipe press-speed hold-duration swipe-duration call-controls crown-direction tone-volume case-volume adaptive-strength hold-modes hold-actions connect-automatically allow-auto-connect en352-protection gain-swipe'\ncomplete -c airpods -n '__airpods_at set' -a 'mode microphone ear-detection one-bud-anc conversation-awareness personalized-volume allow-off pause-when-asleep case-sounds optimized-charging volume-swipe press-speed hold-duration swipe-duration call-controls crown-direction tone-volume case-volume adaptive-strength hold-modes hold-actions connect-automatically allow-auto-connect en352-protection gain-swipe'\ncomplete -c airpods -n '__airpods_at audio' -a 'set'\ncomplete -c airpods -n '__airpods_at game' -a 'on off'\ncomplete -c airpods -n '__airpods_at hearing' -a 'status aid media-assist recover profile'\ncomplete -c airpods -n '__airpods_at hearing profile' -a 'show apply'\ncomplete -c airpods -n '__airpods_at hearing aid' -a 'on off'\ncomplete -c airpods -n '__airpods_at experimental' -a 'transparency loud-sound-reduction eq rename'\ncomplete -c airpods -n '__airpods_at experimental transparency' -a 'show set'\ncomplete -c airpods -n '__airpods_at experimental loud-sound-reduction' -a 'get set'\ncomplete -c airpods -n '__airpods_at experimental loud-sound-reduction set' -a 'on off'\ncomplete -c airpods -n '__airpods_at experimental eq' -a 'show set'\ncomplete -c airpods -n '__airpods_at reconnect-policy' -a 'manual auto'\ncomplete -c airpods -n '__airpods_at hardware' -a 'status data check'\ncomplete -c airpods -n '__airpods_at hearing media-assist' -a 'on off'\ncomplete -c airpods -n '__airpods_at set mode' -a 'off anc transparency adaptive'\ncomplete -c airpods -n '__airpods_at set microphone' -a 'auto right left'\ncomplete -c airpods -n '__airpods_at set ear-detection' -a 'on off'\ncomplete -c airpods -n '__airpods_at set one-bud-anc' -a 'on off'\ncomplete -c airpods -n '__airpods_at set conversation-awareness' -a 'on off'\ncomplete -c airpods -n '__airpods_at set personalized-volume' -a 'on off'\ncomplete -c airpods -n '__airpods_at set allow-off' -a 'on off'\ncomplete -c airpods -n '__airpods_at set pause-when-asleep' -a 'on off'\ncomplete -c airpods -n '__airpods_at set case-sounds' -a 'on off'\ncomplete -c airpods -n '__airpods_at set optimized-charging' -a 'on off'\ncomplete -c airpods -n '__airpods_at set volume-swipe' -a 'on off'\ncomplete -c airpods -n '__airpods_at set press-speed' -a 'default slower slowest'\ncomplete -c airpods -n '__airpods_at set hold-duration' -a 'default slower slowest'\ncomplete -c airpods -n '__airpods_at set swipe-duration' -a 'default longer longest'\ncomplete -c airpods -n '__airpods_at set call-controls' -a 'default swapped'\ncomplete -c airpods -n '__airpods_at set crown-direction' -a 'default reversed'\ncomplete -c airpods -n '__airpods_at set hold-modes' -a 'off,anc off,transparency anc,transparency off,anc,transparency off,adaptive anc,adaptive off,anc,adaptive transparency,adaptive off,transparency,adaptive anc,transparency,adaptive off,anc,transparency,adaptive'\ncomplete -c airpods -n '__airpods_at set hold-actions' -a 'noise-control,noise-control noise-control,siri siri,noise-control siri,siri'\ncomplete -c airpods -n '__airpods_at set connect-automatically' -a 'on off'\ncomplete -c airpods -n '__airpods_at set allow-auto-connect' -a 'on off'\ncomplete -c airpods -n '__airpods_at set en352-protection' -a 'on off'\ncomplete -c airpods -n '__airpods_at set gain-swipe' -a 'on off'\ncomplete -c airpods -s h -l help\ncomplete -c airpods -n '__airpods_at ' -l version\ncomplete -c airpods -n '__airpods_at ' -l serial -x -a '(__airpods_serials)'\ncomplete -c airpods -n '__airpods_at ' -l json\ncomplete -c airpods -n '__airpods_at ' -l debug\ncomplete -c airpods -n '__airpods_at status' -l details\ncomplete -c airpods -n '__airpods_at list' -l serials\ncomplete -c airpods -n '__airpods_at audio set' -l codec -x -a 'auto sbc aac aac-eld'\ncomplete -c airpods -n '__airpods_at audio set' -l bitrate -x -a 'default 96000 128000 174000 192000 220000 256000'\ncomplete -c airpods -n '__airpods_at audio set' -l variable -x -a 'on off'\ncomplete -c airpods -n '__airpods_at nearby' -l seconds -x\ncomplete -c airpods -n '__airpods_at info' -l show-serial\ncomplete -c airpods -n '__airpods_at info' -l capabilities\ncomplete -c airpods -n '__airpods_at pair' -l yes\ncomplete -c airpods -n '__airpods_at hearing aid' -l yes\ncomplete -c airpods -n '__airpods_at hearing media-assist' -l yes\ncomplete -c airpods -n '__airpods_at hearing recover' -l off -x -a 'hearing-aid media-assist'\ncomplete -c airpods -n '__airpods_at experimental' -l experimental\ncomplete -c airpods -n '__airpods_at experimental transparency show' -l experimental\ncomplete -c airpods -n '__airpods_at experimental transparency set' -l experimental\ncomplete -c airpods -n '__airpods_at experimental transparency set' -l enabled -x -a 'on off'\ncomplete -c airpods -n '__airpods_at experimental transparency set' -l ear -x -a 'left right both'\ncomplete -c airpods -n '__airpods_at experimental transparency set' -l amplification -x\ncomplete -c airpods -n '__airpods_at experimental transparency set' -l tone -x\ncomplete -c airpods -n '__airpods_at experimental transparency set' -l noise-reduction -x\ncomplete -c airpods -n '__airpods_at experimental transparency set' -l conversation-boost -x -a 'on off'\ncomplete -c airpods -n '__airpods_at experimental loud-sound-reduction get' -l experimental\ncomplete -c airpods -n '__airpods_at experimental loud-sound-reduction set' -l experimental\ncomplete -c airpods -n '__airpods_at experimental eq show' -l experimental\ncomplete -c airpods -n '__airpods_at experimental eq set' -l experimental\ncomplete -c airpods -n '__airpods_at experimental eq set' -l enabled -x -a 'on off'\ncomplete -c airpods -n '__airpods_at experimental eq set' -l low -x\ncomplete -c airpods -n '__airpods_at experimental eq set' -l mid -x\ncomplete -c airpods -n '__airpods_at experimental eq set' -l high -x\ncomplete -c airpods -n '__airpods_at experimental rename' -l experimental\ncomplete -c airpods -n '__airpods_at hardware check' -l buds-in-case\ncomplete -c airpods -n '__airpods_at diag' -l version\ncomplete -c airpods -n '__airpods_at diag' -l seconds -x\ncomplete -c airpods -n '__airpods_at diag' -l serial -x -a '(__airpods_serials)'\ncomplete -c airpods -n '__airpods_at diag' -l output -r -F\ncomplete -c airpods -n '__airpods_at diag' -l legacy\ncomplete -c airpods -n '__airpods_at diag' -l inspect\ncomplete -c airpods -n '__airpods_at diag' -l phone\ncomplete -c airpods -n '__airpods_at diag' -l radio\ncomplete -c airpods -n '__airpods_at diag' -l no-trace\ncomplete -c airpods -n '__airpods_at diag' -l replace\ncomplete -c airpods -n '__airpods_at hearing profile apply' -l file -r -F\ncomplete -c airpods -n '__airpods_at hearing profile apply' -l left -x\ncomplete -c airpods -n '__airpods_at hearing profile apply' -l right -x\ncomplete -c airpods -n '__airpods_at hearing profile apply' -l amplification -x\ncomplete -c airpods -n '__airpods_at hearing profile apply' -l balance -x\ncomplete -c airpods -n '__airpods_at hearing profile apply' -l tone -x\ncomplete -c airpods -n '__airpods_at hearing profile apply' -l conversation-boost -x -a 'on off'\ncomplete -c airpods -n '__airpods_at hearing profile apply' -l yes\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "completion-powershell",
+  "argv": [
+   "completion",
+   "powershell"
+  ],
+  "dongles": null,
+  "stdout": "# PowerShell completion for airpods\nRegister-ArgumentCompleter -Native -CommandName airpods, airpods.exe -ScriptBlock {\n    param($wordToComplete, $commandAst, $cursorPosition)\n    $route = @()\n    $pending = ''\n    $before = @($commandAst.CommandElements | Select-Object -Skip 1 | Where-Object { $_.Extent.EndOffset -lt $cursorPosition })\n    foreach ($element in $before) {\n        $text = $element.Extent.Text\n        if ($pending) { $pending = ''; continue }\n        if (@('--serial', '--codec', '--bitrate', '--variable', '--seconds', '--off', '--file', '--left', '--right', '--amplification', '--balance', '--tone', '--conversation-boost', '--enabled', '--ear', '--noise-reduction', '--low', '--mid', '--high', '--output') -contains $text) { $pending = $text; continue }\n        if ($text -like '-*') { continue }\n        $route += $text\n    }\n    $route = $route -join ' '\n    $offers = ''\n    if ($pending -eq '--serial') {\n        $offers = (& $commandAst.CommandElements[0].Extent.Text list --serials 2>$null) -join ' '\n    } elseif ($pending) {\n        $offers = switch -Exact ($pending) {\n        '--codec' { 'auto sbc aac aac-eld' }\n        '--bitrate' { 'default 96000 128000 174000 192000 220000 256000' }\n        '--variable' { 'on off' }\n        '--off' { 'hearing-aid media-assist' }\n        '--enabled' { 'on off' }\n        '--ear' { 'left right both' }\n        '--conversation-boost' { 'on off' }\n        default { '' }\n        }\n    } elseif ($wordToComplete -like '-*') {\n        $offers = switch -Exact ($route) {\n        '' { '-h --help --version --serial --json --debug' }\n        'status' { '-h --help --details' }\n        'list' { '-h --help --serials' }\n        'audio set' { '-h --help --codec --bitrate --variable' }\n        'nearby' { '-h --help --seconds' }\n        'info' { '-h --help --show-serial --capabilities' }\n        'pair' { '-h --help --yes' }\n        'hearing aid' { '-h --help --yes' }\n        'hearing media-assist' { '-h --help --yes' }\n        'hearing recover' { '-h --help --off' }\n        'experimental' { '-h --help --experimental' }\n        'experimental transparency show' { '-h --help --experimental' }\n        'experimental transparency set' { '-h --help --experimental --enabled --ear --amplification --tone --noise-reduction --conversation-boost' }\n        'experimental loud-sound-reduction get' { '-h --help --experimental' }\n        'experimental loud-sound-reduction set' { '-h --help --experimental' }\n        'experimental eq show' { '-h --help --experimental' }\n        'experimental eq set' { '-h --help --experimental --enabled --low --mid --high' }\n        'experimental rename' { '-h --help --experimental' }\n        'hardware check' { '-h --help --buds-in-case' }\n        'diag' { '-h --help --version --seconds --serial --output --legacy --inspect --phone --radio --no-trace --replace' }\n        'hearing profile apply' { '-h --help --file --left --right --amplification --balance --tone --conversation-boost --yes' }\n        default { '-h --help' }\n        }\n    } else {\n        $offers = switch -Exact ($route) {\n        '' { 'help completion list status settings get set audio game nearby perf info hearing hardware experimental reconnect connect pair pair-phone disconnect reconnect-policy firmware diag' }\n        'help' { 'help completion list status settings get set audio game nearby perf info hearing hardware experimental reconnect connect pair pair-phone disconnect reconnect-policy firmware diag mode microphone ear-detection one-bud-anc conversation-awareness personalized-volume allow-off pause-when-asleep case-sounds optimized-charging volume-swipe press-speed hold-duration swipe-duration call-controls crown-direction tone-volume case-volume adaptive-strength hold-modes hold-actions connect-automatically allow-auto-connect en352-protection gain-swipe' }\n        'completion' { 'bash zsh fish powershell' }\n        'get' { 'mode microphone ear-detection one-bud-anc conversation-awareness personalized-volume allow-off pause-when-asleep case-sounds optimized-charging volume-swipe press-speed hold-duration swipe-duration call-controls crown-direction tone-volume case-volume adaptive-strength hold-modes hold-actions connect-automatically allow-auto-connect en352-protection gain-swipe' }\n        'set' { 'mode microphone ear-detection one-bud-anc conversation-awareness personalized-volume allow-off pause-when-asleep case-sounds optimized-charging volume-swipe press-speed hold-duration swipe-duration call-controls crown-direction tone-volume case-volume adaptive-strength hold-modes hold-actions connect-automatically allow-auto-connect en352-protection gain-swipe' }\n        'audio' { 'set' }\n        'game' { 'on off' }\n        'hearing' { 'status aid media-assist recover profile' }\n        'hearing profile' { 'show apply' }\n        'hearing aid' { 'on off' }\n        'experimental' { 'transparency loud-sound-reduction eq rename' }\n        'experimental transparency' { 'show set' }\n        'experimental loud-sound-reduction' { 'get set' }\n        'experimental loud-sound-reduction set' { 'on off' }\n        'experimental eq' { 'show set' }\n        'reconnect-policy' { 'manual auto' }\n        'hardware' { 'status data check' }\n        'hearing media-assist' { 'on off' }\n        'set mode' { 'off anc transparency adaptive' }\n        'set microphone' { 'auto right left' }\n        'set ear-detection' { 'on off' }\n        'set one-bud-anc' { 'on off' }\n        'set conversation-awareness' { 'on off' }\n        'set personalized-volume' { 'on off' }\n        'set allow-off' { 'on off' }\n        'set pause-when-asleep' { 'on off' }\n        'set case-sounds' { 'on off' }\n        'set optimized-charging' { 'on off' }\n        'set volume-swipe' { 'on off' }\n        'set press-speed' { 'default slower slowest' }\n        'set hold-duration' { 'default slower slowest' }\n        'set swipe-duration' { 'default longer longest' }\n        'set call-controls' { 'default swapped' }\n        'set crown-direction' { 'default reversed' }\n        'set hold-modes' { 'off,anc off,transparency anc,transparency off,anc,transparency off,adaptive anc,adaptive off,anc,adaptive transparency,adaptive off,transparency,adaptive anc,transparency,adaptive off,anc,transparency,adaptive' }\n        'set hold-actions' { 'noise-control,noise-control noise-control,siri siri,noise-control siri,siri' }\n        'set connect-automatically' { 'on off' }\n        'set allow-auto-connect' { 'on off' }\n        'set en352-protection' { 'on off' }\n        'set gain-swipe' { 'on off' }\n        default { '' }\n        }\n    }\n    @($offers -split ' ') | Where-Object { $_ -and $_ -like \"$wordToComplete*\" } | ForEach-Object {\n        [System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)\n    }\n}\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "completion-no-shell",
+  "argv": [
+   "completion"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "usage: airpods completion [-h] {bash,zsh,fish,powershell}\nairpods completion: error: the following arguments are required: shell\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "completion-bad-shell",
+  "argv": [
+   "completion",
+   "tcsh"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "usage: airpods completion [-h] {bash,zsh,fish,powershell}\nairpods completion: error: argument shell: invalid choice: 'tcsh' (choose from bash, zsh, fish, powershell)\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "completion-help",
+  "argv": [
+   "help",
+   "completion"
+  ],
+  "dongles": null,
+  "stdout": "usage: airpods completion [-h] {bash,zsh,fish,powershell}\n\npositional arguments:\n  {bash,zsh,fish,powershell}\n\noptions:\n  -h, --help            show this help message and exit\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "disconnect-before-0159",
+  "argv": [
+   "disconnect"
+  ],
+  "sim": {
+   "capabilities": 511
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: this dongle firmware has no command to disconnect AirPods while keeping them paired; update it to 0.1.59 or newer, or put the AirPods in their case to disconnect\n",
+  "exit": 1,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da6"
+ },
+ {
+  "name": "status-details-before-0159",
+  "argv": [
+   "status",
+   "--details"
+  ],
+  "sim": {
+   "capabilities": 511
+  },
+  "dongles": null,
+  "stdout": "AirPods: connected\nSettings: ready\nCodec: AAC\nBattery left: 80% (1 s old)\nBattery right: 70% (1 s old)\nBattery case: unknown\nDongle serial: SIM0001\nAirPods address: 01:02:03:04:05:06\nNoise control: anc\nIn use: nothing\nDongle capabilities: control, listening, pair-phone, raw-transport, typed-rpc, lease, per-component, host-volume, runtime-bootsel\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da6"
+ },
+ {
+  "name": "game-waiting-for-playback",
+  "argv": [
+   "game",
+   "on"
+  ],
+  "sim": {
+   "replies": {
+    "9": "0102020000ee020000ee020000000108ffff6400",
+    "4": "0102020000ee020000ee020001010108ffff6400"
+   }
+  },
+  "dongles": null,
+  "stdout": "game: on (accepted by dongle, now waiting for playback)\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 23,
+  "trace": "631318550b56a09e"
+ },
+ {
+  "name": "game-turning-off",
+  "argv": [
+   "game",
+   "off"
+  ],
+  "sim": {
+   "replies": {
+    "9": "0102020000ee020000ee020001030108ffff6400",
+    "4": "0102020000ee020000ee020000060108ffff6400"
+   }
+  },
+  "dongles": null,
+  "stdout": "game: off (accepted by dongle, now turning off)\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 23,
+  "trace": "73e2fefdacfa7bef"
+ },
+ {
+  "name": "reconnect-policy-read",
+  "argv": [
+   "reconnect-policy"
+  ],
+  "dongles": null,
+  "stdout": "Reconnect policy: manual\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 12,
+  "trace": "9a0e22299085ef84"
+ },
+ {
+  "name": "reconnect-policy-read-auto",
+  "argv": [
+   "reconnect-policy"
+  ],
+  "sim": {
+   "reconnect_policy": 1
+  },
+  "dongles": null,
+  "stdout": "Reconnect policy: auto\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 12,
+  "trace": "9a0e22299085ef84"
+ },
+ {
+  "name": "reconnect-policy-read-unavailable",
+  "argv": [
+   "reconnect-policy"
+  ],
+  "sim": {
+   "reconnect_policy_unsupported": true
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: Reconnect policy unavailable: the dongle firmware is older than 0.1.63, or its saved configuration is unreadable\n",
+  "exit": 1,
+  "ops": 11,
+  "trace": "eeb9f059a92e7ff9"
+ },
+ {
+  "name": "reconnect-policy-save-auto",
+  "argv": [
+   "reconnect-policy",
+   "auto"
+  ],
+  "dongles": null,
+  "stdout": "Reconnect policy: auto (saved and verified)\n",
+  "stderr": "Warning: under the auto policy the dongle connects to the AirPods by itself whenever they are not connected and not released, and can take them from another device using them. airpods disconnect holds it off only until the dongle restarts.\n",
+  "exit": 0,
+  "ops": 23,
+  "trace": "ef15dc0376a1d5b0"
+ },
+ {
+  "name": "reconnect-policy-save-manual",
+  "argv": [
+   "reconnect-policy",
+   "manual"
+  ],
+  "sim": {
+   "reconnect_policy": 1
+  },
+  "dongles": null,
+  "stdout": "Reconnect policy: manual (saved and verified)\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 23,
+  "trace": "a93ee5f233c5e56e"
+ },
+ {
+  "name": "reconnect-policy-no-change",
+  "argv": [
+   "reconnect-policy",
+   "manual"
+  ],
+  "dongles": null,
+  "stdout": "Reconnect policy: manual (no change needed; no write sent)\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 12,
+  "trace": "9a0e22299085ef84"
+ },
+ {
+  "name": "reconnect-policy-save-unavailable",
+  "argv": [
+   "reconnect-policy",
+   "auto"
+  ],
+  "sim": {
+   "reconnect_policy_unsupported": true
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: Reconnect policy unavailable: the dongle firmware is older than 0.1.63, or its saved configuration is unreadable; nothing was saved\n",
+  "exit": 1,
+  "ops": 21,
+  "trace": "41fbe269be6246ac"
+ },
+ {
+  "name": "reconnect-policy-save-busy",
+  "argv": [
+   "reconnect-policy",
+   "auto"
+  ],
+  "sim": {
+   "flags": 67
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: The dongle saves the reconnect policy only while idle: pause playback, stop microphone use and calls, wait for connecting or a Game Mode change to finish, and close settings sessions; any settings lease blocks it, this app's own included\n",
+  "exit": 1,
+  "ops": 22,
+  "trace": "610b10daf0523c10"
+ },
+ {
+  "name": "reconnect-policy-save-unverified",
+  "argv": [
+   "reconnect-policy",
+   "auto"
+  ],
+  "sim": {
+   "reconnect_policy_write_fails": true
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "reconnect policy: the dongle could not verify the save, so it may have been saved. Do not retry it automatically; the policy reads as unavailable until the dongle restarts or a later save verifies.\n",
+  "exit": 3,
+  "ops": 22,
+  "trace": "610b10daf0523c10"
+ },
+ {
+  "name": "reconnect-policy-no-capability",
+  "argv": [
+   "reconnect-policy"
+  ],
+  "sim": {
+   "capabilities": 0
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: Firmware does not advertise typed settings support\n",
+  "exit": 1,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da6"
+ },
+ {
+  "name": "reconnect-policy-bad-word",
+  "argv": [
+   "reconnect-policy",
+   "always"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "usage: airpods reconnect-policy [-h] [{manual,auto}]\nairpods reconnect-policy: error: argument policy: invalid choice: 'always' (choose from manual, auto)\n",
+  "exit": 2,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "reconnect-policy-help",
+  "argv": [
+   "help",
+   "reconnect-policy"
+  ],
+  "dongles": null,
+  "stdout": "usage: airpods reconnect-policy [-h] [{manual,auto}]\n\nWithout a policy this reads it. manual, the default: the dongle connects to the\nAirPods only when asked. auto: it also reconnects by itself whenever they are\nnot connected, which can take them from another device. The dongle saves only\nwhile idle.\n\npositional arguments:\n  {manual,auto}  omit to read; auto may take the AirPods from another device\n\noptions:\n  -h, --help     show this help message and exit\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "connect-already",
+  "argv": [
+   "connect"
+  ],
+  "dongles": null,
+  "stdout": "connect: AirPods connected; audio ownership confirmed.\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 12,
+  "trace": "faeaea125ad3db4c"
+ },
+ {
+  "name": "connect-before-0159",
+  "argv": [
+   "connect"
+  ],
+  "sim": {
+   "capabilities": 511
+  },
+  "dongles": null,
+  "stdout": "connect: AirPods connection requested; not yet confirmed. Use airpods status to check the connection.\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 4,
+  "trace": "cfb32ef6e3911989"
+ },
+ {
+  "name": "connect-help",
+  "argv": [
+   "help",
+   "connect"
+  ],
+  "dongles": null,
+  "stdout": "usage: airpods connect [-h]\n\nConnects the saved AirPods through the routing handover and waits up to 5 s for\nthe dongle to own their audio. On dongle firmware before 0.1.59 it sends the\nreconnect request instead, which is not confirmed.\n\noptions:\n  -h, --help  show this help message and exit\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ },
+ {
+  "name": "pair-busy-unconfirmed",
+  "argv": [
+   "pair",
+   "--yes"
+  ],
+  "sim": {
+   "control_results": {
+    "2": 2
+   }
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Warning: this erases the saved pairing on the dongle. The AirPods paired now will have to be paired again to come back.\npair: the dongle answered busy, but it may already have disconnected the AirPods and erased their pairing; check status before retrying.\n",
+  "exit": 3,
+  "ops": 4,
+  "trace": "6b2d7a673c011d66"
+ },
+ {
+  "name": "pair-phone-busy-usb",
+  "argv": [
+   "pair-phone"
+  ],
+  "sim": {
+   "flags": 67
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: Control failure: busy; another companion request or settings session is running, or USB audio, the microphone or a phone is in use\n",
+  "exit": 1,
+  "ops": 1,
+  "trace": "3dd53a9a2e014da6"
+ },
+ {
+  "name": "extended-settings",
+  "argv": [
+   "settings"
+  ],
+  "sim": {
+   "settings": [
+    {
+     "control": 13,
+     "age": 5,
+     "revision": 1,
+     "value": 2
+    },
+    {
+     "control": 55,
+     "age": 6,
+     "revision": 1,
+     "value": 1
+    },
+    {
+     "control": 47,
+     "age": 7,
+     "revision": 1,
+     "value": 2
+    }
+   ]
+  },
+  "dongles": null,
+  "stdout": "mode: anc (report age 5 ms)\nmicrophone: unknown (not reported; may be unsupported)\near-detection: unknown (not reported; may be unsupported)\none-bud-anc: unknown (not reported; may be unsupported)\nconversation-awareness: unknown (not reported; may be unsupported)\npersonalized-volume: unknown (not reported; may be unsupported)\nallow-off: unknown (not reported; may be unsupported)\npause-when-asleep: unknown (not reported; may be unsupported)\ncase-sounds: unknown (not reported; may be unsupported)\noptimized-charging: unknown (not reported; may be unsupported)\nvolume-swipe: unknown (not reported; may be unsupported)\npress-speed: unknown (not reported; may be unsupported)\nhold-duration: unknown (not reported; may be unsupported)\nswipe-duration: unknown (not reported; may be unsupported)\ncall-controls: unknown (not reported; may be unsupported)\ncrown-direction: unknown (not reported; may be unsupported)\ntone-volume: unknown (not reported; may be unsupported)\ncase-volume: unknown (not reported; may be unsupported)\nadaptive-strength: unknown (not reported; may be unsupported)\nhold-modes: unknown (not reported; may be unsupported)\nhold-actions: unknown (not reported; may be unsupported)\nconnect-automatically: unknown (not reported; may be unsupported)\nallow-auto-connect: unknown (not reported; may be unsupported)\nen352-protection: on (report age 6 ms)\ngain-swipe: off (report age 7 ms)\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 12,
+  "trace": "1b9377257493ba0a"
+ },
+ {
+  "name": "extended-settings-legacy-firmware",
+  "argv": [
+   "settings"
+  ],
+  "sim": {
+   "settings": [
+    {
+     "control": 13,
+     "age": 5,
+     "revision": 1,
+     "value": 2
+    },
+    {
+     "control": 55,
+     "age": 6,
+     "revision": 1,
+     "value": 1
+    },
+    {
+     "control": 47,
+     "age": 7,
+     "revision": 1,
+     "value": 2
+    }
+   ],
+   "legacy_snapshot_only": true
+  },
+  "dongles": null,
+  "stdout": "mode: anc (report age 5 ms)\nmicrophone: unknown (not reported; may be unsupported)\near-detection: unknown (not reported; may be unsupported)\none-bud-anc: unknown (not reported; may be unsupported)\nconversation-awareness: unknown (not reported; may be unsupported)\npersonalized-volume: unknown (not reported; may be unsupported)\nallow-off: unknown (not reported; may be unsupported)\npause-when-asleep: unknown (not reported; may be unsupported)\ncase-sounds: unknown (not reported; may be unsupported)\noptimized-charging: unknown (not reported; may be unsupported)\nvolume-swipe: unknown (not reported; may be unsupported)\npress-speed: unknown (not reported; may be unsupported)\nhold-duration: unknown (not reported; may be unsupported)\nswipe-duration: unknown (not reported; may be unsupported)\ncall-controls: unknown (not reported; may be unsupported)\ncrown-direction: unknown (not reported; may be unsupported)\ntone-volume: unknown (not reported; may be unsupported)\ncase-volume: unknown (not reported; may be unsupported)\nadaptive-strength: unknown (not reported; may be unsupported)\nhold-modes: unknown (not reported; may be unsupported)\nhold-actions: unknown (not reported; may be unsupported)\nconnect-automatically: unknown (not reported; may be unsupported)\nallow-auto-connect: unknown (not reported; may be unsupported)\nen352-protection: unknown (not reported; may be unsupported)\ngain-swipe: unknown (not reported; may be unsupported)\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 22,
+  "trace": "b4b0b018b9071e40"
+ },
+ {
+  "name": "extended-get",
+  "argv": [
+   "get",
+   "en352-protection"
+  ],
+  "sim": {
+   "settings": [
+    {
+     "control": 13,
+     "age": 5,
+     "revision": 1,
+     "value": 2
+    },
+    {
+     "control": 55,
+     "age": 6,
+     "revision": 1,
+     "value": 1
+    },
+    {
+     "control": 47,
+     "age": 7,
+     "revision": 1,
+     "value": 2
+    }
+   ]
+  },
+  "dongles": null,
+  "stdout": "en352-protection: on (report age 6 ms)\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 12,
+  "trace": "1b9377257493ba0a"
+ },
+ {
+  "name": "extended-get-json",
+  "argv": [
+   "--json",
+   "get",
+   "gain-swipe"
+  ],
+  "sim": {
+   "settings": [
+    {
+     "control": 13,
+     "age": 5,
+     "revision": 1,
+     "value": 2
+    },
+    {
+     "control": 55,
+     "age": 6,
+     "revision": 1,
+     "value": 1
+    },
+    {
+     "control": 47,
+     "age": 7,
+     "revision": 1,
+     "value": 2
+    }
+   ]
+  },
+  "dongles": null,
+  "stdout": "{\n  \"schema\": 1,\n  \"setting\": {\n    \"name\": \"gain-swipe\",\n    \"raw\": 2,\n    \"decoded\": \"off\",\n    \"age_ms\": 7,\n    \"unknown\": false\n  }\n}\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 12,
+  "trace": "1b9377257493ba0a"
+ },
+ {
+  "name": "extended-set",
+  "argv": [
+   "set",
+   "gain-swipe",
+   "on"
+  ],
+  "sim": {
+   "settings": [
+    {
+     "control": 13,
+     "age": 5,
+     "revision": 1,
+     "value": 2
+    },
+    {
+     "control": 55,
+     "age": 6,
+     "revision": 1,
+     "value": 1
+    },
+    {
+     "control": 47,
+     "age": 7,
+     "revision": 1,
+     "value": 2
+    }
+   ]
+  },
+  "dongles": null,
+  "stdout": "gain-swipe: on (confirmed by AirPods)\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 35,
+  "trace": "3eaa09dee84bd516"
+ },
+ {
+  "name": "extended-set-unreported",
+  "argv": [
+   "set",
+   "en352-protection",
+   "on"
+  ],
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: Firmware does not support this request for this device\n",
+  "exit": 1,
+  "ops": 27,
+  "trace": "dc85cc91a1796cbd"
+ },
+ {
+  "name": "extended-set-legacy-firmware",
+  "argv": [
+   "set",
+   "gain-swipe",
+   "on"
+  ],
+  "sim": {
+   "settings": [
+    {
+     "control": 13,
+     "age": 5,
+     "revision": 1,
+     "value": 2
+    },
+    {
+     "control": 55,
+     "age": 6,
+     "revision": 1,
+     "value": 1
+    },
+    {
+     "control": 47,
+     "age": 7,
+     "revision": 1,
+     "value": 2
+    }
+   ],
+   "legacy_snapshot_only": true
+  },
+  "dongles": null,
+  "stdout": "",
+  "stderr": "Error: Firmware does not support this request for this device\n",
+  "exit": 1,
+  "ops": 33,
+  "trace": "c55f50ca7d48661d"
+ },
+ {
+  "name": "extended-help",
+  "argv": [
+   "help",
+   "en352-protection"
+  ],
+  "dongles": null,
+  "stdout": "en352-protection: on, off\nGet: airpods get en352-protection\nSet: airpods set en352-protection VALUE\n",
+  "stderr": "",
+  "exit": 0,
+  "ops": 0,
+  "trace": "e3b0c44298fc1c14"
+ }
+]

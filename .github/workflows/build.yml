@@ -1,0 +1,148 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+env:
+  # Tag builds embed the tag; branch builds fall back to git describe.
+  VERSION: ${{ github.ref_type == 'tag' && github.ref_name || '' }}
+  # Host directories rather than named volumes, which are empty on every runner.
+  AIRPODS_CACHE_DIR: /tmp/airpods-cache
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: /tmp/airpods-cache
+          key: go-test-${{ hashFiles('go.sum') }}-${{ github.sha }}
+          restore-keys: go-test-
+      - name: Package version table
+        run: bash build/pkg-version-test.sh
+      - run: build/fyne-cross.sh test
+
+  # The command line tool and the library need no C compiler, so their tests also run on Windows itself.
+  test-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version: '1.26'
+          cache: false
+      - name: test
+        env:
+          CGO_ENABLED: '0'
+        run: go test ./core/... ./cmd/airpods/... ./internal/argparse/... ./internal/cliutil/... ./internal/winpath/...
+
+  govulncheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: /tmp/airpods-cache
+          key: go-vulncheck-${{ hashFiles('go.sum') }}-${{ github.sha }}
+          restore-keys: go-vulncheck-
+      - run: build/fyne-cross.sh vulncheck
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0 # git describe needs the tags for a package version on main.
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: /tmp/airpods-cache
+          key: go-build-${{ hashFiles('go.sum') }}-${{ github.sha }}
+          restore-keys: go-build-
+      - run: build/fyne-cross.sh package
+      - run: build/fyne-cross.sh installer # builds the Windows exes first
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: tray
+          if-no-files-found: error
+          path: |
+            dist/airpods-tray
+            dist/airpods-tray.exe
+            dist/airpods-tray.png
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: cli
+          if-no-files-found: error
+          path: |
+            dist/airpods-linux-amd64
+            dist/airpods-linux-arm64
+            dist/airpods-windows-amd64.exe
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: packages
+          if-no-files-found: error
+          path: |
+            dist/airpods-gui_*.deb
+            dist/airpods-gui_*.rpm
+            dist/airpods-gui_*.pkg.tar.zst
+            dist/airpods-cli_*.deb
+            dist/airpods-cli_*.rpm
+            dist/airpods-cli_*.pkg.tar.zst
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: installer
+          if-no-files-found: error
+          path: dist/airpods-gui-*-setup-x64.exe
+
+  release:
+    if: github.ref_type == 'tag'
+    needs: [build, test-windows, govulncheck]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: tray
+          path: dist
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: cli
+          path: dist
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: packages
+          path: dist
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: installer
+          path: dist
+      - name: Assemble assets
+        run: |
+          mkdir release
+          cp dist/airpods-tray.exe release/airpods-tray-windows-amd64.exe
+          cp dist/airpods-tray release/airpods-tray-linux-amd64
+          cp dist/airpods-tray.png release/
+          cp dist/airpods-linux-amd64 dist/airpods-linux-arm64 dist/airpods-windows-amd64.exe release/
+          cp dist/airpods-gui_* dist/airpods-cli_* dist/airpods-gui-*-setup-x64.exe release/
+          cp core/hid/70-airpods-hid.rules build/linux/airpods-tray.desktop release/
+          chmod +x release/airpods-tray-linux-amd64 release/airpods-linux-amd64 release/airpods-linux-arm64
+          (cd release && sha256sum -- * > SHA256SUMS)
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          kind=(--latest)
+          case "$TAG" in
+            *alpha*|*rc*) kind=(--prerelease) ;;
+          esac
+          gh release create "$TAG" release/* --verify-tag --title "$TAG" \
+            --notes-file build/release-notes.md --generate-notes "${kind[@]}"
