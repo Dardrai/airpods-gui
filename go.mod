@@ -5,8 +5,8 @@ go 1.26.0
 require (
 	fyne.io/fyne/v2 v2.8.2
 	fyne.io/systray v1.12.3-0.20260810170012-af4e8e793ec4
-	github.com/godbus/dbus/v5 v5.2.2
-	golang.org/x/sys v0.49.0
+	github.com/godbus/dbus/v5 v5.2.4
+	golang.org/x/sys v0.50.0
 )
 
 require (
