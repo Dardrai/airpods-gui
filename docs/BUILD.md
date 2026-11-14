@@ -211,7 +211,7 @@ launcher there.
 targets of those names, for the app, the command and the library together. `test-windows` runs the tests of the code
 that needs no C compiler, the command and the library, on `windows-latest`. `build` builds the packages and the
 installer and uploads them. All actions are pinned to a commit, with the version in a comment.
-Dependabot proposes updates to them and to the Go modules every week.
+Updates to them and to the Go modules are made by hand; no bot opens pull requests here.
 
 A tag starting with `v` also publishes a GitHub release, once every job has passed, with one file per system and
 nothing else: the three packages, the installer and `SHA256SUMS`. The in-app update finds its file by these names
