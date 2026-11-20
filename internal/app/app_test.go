@@ -171,6 +171,31 @@ func TestNoiseControlRowWritesModeSetting(t *testing.T) {
 	}
 }
 
+// The tray's Game Mode row appears with the window hidden, from the one read per link, and
+// a click sends the request through the window's checks.
+func TestGameModeRowReachesTheTrayAndWrites(t *testing.T) {
+	r := started(t, sim.Demo())
+	var row *fyne.MenuItem
+	r.eventually(t, func() bool {
+		for _, item := range r.tray.Menu().Items {
+			if item.Label == "Game mode" && !item.Disabled && !item.Checked {
+				row = item
+				return true
+			}
+		}
+		return false
+	})
+	r.main.do(row.Action)
+	r.eventually(t, func() bool {
+		for _, commit := range r.dev.Commits() {
+			if len(commit) > 1 && commit[0] == 4 && commit[1] == 1 {
+				return true
+			}
+		}
+		return false
+	})
+}
+
 // Older firmware gets the plain reconnect command, once.
 func TestReconnectSendsOneCommandOnOldFirmware(t *testing.T) {
 	r := started(t, SimConfig("old"))

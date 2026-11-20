@@ -148,7 +148,8 @@ var english = map[string]string{
 	"audio.active": "Active", "audio.requested": "Requested", "audio.delay": "Reported delay", "audio.state": "State",
 	"audio.codec": "Codec", "audio.bitrate": "Bitrate", "audio.variable": "Variable bitrate",
 	"audio.applyRow": "Apply codec and bitrate", "audio.applyHint": "Can restart the audio link.",
-	"audio.gameMode": "Game mode", "audio.gameStatus": "Game mode status", "audio.idle": "Idle",
+	"audio.gameMode": "Game mode", "audio.gameModeHint": "Lower audio delay, for games. Now: %s",
+	"audio.gameStatus": "Game mode status", "audio.idle": "Idle",
 	"audio.pending": "Change pending", "audio.streaming": "Streaming", "audio.micActive": ", microphone active",
 	"audio.notSupported": "Not supported", "audio.applied": "applied", "audio.codecProfile": "Codec profile",
 

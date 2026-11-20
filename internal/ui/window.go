@@ -61,6 +61,9 @@ type Options struct {
 	Choices *choices.Store
 	// OnReports receives the settings the AirPods reported, on the main thread.
 	OnReports func(map[byte]uint32)
+	// OnGameMode receives what the tray shows of Game Mode, on the main thread, whenever it
+	// may have changed; nil sends it nowhere.
+	OnGameMode func(tray.GameMode)
 	// Disconnect ends the AirPods connection, or explains how to; nil hides the action.
 	Disconnect func()
 	// Controls are the app-wide choices in the ... panel; nil leaves them out.
@@ -192,7 +195,7 @@ func New(opts Options) *Window {
 	w.buildSections()
 	w.extras = container.New(tightLayout{})
 	// What the AirPods' own settings page has comes first; the rest needs the experimental switch.
-	w.page = container.New(tightLayout{}, w.header.content, w.settings.content, w.device.about, w.device.leave,
+	w.page = container.New(tightLayout{}, w.header.content, w.settings.content, w.audio.gameModeCard, w.device.about, w.device.leave,
 		w.settings.experiments, w.playbackRow.object, w.nearbyRow.object, w.connectionRow.object, w.diagnosticsRow.object,
 		w.extras, w.hardwareRow.object)
 	w.scroll = container.NewVScroll(container.New(columnLayout{}, container.New(insetLayout{top: 15, bottom: 32}, w.page)))
@@ -483,6 +486,21 @@ func (w *Window) refresh() {
 		w.diag.read()
 	}
 }
+
+// SetGameMode asks for Game Mode on or off, as the page's switches do, for the tray. It
+// returns at once; notify, which may be nil, hears a problem, since the window may be hidden.
+func (w *Window) SetGameMode(on bool, notify func(title, text string)) {
+	w.audio.setGameMode(on, notify)
+}
+
+// ReadGameMode reads the audio state, for the tray's Game Mode row, with the window shown or
+// not. The app asks for it once per link; a hidden window sends nothing on its own.
+func (w *Window) ReadGameMode() { w.audio.read() }
+
+// FollowGameMode reads the audio state again now and then while Game Mode is changing, so
+// that the page and the tray see where it went. The app calls it on its own tick, which runs
+// with the window hidden too; it reads nothing while Game Mode stays put.
+func (w *Window) FollowGameMode() { w.audio.followGameMode(w.now()) }
 
 // model is the reported AirPods model number, empty until it is known.
 func (w *Window) model() string { return w.info.Model }

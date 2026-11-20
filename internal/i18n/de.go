@@ -148,7 +148,8 @@ var german = map[string]string{
 	"audio.active": "Aktiv", "audio.requested": "Angefordert", "audio.delay": "Gemeldete Verzögerung", "audio.state": "Status",
 	"audio.codec": "Codec", "audio.bitrate": "Bitrate", "audio.variable": "Variable Bitrate",
 	"audio.applyRow": "Codec und Bitrate anwenden", "audio.applyHint": "Kann die Audioverbindung neu starten.",
-	"audio.gameMode": "Spielmodus", "audio.gameStatus": "Status Spielmodus", "audio.idle": "Inaktiv",
+	"audio.gameMode": "Spielmodus", "audio.gameModeHint": "Geringere Audioverzögerung, für Spiele. Jetzt: %s",
+	"audio.gameStatus": "Status Spielmodus", "audio.idle": "Inaktiv",
 	"audio.pending": "Änderung ausstehend", "audio.streaming": "Streaming", "audio.micActive": ", Mikrofon aktiv",
 	"audio.notSupported": "Nicht unterstützt", "audio.applied": "angewendet", "audio.codecProfile": "Codec-Profil",
 

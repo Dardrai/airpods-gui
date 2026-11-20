@@ -131,6 +131,7 @@ func newTray(t *testing.T) (*Tray, *fakeHost, *[]string) {
 	var calls []string
 	tr := New(host, Actions{
 		SetMode:       func(word string) { calls = append(calls, "mode:"+word) },
+		SetGameMode:   func(on bool) { calls = append(calls, map[bool]string{true: "game:on", false: "game:off"}[on]) },
 		Disconnect:    func() { calls = append(calls, "disconnect") },
 		Reconnect:     func() { calls = append(calls, "reconnect") },
 		ShowBatteries: func() { calls = append(calls, "batteries") },
@@ -686,4 +687,98 @@ func TestAvailabilityStopWithoutStart(t *testing.T) {
 	a := NewAvailability(func() bool { return true }, time.Hour)
 	a.Stop(time.Hour)
 	a.Stop(time.Hour)
+}
+
+func TestGameModeRowNeedsTypedRequestsAndSupport(t *testing.T) {
+	supported := GameMode{Supported: true}
+	untyped := connected()
+	untyped.Status.Capabilities = dongle.CapControl | dongle.CapListening
+	for name, entry := range map[string]struct {
+		st   device.State
+		game GameMode
+	}{
+		"no dongle":         {device.State{}, supported},
+		"no typed requests": {untyped, supported},
+		"not supported":     {connected(), GameMode{}},
+	} {
+		if !BuildModelWithGameMode(entry.st, model.View{}, entry.game).GameMode.Hidden {
+			t.Errorf("%s: the row shows", name)
+		}
+	}
+	// The dongle answers without the AirPods: the row only needs the dongle.
+	away := connected()
+	away.Status.Connected = false
+	if BuildModelWithGameMode(away, model.View{}, supported).GameMode.Hidden {
+		t.Error("hidden while the AirPods are away")
+	}
+	if !BuildModel(connected(), model.View{}).GameMode.Hidden {
+		t.Error("shown with nothing known about Game Mode")
+	}
+}
+
+func TestGameModeRowShowsTheRequestAndThePhase(t *testing.T) {
+	for _, entry := range []struct {
+		game  GameMode
+		label string
+	}{
+		{GameMode{Supported: true}, "Game mode"},
+		{GameMode{Supported: true, Requested: true, Phase: dongle.GameModeConfirmed}, "Game mode"},
+		{GameMode{Supported: true, Requested: true, Phase: dongle.GameModePending}, "Game mode (Waiting for playback)"},
+		{GameMode{Supported: true, Requested: true, Phase: dongle.GameModeUnconfirmed}, "Game mode (Unconfirmed)"},
+		{GameMode{Supported: true, Requested: true, Phase: dongle.GameModeFailed}, "Game mode (Failed)"},
+		{GameMode{Supported: true, Phase: dongle.GameModeRestoring}, "Game mode (Turning off)"},
+		{GameMode{Supported: true, Phase: 99}, "Game mode"},
+	} {
+		row := BuildModelWithGameMode(connected(), model.View{}, entry.game).GameMode
+		if row.Label != entry.label || row.Checked != entry.game.Requested || row.Disabled || row.Hidden {
+			t.Errorf("%+v: %+v", entry.game, row)
+		}
+	}
+	busy := BuildModelWithGameMode(connected(), model.View{}, GameMode{Supported: true, Busy: true}).GameMode
+	if !busy.Disabled {
+		t.Error("enabled while a request is out")
+	}
+}
+
+func TestGameModeRowInTheMenu(t *testing.T) {
+	t.Cleanup(func() { i18n.SetLanguage(i18n.English) })
+	tr, host, calls := newTray(t)
+	tr.Update(connected())
+	if got := len(tr.Menu().Items); got != 12 {
+		t.Fatalf("items before Game Mode is known: %d", got)
+	}
+	before := host.tooltips
+	tr.SetGameMode(GameMode{Supported: true})
+	items := tr.Menu().Items
+	if len(items) != 13 || items[6] != tr.gameMode || items[6].Label != "Game mode" || items[6].Checked {
+		t.Fatalf("menu: %q", labels(tr.Menu()))
+	}
+	if host.tooltips != before+1 {
+		t.Error("a new row did not rebuild the menu")
+	}
+	items[6].Action()
+	tr.SetGameMode(GameMode{Supported: true, Requested: true, Phase: dongle.GameModePending})
+	if !tr.gameMode.Checked || tr.gameMode.Label != "Game mode (Waiting for playback)" {
+		t.Errorf("row %q checked %v", tr.gameMode.Label, tr.gameMode.Checked)
+	}
+	tr.gameMode.Action()
+	if got := strings.Join(*calls, " "); got != "game:on game:off" {
+		t.Errorf("actions: %q", got)
+	}
+	before = host.tooltips
+	tr.SetGameMode(GameMode{Supported: true, Requested: true, Phase: dongle.GameModePending})
+	if host.tooltips != before {
+		t.Error("the same Game Mode rebuilt the menu")
+	}
+	i18n.SetLanguage(i18n.German)
+	tr.Refresh()
+	if tr.gameMode.Label != "Spielmodus (Wartet auf Wiedergabe)" {
+		t.Errorf("German: %q", tr.gameMode.Label)
+	}
+	tr.Update(device.State{})
+	for _, item := range tr.Menu().Items {
+		if item == tr.gameMode {
+			t.Error("Game Mode offered with no dongle")
+		}
+	}
 }

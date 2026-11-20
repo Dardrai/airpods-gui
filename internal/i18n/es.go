@@ -148,7 +148,8 @@ var spanish = map[string]string{
 	"audio.active": "Activo", "audio.requested": "Solicitado", "audio.delay": "Retardo informado", "audio.state": "Estado",
 	"audio.codec": "Códec", "audio.bitrate": "Tasa de bits", "audio.variable": "Tasa de bits variable",
 	"audio.applyRow": "Aplicar códec y tasa de bits", "audio.applyHint": "Puede reiniciar el enlace de audio.",
-	"audio.gameMode": "Modo de juego", "audio.gameStatus": "Estado del modo de juego", "audio.idle": "Inactivo",
+	"audio.gameMode": "Modo de juego", "audio.gameModeHint": "Menor retardo de audio, para juegos. Ahora: %s",
+	"audio.gameStatus": "Estado del modo de juego", "audio.idle": "Inactivo",
 	"audio.pending": "Cambio pendiente", "audio.streaming": "Transmitiendo", "audio.micActive": ", micrófono activo",
 	"audio.notSupported": "No compatible", "audio.applied": "aplicado", "audio.codecProfile": "Perfil de códec",
 

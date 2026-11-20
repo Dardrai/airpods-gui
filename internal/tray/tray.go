@@ -17,7 +17,9 @@ type Host interface {
 
 // Actions are the menu's handlers. They run on the Fyne main thread and must not block.
 type Actions struct {
-	SetMode       func(word string)
+	SetMode func(word string)
+	// SetGameMode asks for Game Mode on or off; nil leaves the row without an action.
+	SetGameMode   func(on bool)
 	ShowBatteries func()
 	Disconnect    func()
 	Reconnect     func()
@@ -32,6 +34,7 @@ type Tray struct {
 	header     *fyne.MenuItem
 	battery    *fyne.MenuItem
 	modes      [4]*fyne.MenuItem
+	gameMode   *fyne.MenuItem
 	batteries  *fyne.MenuItem
 	disconnect *fyne.MenuItem
 	reconnect  *fyne.MenuItem
@@ -40,6 +43,7 @@ type Tray struct {
 	open       *fyne.MenuItem
 	state      device.State
 	view       model.View
+	game       GameMode
 	last       Model
 }
 
@@ -54,6 +58,12 @@ func New(host Host, actions Actions) *Tray {
 		t.modes[i] = fyne.NewMenuItem(mode.Label(), func() { actions.SetMode(word) })
 		items = append(items, t.modes[i])
 	}
+	// A click asks for the opposite of what the row shows; the row is checked by the request.
+	t.gameMode = fyne.NewMenuItem("", func() {
+		if actions.SetGameMode != nil {
+			actions.SetGameMode(!t.last.GameMode.Checked)
+		}
+	})
 	t.batteries = fyne.NewMenuItem("", actions.ShowBatteries)
 	t.disconnect = fyne.NewMenuItem("", actions.Disconnect)
 	t.reconnect = fyne.NewMenuItem("", actions.Reconnect)
@@ -85,6 +95,7 @@ func (t *Tray) apply(model Model) {
 	for i := range t.modes {
 		setRow(t.modes[i], model.Modes[i])
 	}
+	setRow(t.gameMode, model.GameMode)
 	setRow(t.batteries, model.Batteries)
 	setRow(t.disconnect, model.Disconnect)
 	setRow(t.reconnect, model.Reconnect)
@@ -95,6 +106,9 @@ func (t *Tray) apply(model Model) {
 		if !model.Modes[i].Hidden {
 			items = append(items, t.modes[i])
 		}
+	}
+	if !model.GameMode.Hidden {
+		items = append(items, t.gameMode)
 	}
 	t.menu.Items = append(items, t.separator, t.batteries, t.disconnect, t.reconnect, t.open, t.quit)
 }
@@ -111,8 +125,14 @@ func (t *Tray) SetView(view model.View) {
 	t.refresh()
 }
 
+// SetGameMode applies what the window last learned of Game Mode.
+func (t *Tray) SetGameMode(game GameMode) {
+	t.game = game
+	t.refresh()
+}
+
 func (t *Tray) refresh() {
-	model := BuildModel(t.state, t.view)
+	model := BuildModelWithGameMode(t.state, t.view, t.game)
 	if model == t.last {
 		return
 	}

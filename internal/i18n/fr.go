@@ -148,7 +148,8 @@ var french = map[string]string{
 	"audio.active": "Actif", "audio.requested": "Demandé", "audio.delay": "Délai communiqué", "audio.state": "État",
 	"audio.codec": "Codec", "audio.bitrate": "Débit", "audio.variable": "Débit variable",
 	"audio.applyRow": "Appliquer le codec et le débit", "audio.applyHint": "Peut redémarrer la liaison audio.",
-	"audio.gameMode": "Mode jeu", "audio.gameStatus": "État du mode jeu", "audio.idle": "Inactif",
+	"audio.gameMode": "Mode jeu", "audio.gameModeHint": "Latence audio réduite, pour les jeux. Actuellement : %s",
+	"audio.gameStatus": "État du mode jeu", "audio.idle": "Inactif",
 	"audio.pending": "Changement en attente", "audio.streaming": "Diffusion", "audio.micActive": ", micro actif",
 	"audio.notSupported": "Non pris en charge", "audio.applied": "appliqué", "audio.codecProfile": "Profil de codec",
 

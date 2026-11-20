@@ -42,6 +42,7 @@ type Model struct {
 	Header     Row
 	Battery    Row
 	Modes      [4]Row
+	GameMode   Row
 	Batteries  Row
 	Disconnect Row
 	Reconnect  Row
@@ -156,12 +157,56 @@ func disconnectRow(st device.State) Row {
 	return Row{Label: i18n.T("tray.disconnect"), Disabled: supported && !st.Connected()}
 }
 
-// BuildModel derives the menu appearance from a state. Reconnect stays available
-// while the AirPods are away since that is when it is useful; it needs a dongle.
+// GameMode is what the menu knows of the dongle's Game Mode, from the window's last read of
+// the audio state.
+type GameMode struct {
+	// Supported is set once an audio state read found Game Mode usable over this connection.
+	Supported bool
+	// Requested is the request the dongle holds; Phase is where it got to, from
+	// dongle.GameModeOff to dongle.GameModeRestoring.
+	Requested bool
+	Phase     byte
+	// Busy is set while a request is in flight, or while the dongle cannot take one.
+	Busy bool
+}
+
+// GameModeLabel names the Game Mode row, with the phase when that is more than on or off:
+// waiting for playback, unconfirmed, failed and so on.
+func GameModeLabel(game GameMode) string {
+	label := i18n.T("audio.gameMode")
+	switch game.Phase {
+	case dongle.GameModeOff, dongle.GameModeConfirmed:
+		return label
+	case dongle.GameModePending, dongle.GameModeUnconfirmed, dongle.GameModeFailed, dongle.GameModeUnsupported,
+		dongle.GameModeRestoring:
+		return label + " (" + i18n.T("game."+dongle.GameModeLabel(game.Phase)) + ")"
+	}
+	return label
+}
+
+// gameModeRow is checked while Game Mode is requested. It needs a dongle with typed requests
+// that reported Game Mode usable, and is left out, not greyed out, everywhere else.
+func gameModeRow(st device.State, game GameMode) Row {
+	return Row{
+		Label:    GameModeLabel(game),
+		Disabled: game.Busy,
+		Checked:  game.Requested,
+		Hidden:   !st.Present || !st.Status.Has(dongle.CapTypedRPC) || !game.Supported,
+	}
+}
+
+// BuildModel derives the menu appearance from a state, with no Game Mode known.
 func BuildModel(st device.State, view model.View) Model {
+	return BuildModelWithGameMode(st, view, GameMode{})
+}
+
+// BuildModelWithGameMode derives the menu appearance from a state. Reconnect stays available
+// while the AirPods are away since that is when it is useful; it needs a dongle.
+func BuildModelWithGameMode(st device.State, view model.View, game GameMode) Model {
 	model := Model{
 		Header:     Row{Label: Headline(st, view), Disabled: true},
 		Battery:    Row{Label: batteryRow(st, view), Disabled: true},
+		GameMode:   gameModeRow(st, game),
 		Batteries:  Row{Label: i18n.T("tray.batteries"), Disabled: !HasReading(st)},
 		Disconnect: disconnectRow(st),
 		Reconnect:  Row{Label: i18n.T("tray.reconnect"), Disabled: !st.Present || !st.Status.Selected() || !st.Status.Has(dongle.CapControl)},

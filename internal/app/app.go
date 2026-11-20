@@ -204,6 +204,12 @@ func New(cfg Config) *App {
 		Quit: a.quit, Disconnect: a.disconnect, Tray: trayAnswer, TrayRecheck: trayRecheck, Tick: cfg.Tick, Autostart: cfg.Autostart,
 		Log: cfg.Log, Choices: cfg.Choices, Picker: cfg.Picker,
 		OnReports: func(reports map[byte]uint32) { a.setReports(reports) },
+		// The window owns the audio state; the tray shows what it last read.
+		OnGameMode: func(game tray.GameMode) {
+			if a.tray != nil {
+				a.tray.SetGameMode(game)
+			}
+		},
 		Controls: &ui.AppControls{
 			AutoPauseEnabled: a.AutoPauseEnabled, SetAutoPauseEnabled: a.SetAutoPauseEnabled,
 			NotificationsEnabled: a.NotificationsEnabled, SetNotificationsEnabled: a.SetNotificationsEnabled,
@@ -222,6 +228,7 @@ func New(cfg Config) *App {
 	a.win.SetFirmwareUpdate(a.firmwareUpdates.Result())
 	a.tray = tray.New(cfg.Host, tray.Actions{
 		SetMode:       a.setMode,
+		SetGameMode:   a.setGameMode,
 		ShowBatteries: a.showBatteries,
 		Disconnect:    a.disconnect,
 		Reconnect:     a.reconnect,
@@ -268,6 +275,7 @@ func (a *App) watchNotes() {
 				a.showNotes(a.state)
 				a.refreshInfo(a.state)
 				a.followRelease()
+				a.win.FollowGameMode()
 			})
 		}
 	}
@@ -431,10 +439,14 @@ func (a *App) apply(st device.State) {
 	if st.Status.ANC != a.state.Status.ANC || st.Status.Capabilities != a.state.Status.Capabilities {
 		a.info.failures, a.info.nextTry = 0, time.Time{}
 	}
+	previous := a.state
 	a.state = st
 	a.pause.SetState(st)
 	a.tray.Update(st)
 	a.win.Update(st)
+	if gameModeLinkChanged(previous, st) {
+		a.win.ReadGameMode()
+	}
 	if a.popup != nil {
 		a.popup.Update(st, a.view())
 	}
@@ -442,6 +454,17 @@ func (a *App) apply(st device.State) {
 	a.refreshInfo(st)
 	a.refreshFirmware(st)
 	a.reapplyAllowOff(st)
+}
+
+// gameModeLinkChanged reports a new dongle or AirPods link that can carry Game Mode: the
+// tray's row needs one audio state read for it, made with the window hidden too. Changes in
+// between are followed by FollowGameMode, so the tray costs no polling of its own.
+func gameModeLinkChanged(previous, current device.State) bool {
+	if !current.Present || !current.Status.Has(dongle.CapTypedRPC) {
+		return false
+	}
+	return !previous.Present || !previous.Status.Has(dongle.CapTypedRPC) || previous.Serial != current.Serial ||
+		previous.Status.Connected != current.Status.Connected || previous.Status.Generation != current.Status.Generation
 }
 
 // Quit ends the app as the menu's Quit does, for a request from outside. Repeats do nothing.
@@ -497,6 +520,11 @@ func (a *App) setMode(word string) {
 		a.report(i18n.T("tray.noiseControl"), err)
 	})
 }
+
+// setGameMode answers the tray's Game Mode row. The window sends the request on the owner
+// goroutine, with the same checks as its switches, and both switches follow the outcome; a
+// problem gets a notification, since the menu has no place for it.
+func (a *App) setGameMode(on bool) { a.win.SetGameMode(on, a.notify) }
 
 // reconnect takes the AirPods back through the routing handover where the dongle has it, and
 // with the plain reconnect command where not. It also ends a release. The window shows how it

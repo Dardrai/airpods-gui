@@ -3,14 +3,21 @@ package ui
 import (
 	"errors"
 	"fmt"
+	"time"
 
 	"fyne.io/fyne/v2"
+	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
 
 	"github.com/Dardrai/airpods-gui/core/dongle"
 	"github.com/Dardrai/airpods-gui/internal/device"
 	"github.com/Dardrai/airpods-gui/internal/i18n"
+	"github.com/Dardrai/airpods-gui/internal/tray"
 )
+
+// gameModeFollowPeriod is how often the audio state is read again while Game Mode is on its
+// way somewhere: waiting for playback, unconfirmed or turning off. Nothing else is polled.
+const gameModeFollowPeriod = 5 * time.Second
 
 // codecLabels lists the codecs by number, in the current language.
 func codecLabels() []string { return []string{i18n.T("audio.automatic"), "SBC", "AAC", "AAC-ELD"} }
@@ -49,6 +56,14 @@ type audioTab struct {
 	codec, bitrate            *widget.Select
 	variable, gameMode        *Switch
 	apply                     *widget.Button
+
+	// gameModeCard is the Game Mode card on the default page, with its own switch and a
+	// row whose hint names the phase. It shows only where Game Mode can be used.
+	gameModeCard   fyne.CanvasObject
+	gameModeRow    *optionRow
+	gameModeOnPage *Switch
+	// lastRead is when the last audio state read started, for following Game Mode.
+	lastRead time.Time
 
 	// codecChoice and bitrateChoice are what the pickers mean, whatever language they are in.
 	codecChoice   byte
@@ -94,9 +109,20 @@ func newAudioTab(w *Window) *audioTab {
 	t.apply = w.button("audio.apply", t.applyProfile)
 	t.gameMode = NewSwitch(func(on bool) {
 		if !t.applying {
-			t.setGameMode(on)
+			t.setGameMode(on, nil)
 		}
 	})
+	t.gameModeOnPage = NewSwitch(func(on bool) {
+		if !t.applying {
+			t.setGameMode(on, nil)
+		}
+	})
+	t.gameModeRow = w.optionRow("audio.gameMode", "", t.gameModeOnPage)
+	caption, head := captionText("")
+	w.bind(func() { caption.SetText(i18n.T("section.playback")) })
+	t.gameModeCard = container.New(tightLayout{}, head, card(newStack(t.gameModeRow)), gap(sectionGap))
+	t.gameModeCard.Hide()
+	t.showGameModePhase()
 	t.content = newStack(
 		w.valueRow("audio.active", t.current),
 		w.valueRow("audio.requested", t.requested),
@@ -134,6 +160,7 @@ func (t *audioTab) relabel() {
 	if t.last != nil {
 		t.showValues(*t.last)
 	}
+	t.showGameModePhase()
 }
 
 func (t *audioTab) selectedCodec() byte { return t.codecChoice }
@@ -171,6 +198,58 @@ func (t *audioTab) updateEnabled() {
 	enableWidget(t.variable, usable && codec == 3)
 	setEnabled(t.apply, usable)
 	enableWidget(t.gameMode, usable && t.supports)
+	enableWidget(t.gameModeOnPage, usable && t.supports)
+	t.showGameModeCard()
+	if t.w.opts.OnGameMode != nil {
+		t.w.opts.OnGameMode(t.gameModeForTray(usable))
+	}
+}
+
+// gameModeAvailable is whether Game Mode can be offered at all: a dongle with typed requests
+// that reported Game Mode usable over this connection.
+func (t *audioTab) gameModeAvailable() bool {
+	return t.w.state.Present && t.w.state.Status.Has(dongle.CapTypedRPC) && t.have && t.supports
+}
+
+// showGameModeCard puts the default page's Game Mode card on the page where Game Mode can
+// be used, and takes it off where it cannot: it is never shown empty or for good disabled.
+func (t *audioTab) showGameModeCard() {
+	if on := t.gameModeAvailable(); on != t.gameModeCard.Visible() {
+		showIf(t.gameModeCard, on)
+		t.w.relayout()
+	}
+}
+
+// showGameModePhase names the current phase in the default page's row.
+func (t *audioTab) showGameModePhase() {
+	phase := i18n.T("value.unknown")
+	if t.last != nil {
+		phase = gamePhaseText(t.last.GameModePhase)
+	}
+	t.gameModeRow.SetHint(fmt.Sprintf(i18n.T("audio.gameModeHint"), phase))
+}
+
+// gameModeForTray is what the tray menu shows of Game Mode. usable is whether a request
+// could be sent now.
+func (t *audioTab) gameModeForTray(usable bool) tray.GameMode {
+	game := tray.GameMode{Supported: t.gameModeAvailable(), Busy: !usable}
+	if t.last != nil {
+		game.Requested, game.Phase = t.last.GameModeRequested, t.last.GameModePhase
+	}
+	return game
+}
+
+// followGameMode reads the audio state again, at most every gameModeFollowPeriod, while Game
+// Mode is on its way to a phase it stays in. With the window hidden this is what moves the
+// tray's Game Mode row on.
+func (t *audioTab) followGameMode(now time.Time) {
+	if t.last == nil || !t.gameModeAvailable() || t.writing || now.Sub(t.lastRead) < gameModeFollowPeriod {
+		return
+	}
+	switch t.last.GameModePhase {
+	case dongle.GameModePending, dongle.GameModeUnconfirmed, dongle.GameModeRestoring:
+		t.read()
+	}
 }
 
 func (t *audioTab) read() {
@@ -178,6 +257,7 @@ func (t *audioTab) read() {
 		return
 	}
 	t.reading = true
+	t.lastRead = t.w.now()
 	var state dongle.AudioState
 	t.w.owner.Submit(func(c *dongle.Client) (err error) {
 		state, err = c.AudioState()
@@ -209,7 +289,9 @@ func (t *audioTab) show(state dongle.AudioState) {
 	t.bitrate.SetSelected(bitrateLabel(state.RequestedBitrate))
 	t.variable.SetChecked(state.Variable)
 	t.gameMode.SetChecked(state.GameModeRequested)
+	t.gameModeOnPage.SetChecked(state.GameModeRequested)
 	t.applying = false
+	t.showGameModePhase()
 	t.updateEnabled()
 }
 
@@ -240,18 +322,24 @@ func (t *audioTab) showValues(state dongle.AudioState) {
 	}
 }
 
-// writeMessage: a refusal did not apply; anything else may have, because a profile
-// change can restart the link before the reply arrives.
+// writeMessage: a refusal did not apply, and neither did a request that was never sent;
+// anything else may have, because a profile change can restart the link before the reply
+// arrives.
 func writeMessage(err error) string {
 	var rejected *dongle.RequestRejected
 	var unsupported *dongle.Unsupported
-	if errors.As(err, &rejected) || errors.As(err, &unsupported) || errors.Is(err, device.ErrNoDongle) {
+	if errors.As(err, &rejected) || errors.As(err, &unsupported) || errors.Is(err, device.ErrNoDongle) ||
+		errors.Is(err, dongle.ErrNotSent) {
 		return device.Explain(err)
 	}
 	return device.UnconfirmedNote()
 }
 
-func (t *audioTab) submit(name string, job func(*dongle.Client) (dongle.AudioState, error)) {
+// submit sends one audio request. outcome words a request the dongle accepted, empty for
+// plain "applied"; notify, which may be nil, also hears what went wrong, for a request made
+// from the tray, where the window's line is out of sight.
+func (t *audioTab) submit(name string, job func(*dongle.Client) (dongle.AudioState, error),
+	outcome func(dongle.AudioState) (text string, problem bool), notify func(title, text string)) {
 	t.writing = true
 	t.updateEnabled()
 	var state dongle.AudioState
@@ -262,12 +350,27 @@ func (t *audioTab) submit(name string, job func(*dongle.Client) (dongle.AudioSta
 		t.w.do(func() {
 			t.writing = false
 			if err != nil {
-				t.w.say(name + ": " + writeMessage(err))
+				text := writeMessage(err)
+				t.w.say(name + ": " + text)
+				// No answer is not worth a notification: the next read shows what happened.
+				if notify != nil && text != device.UnconfirmedNote() {
+					notify(name, text)
+				}
 				t.updateEnabled()
 				t.read()
 				return
 			}
-			t.w.say(name + ": " + i18n.T("audio.applied"))
+			text, problem := "", false
+			if outcome != nil {
+				text, problem = outcome(state)
+			}
+			if text == "" {
+				text = i18n.T("audio.applied")
+			}
+			t.w.say(name + ": " + text)
+			if problem && notify != nil {
+				notify(name, text)
+			}
 			t.show(state)
 		})
 	})
@@ -277,11 +380,40 @@ func (t *audioTab) applyProfile() {
 	codec, variable, bitrate := t.selectedCodec(), t.variable.Checked, t.selectedBitrate()
 	t.submit(i18n.T("audio.codecProfile"), func(c *dongle.Client) (dongle.AudioState, error) {
 		return c.SetAudioProfile(codec, variable, bitrate)
-	})
+	}, nil, nil)
 }
 
-func (t *audioTab) setGameMode(on bool) {
-	t.submit(i18n.T("audio.gameMode"), func(c *dongle.Client) (dongle.AudioState, error) { return c.SetGameMode(on) })
+// setGameMode asks for Game Mode on or off, from either switch or from the tray. As the
+// command line tool does, it reads the audio state first and writes only when the request
+// differs, and a dongle that answers with the failed or unsupported phase counts as a problem.
+func (t *audioTab) setGameMode(on bool, notify func(title, text string)) {
+	if t.writing {
+		return
+	}
+	// Both switches show the request at once; the reply or the read after a failure corrects them.
+	t.applying = true
+	t.gameMode.SetChecked(on)
+	t.gameModeOnPage.SetChecked(on)
+	t.applying = false
+	sent := false
+	t.submit(i18n.T("audio.gameMode"), func(c *dongle.Client) (dongle.AudioState, error) {
+		state, err := c.AudioState()
+		if err != nil || !state.GameModeSupported || state.GameModeRequested == on {
+			return state, err
+		}
+		sent = true
+		return c.SetGameMode(on)
+	}, func(state dongle.AudioState) (string, bool) {
+		switch {
+		case !state.GameModeSupported:
+			return i18n.T("audio.notSupported"), true
+		case !sent:
+			return gamePhaseText(state.GameModePhase), false
+		case state.GameModePhase == dongle.GameModeFailed || state.GameModePhase == dongle.GameModeUnsupported:
+			return gamePhaseText(state.GameModePhase), true
+		}
+		return "", false
+	}, notify)
 }
 
 // gamePhaseText names a Game Mode phase the way the firmware's own tool does: waiting for

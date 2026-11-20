@@ -148,7 +148,8 @@ var portuguese = map[string]string{
 	"audio.active": "Ativo", "audio.requested": "Pedido", "audio.delay": "Atraso comunicado", "audio.state": "Estado",
 	"audio.codec": "Codec", "audio.bitrate": "Débito", "audio.variable": "Débito variável",
 	"audio.applyRow": "Aplicar codec e débito", "audio.applyHint": "Pode reiniciar a ligação de áudio.",
-	"audio.gameMode": "Modo de jogo", "audio.gameStatus": "Estado do modo de jogo", "audio.idle": "Inativo",
+	"audio.gameMode": "Modo de jogo", "audio.gameModeHint": "Menor atraso de áudio, para jogos. Agora: %s",
+	"audio.gameStatus": "Estado do modo de jogo", "audio.idle": "Inativo",
 	"audio.pending": "Alteração pendente", "audio.streaming": "A transmitir", "audio.micActive": ", microfone ativo",
 	"audio.notSupported": "Não suportado", "audio.applied": "aplicado", "audio.codecProfile": "Perfil de codec",
 
