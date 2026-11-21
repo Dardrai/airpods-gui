@@ -1,4 +1,9 @@
-Tray app, settings window and command line tool for the AirPods USB dongle, for Linux and Windows. This release follows dongle firmware 0.1.66.
+Tray app, settings window and command line tool for the AirPods USB dongle, for Linux and Windows. This release follows dongle firmware 0.1.69.
+
+New in 0.5.0:
+
+- **Game Mode without the experimental switch:** a Game mode switch on the main settings page (Playback card) and a Game mode item in the tray menu. Both show where it got to, such as "waiting for playback", and only appear when the dongle supports it. `airpods game on|off` is unchanged.
+- **Hold actions follow Apple's layout:** `1` is Siri and `5` is noise control, with the right AirPod in the low byte, matching the dongle firmware since 0.1.67. Same-action choices (`siri,siri`, `noise-control,noise-control`) now send the correct value.
 
 One download per system, and each installs both programs: `airpods-tray`, the app, and `airpods`, the command line tool.
 
